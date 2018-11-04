@@ -1,7 +1,9 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material';
+import { MatChipInputEvent, MatDialogRef } from '@angular/material';
+import { User } from '../_model/user';
+import { UsersService } from '../_services/users.service';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +11,7 @@ import { MatChipInputEvent } from '@angular/material';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+
   addressForm = this.fb.group({
     firstName: [null, Validators.required],
     lastName: [null, Validators.required],
@@ -26,7 +29,11 @@ export class RegisterComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   programs: string[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UsersService,
+    private registerDialogRef: MatDialogRef<RegisterComponent>
+  ) { }
 
   add(event: MatChipInputEvent) {
     const input = event.input;
@@ -50,6 +57,15 @@ export class RegisterComponent {
   }
 
   register() {
-    alert('Thanks!');
+    this.userService.addNewUser(new User(
+      this.addressForm.controls.firstName.value,
+      this.addressForm.controls.lastName.value,
+      this.addressForm.controls.username.value,
+      this.addressForm.controls.yearOfStudy.value,
+      this.programs,
+      this.addressForm.controls.password.value
+    ));
+    console.log(this.addressForm);
+    this.registerDialogRef.close();
   }
 }

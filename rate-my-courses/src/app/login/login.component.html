@@ -19,7 +19,7 @@
     <mat-card-actions style="overflow: hidden;">
       <div class="center">
         <button mat-raised-button color="primary" type="submit">Login</button>
-        <button mat-raised-button color="primary" type="button" [routerLink]="['/register']" routerLinkActive="true">Register</button>
+        <button mat-raised-button color="primary" type="button" (click)="register()" >Register</button>
       </div>
     </mat-card-actions>
   </mat-card>

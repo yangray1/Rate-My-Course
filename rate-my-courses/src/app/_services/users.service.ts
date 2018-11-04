@@ -44,4 +44,8 @@ export class UsersService {
       return { valid: false };
     }
   }
+
+  public addNewUser(newUser: User) {
+    this.users.push(newUser);
+  }
 }

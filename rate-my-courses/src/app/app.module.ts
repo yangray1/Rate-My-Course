@@ -1,3 +1,4 @@
+import { LoginService } from './_services/login.service';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,7 +13,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
@@ -35,9 +36,14 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
   ],
-  providers: [],
+  entryComponents: [
+    RegisterComponent
+  ],
+  providers: [
+    LoginService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
