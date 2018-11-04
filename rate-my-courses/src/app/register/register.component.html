@@ -1,0 +1,68 @@
+<form [formGroup]="addressForm" novalidate>
+  <mat-card class="shipping-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="number" placeholder="Year of Study" formControlName="yearOfStudy">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let program of programs" [selectable]="selectable" [removable]="removable" (removed)="remove(program)">
+                {{program}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Program of Study" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="password" matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="password" matInput placeholder="Re-enter Password" formControlName="reenterPassword">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions style="overflow: hidden;">
+      <div class="center">
+        <button mat-raised-button color="primary" type="button" [routerLink]="['/login']" routerLinkActive="true">Login</button>
+        <button mat-raised-button color="primary" type="button" (click)="register()">Register</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</form>
