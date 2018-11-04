@@ -1,0 +1,25 @@
+<h1>CSC209</h1>
+<ul class="review-list">
+  <div *ngFor="let review of allReviews">
+
+      <div class="review">
+        <div class="vote">
+
+        </div>
+        <div class="review-side">
+          Taken With: {{review.profName}} <br>
+          Overall Rating: {{review.overallRating}} <br>
+          Difficulty: {{review.difficulty}} <br>
+          Workload: {{review.workload}} <br>
+          Hours Per Week: {{review.hoursPerWeek}} <br>
+          Textbook Used: {{review.textbookUsed}} <br>
+          Grade Received: {{review.gradeReceived}} <br>
+          Reputation: {{review.score}}
+        </div>
+        <div class="review-written">
+          {{review.writtenReview}}
+        </div>
+      </div>
+
+  </div>
+</ul>

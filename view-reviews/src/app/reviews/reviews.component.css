@@ -1,0 +1,30 @@
+h1 {
+    color: blue;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.review-list {
+    list-style-type: none;
+    /* gets rid of the "dot" associated with lists */
+    padding: 0;
+}
+
+.review {
+    overflow: auto;
+    min-height: 150px;
+    border-bottom: 1px solid grey;
+}
+
+.review-side {
+    float: left;
+    width: 300px;
+}
+
+.review-written {
+    float: left;
+    width: 400px;
+}
+
+.vote {
+    float: left;
+}
