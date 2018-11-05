@@ -1,30 +1,24 @@
-h1 {
-    color: blue;
-    font-family: Arial, Helvetica, sans-serif;
+.card {
+    max-width: 1000px;
+    min-height: 250px;
+  }
+  
+.header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
-.review-list {
-    list-style-type: none;
-    /* gets rid of the "dot" associated with lists */
-    padding: 0;
+mat-card-footer {
+  margin-left: 5px;
+  border-bottom-color: gray;
 }
 
-.review {
-    overflow: auto;
-    min-height: 150px;
-    border-bottom: 1px solid grey;
+.written-review {
+  margin-left: 100px;
+  float: left;
 }
 
 .review-side {
-    float: left;
-    width: 300px;
-}
-
-.review-written {
-    float: left;
-    width: 400px;
-}
-
-.vote {
-    float: left;
+  float: left;
+  margin-top: 10px;
 }

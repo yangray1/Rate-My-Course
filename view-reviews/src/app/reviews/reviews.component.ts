@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Review } from '../review'
 import { REVIEWS } from '../hardcoded-reviews'
 
 @Component({
