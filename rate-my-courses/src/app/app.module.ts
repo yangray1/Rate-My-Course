@@ -16,7 +16,8 @@ import { SearchCourseComponent } from './search-course/search-course.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MyRatingsComponent } from './my-ratings/my-ratings.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     NavBarComponent,
     HomeComponent,
     StickyHeaderComponent,
-    SearchCourseComponent
+    SearchCourseComponent,
+    MyRatingsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     LayoutModule
   ],
   providers: [],

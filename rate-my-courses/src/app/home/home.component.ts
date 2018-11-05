@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     {text: 'Rate a Course', cols: 2, rows: 1, color: 'lightblue', link: ""},
     {text: 'Search for a Course', cols: 2, rows: 1, color: 'lightblue', link: "/search-course"},
     {text: '', cols: 2, rows: 1, color: '', link: ""},
-    {text: 'My Ratings', cols: 2, rows: 1, color: 'lightblue', link: ""},
+    {text: 'My Ratings', cols: 2, rows: 1, color: 'lightblue', link: "/my-ratings"},
   ];
 
 }
