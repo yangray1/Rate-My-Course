@@ -1,24 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, div, p {
+  font-family: "Montserrat";
+}
+
 .card {
     max-width: 1000px;
-    min-height: 250px;
+    min-height: 225px;
   }
   
 .header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Xxxtentacion.jpg/220px-Xxxtentacion.jpg');
   background-size: cover;
-}
-
-mat-card-footer {
-  margin-left: 5px;
-  border-bottom-color: gray;
+  margin-bottom: 5px;
 }
 
 .written-review {
-  margin-left: 100px;
+  margin-left: 70px;
+  margin-top: 0px;
   float: left;
 }
 
 .review-side {
   float: left;
-  margin-top: 10px;
 }
