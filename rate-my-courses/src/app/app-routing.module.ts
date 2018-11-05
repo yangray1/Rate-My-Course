@@ -17,16 +17,16 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 //   { path: 'admin-dashboard', component: AdminDashboardComponent },
 //   { path: 'write-review', component: WriteReviewComponent},
 //   { path: 'report-user', component: ReportUserComponent},
-//   { path: 'user-profile', component: UserProfileComponent},
 //   { path: 'reported-reviews', component: ReportedReviewsComponent},
 
 
-  const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'search-course', component: SearchCourseComponent},
-    {path: 'my-ratings', component: MyRatingsComponent},
-    { path: 'admin-dashboard', component: AdminDashboardComponent },
-    { path: '**', redirectTo: '' }
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'search-course', component: SearchCourseComponent },
+  { path: 'my-ratings', component: MyRatingsComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'user-profile', component: UserProfileComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

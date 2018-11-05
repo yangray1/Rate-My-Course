@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from '../_services/login.service';
 import { LoginComponent } from '../login/login.component';
+import { WriteReviewComponent } from '../write-review/write-review.component';
 
 @Component({
   selector: 'app-navbar',
@@ -14,6 +15,7 @@ import { LoginComponent } from '../login/login.component';
 export class NavbarComponent implements OnInit, OnDestroy {
 
   loggedIn: boolean;
+  user: User;
   isAdmin: boolean;
 
   loginSubscription: Subscription;
@@ -21,7 +23,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private activeRoute: ActivatedRoute,
     private matDialog: MatDialog
   ) {
     this.loggedIn = false;
@@ -47,6 +48,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       LoginComponent,
       { width: '500px' }
     ).afterClosed().subscribe(response => {
+      this.user = response.user;
       this.isAdmin = response.user.isAdmin;
       console.log(response);
     });
@@ -56,12 +58,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.isAdmin) {
       this.router.navigate(['/admin-dashboard']);
     } else {
-      this.router.navigate(['/']); // TODO: ADD ROUTE TO USER DASHBOARD HERE
+      this.router.navigate(['/user-profile']);
     }
   }
 
   goHome() {
     this.router.navigate(['/']);
+  }
+
+  newReview() {
+    const matDialogRef = this.matDialog.open(
+      WriteReviewComponent,
+      { width: '500px' }
+    );
   }
 
   ngOnDestroy(): void {

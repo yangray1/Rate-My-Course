@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
-    <div class="logo mat-elevation-z4" matRipple>RateMyCourses</div>
+    <div class="logo mat-elevation-z4" matRipple (click)="goHome()">RateMyCourses</div>
     <!-- <a routerLink="/" color="primary"><span>RateMyCourses</span></a> -->
     <mat-form-field style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
       <input matInput placeholder="Search for a Course">
     </mat-form-field>
-    <button *ngIf="loggedIn" mat-icon-button>
+    <button *ngIf="loggedIn" mat-icon-button (click)="newReview()">
       <mat-icon>note_add</mat-icon>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu">

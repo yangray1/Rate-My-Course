@@ -68,7 +68,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     EditUserComponent,
     RespondReportComponent,
     RespondRequestComponent,
-    LoginComponent
+    LoginComponent,
+    WriteReviewComponent,
   ],
   providers: [
     LoginService,
