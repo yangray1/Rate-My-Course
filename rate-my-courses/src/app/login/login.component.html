@@ -1,0 +1,38 @@
+
+<!-- take the form, formGroup and bind it to addressForm (defined in component.ts)-->
+
+<!-- ngSubmit based event, Bind it to onSubmit() function [locatied in component.ts]-->
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+
+    <!-- text boxes-->
+    <mat-card-content>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="password" matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <!-- buttons -->
+    <mat-card-actions style="overflow: hidden;">
+      <div class="center">
+        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button mat-raised-button color="primary" type="button" (click)="register()" >Register</button>
+      </div>
+    </mat-card-actions>
+
+  </mat-card>
+</form>
