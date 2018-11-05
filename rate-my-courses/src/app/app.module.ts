@@ -29,6 +29,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MyRatingsComponent } from './my-ratings/my-ratings.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { WriteReviewComponent } from './write-review/write-review.component';
+import { ReportUserComponent } from './report-user/report-user.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ReportedReviewsComponent } from './reported-reviews/reported-reviews.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +50,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     HomeComponent,
     StickyHeaderComponent,
     SearchCourseComponent,
-    MyRatingsComponent
+    MyRatingsComponent,
+    WriteReviewComponent,
+    ReportUserComponent,
+    UserProfileComponent,
+    ReportedReviewsComponent,
   ],
   imports: [
     BrowserModule,

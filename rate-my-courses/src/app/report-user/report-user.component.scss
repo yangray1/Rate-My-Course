@@ -1,0 +1,62 @@
+#reportForm{
+    display: flex!important;
+    flex-direction: column;
+    align-content: center!important;
+    align-items: center!important;
+    justify-content: center!important;
+}
+#header h1 {
+    display: flex!important;
+    flex-direction: column;
+    align-content: center!important;
+    align-items: center!important;
+    justify-content: center!important;
+    margin-bottom: 0px;
+    font-size: 40px;
+
+}
+#header p{
+    display: flex!important;
+    flex-direction: column;
+    align-content: center!important;
+    align-items: center!important;
+    justify-content: center!important;
+    margin-bottom: 0px;
+}
+
+#quote {
+    font-size: 20px;
+}
+.body{
+    margin-left: -180px;
+}
+.items ul{
+    padding: 0px;
+}
+.items ul li{
+    list-style: none;
+}
+
+.items h3{
+    margin: 0
+}
+
+.buttons ul li{
+    float:left;
+    list-style: none;
+}
+.buttons {
+    display: flex!important;
+    flex-direction: column;
+    align-content: center!important;
+    align-items: center!important;
+    justify-content: center!important;
+}
+#submit {
+    margin-right: 20px;
+}
+
+#commentBox {
+    
+    width: 410px;
+}

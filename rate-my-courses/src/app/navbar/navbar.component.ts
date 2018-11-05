@@ -27,8 +27,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.loggedIn = false;
   }
 
+  // this is executed when the component is loaded up
   ngOnInit() {
+    // Subscribe to the results
     this.loginSubscription = this.loginService.loggedIn$.subscribe((validLogin: boolean) => {
+
+      // Bind the given variable validLogin, to this.loggedIn
       this.loggedIn = validLogin;
       console.log('change');
     });
