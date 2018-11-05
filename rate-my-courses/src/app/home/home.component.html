@@ -1,0 +1,27 @@
+<div class="option-container"> 
+  <p>Check what other people think about that <strong>HARD</strong> course before taking it </p>
+  <mat-grid-list cols="6" rowHeight="100px" gutterSize="2px">
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="tile.cols"
+        [rowspan]="tile.rows"
+        [style.background]="tile.color">
+        <a routerLink="{{tile.link}}">{{tile.text}}</a>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<app-sticky-header></app-sticky-header>
+
+<!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, similique consequuntur veniam amet id error delectus ea excepturi odit quibusdam nisi voluptate! Quidem ab modi accusamus provident, explicabo nisi id.</p> -->

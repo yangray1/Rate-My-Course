@@ -1,16 +1,16 @@
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { SearchCourseComponent } from './search-course/search-course.component';
+import { MyRatingsComponent } from 'src/app/my-ratings/my-ratings.component';
 
-const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'user-dashboard', component: UserDashboardComponent },
-  { path: 'admin-dashboard', component: AdminDashboardComponent },
-
-  // otherwise redirect to login
-  { path: '**', redirectTo: 'login' }
+  const routes: Routes = [
+    {path: '', component: HomeComponent},
+    {path: 'search-course', component: SearchCourseComponent},
+    {path: 'my-ratings', component: MyRatingsComponent},
+    { path: 'admin-dashboard', component: AdminDashboardComponent },
+    { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

@@ -12,13 +12,23 @@ import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LayoutModule } from '@angular/cdk/layout';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './login/register/register.component';
 import { EditUserComponent } from './admin-dashboard/edit-user/edit-user.component';
 import { RespondRequestComponent } from './admin-dashboard/respond-request/respond-request.component';
 import { RespondReportComponent } from './admin-dashboard/respond-report/respond-report.component';
 import { UsersService } from './_services/users.service';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule} from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HomeComponent } from './home/home.component';
+import { StickyHeaderComponent } from './sticky-header/sticky-header.component';
+import { SearchCourseComponent } from './search-course/search-course.component';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MyRatingsComponent } from './my-ratings/my-ratings.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -32,6 +42,11 @@ import { UsersService } from './_services/users.service';
     EditUserComponent,
     RespondRequestComponent,
     RespondReportComponent,
+    NavBarComponent,
+    HomeComponent,
+    StickyHeaderComponent,
+    SearchCourseComponent,
+    MyRatingsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +67,15 @@ import { UsersService } from './_services/users.service';
     LoginService,
     RequestReportService,
     UsersService,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatExpansionModule,
+    LayoutModule
   ],
   bootstrap: [AppComponent]
 })
