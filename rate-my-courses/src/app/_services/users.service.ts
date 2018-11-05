@@ -42,7 +42,7 @@ export class UsersService {
   public verifyLogin(username: string, password: string): any {
     const foundUser = this.users.filter(user => user.username === username);
     if (foundUser.length > 0 && foundUser[0].password === password) {
-      return { valid: true, isAdmin: foundUser[0].isAdmin };
+      return { valid: true, foundUser: foundUser[0] };
     } else {
       return { valid: false };
     }

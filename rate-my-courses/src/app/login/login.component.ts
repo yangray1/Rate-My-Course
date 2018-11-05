@@ -3,8 +3,9 @@ import { UsersService } from './../_services/users.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
+import { EditUserComponent } from '../admin-dashboard/edit-user/edit-user.component';
 
 @Component({
   selector: 'app-login',
@@ -23,29 +24,17 @@ export class LoginComponent {
     private userService: UsersService,
     private loginService: LoginService,
     private registerDialog: MatDialog,
-    private router: Router,
-    private activeRoute: ActivatedRoute) { }
+    public dialogRef: MatDialogRef<EditUserComponent>,
+  ) { }
 
   onSubmit() {
     const result = this.userService.verifyLogin(
       this.addressForm.controls.username.value,
       this.addressForm.controls.password.value);
+    this.loginService.login(result.valid);
     if (result.valid) {
-      this.loginService.login(true);
-      if (result.isAdmin) {
-        this.router.navigate(
-          ['../admin-dashboard'],
-          { relativeTo: this.activeRoute }
-        );
-      } else {
-        this.router.navigate(
-          ['../user-dashboard'],
-          { relativeTo: this.activeRoute }
-        );
-      }
-    } else {
-      this.loginService.login(false);
-      alert('username and password INVALID');
+      this.loginService.inSession(result.foundUser);
+      this.dialogRef.close({ user: result.foundUser });
     }
     console.log(result);
   }

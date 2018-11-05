@@ -1,15 +1,20 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>RateMyCourses</span>
-    <span class="spacer"></span>
-    <!-- <button mat-button>About</button> -->
-    <button *ngIf="!loggedIn" mat-button>About</button>
-    <button *ngIf="loggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+    <div class="logo mat-elevation-z4" matRipple>RateMyCourses</div>
+    <!-- <a routerLink="/" color="primary"><span>RateMyCourses</span></a> -->
+    <mat-form-field style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
+      <input matInput placeholder="Search for a Course">
+    </mat-form-field>
+    <button *ngIf="loggedIn" mat-icon-button>
+      <mat-icon>note_add</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu">
       <mat-icon>person</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="logout()">Logout</button>
-      <button mat-menu-item>Settings</button>
+      <button *ngIf="loggedIn" mat-menu-item (click)="dashboard()">Dashboard</button>
+      <button *ngIf="loggedIn" mat-menu-item (click)="logout()">Logout</button>
+      <button *ngIf="!loggedIn" mat-menu-item (click)="login()">Login/Register</button>
       <button mat-menu-item>About</button>
     </mat-menu>
   </mat-toolbar-row>

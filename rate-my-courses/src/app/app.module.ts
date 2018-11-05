@@ -61,7 +61,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     RegisterComponent,
     EditUserComponent,
     RespondReportComponent,
-    RespondRequestComponent
+    RespondRequestComponent,
+    LoginComponent
   ],
   providers: [
     LoginService,
