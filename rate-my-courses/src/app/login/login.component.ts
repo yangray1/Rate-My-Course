@@ -14,11 +14,18 @@ import { MatDialog } from '@angular/material';
 export class LoginComponent {
 
   addressForm = this.fb.group({
+    
+    // [ <defualtValue>, validators.requred -> required form (can put other type of validator: ie min char, max char, etc)]
     username: [null, Validators.required],
     password: [null, Validators.required],
   });
 
   constructor(
+    // Dependency injection; <variable>: <bound to this>,
+    // Now when we want to want to access methods,such from <bound to this, we do:
+    //       this.<variable>.<method> ie this.fb.<method>
+
+    // -> multiple components can access 1 component.
     private fb: FormBuilder,
     private userService: UsersService,
     private loginService: LoginService,
@@ -30,27 +37,33 @@ export class LoginComponent {
     const result = this.userService.verifyLogin(
       this.addressForm.controls.username.value,
       this.addressForm.controls.password.value);
+      
     if (result.valid) {
       this.loginService.login(true);
+
       if (result.isAdmin) {
+        // Go to admin-dashboard component
         this.router.navigate(
           ['../admin-dashboard'],
           { relativeTo: this.activeRoute }
         );
       } else {
+
+        // Go to user-dashboard component
         this.router.navigate(
           ['../user-dashboard'],
           { relativeTo: this.activeRoute }
         );
       }
     } else {
-      this.loginService.login(false);
+      this.loginService.login(false); //makes the red font when fail.
       alert('username and password INVALID');
     }
     console.log(result);
   }
 
   register() {
+    // opens register component w/ width 500px
     const registerDialogRef = this.registerDialog.open(RegisterComponent, {
       width: '500px',
     });

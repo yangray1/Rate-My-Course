@@ -1,0 +1,164 @@
+<form [formGroup]="reviewForm" novalidate (ngSubmit)="onSubmit()">
+  <div id="header">
+    <h1>CSC209</h1>
+    <h4>University of Toronto</h4>
+  </div>
+
+  <div class="form">
+    <br>
+    <h3>Ready to rate CSC209?</h3>
+    <div class="items">
+      <ul class= "i">
+        <li>1. Rate the course</li>
+        <li class="slider">
+            <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            formControlName="overallRating"
+            tickInterval="1000"
+            min="0"
+            max="5"></mat-slider>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>2. Level of difficulty</li>
+        <li class="slider">
+            <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            formControlName="levelOfDifficulty"
+            tickInterval="1000"
+            min="0"
+            max="5"></mat-slider>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>3. Workload</li>
+        <li class="slider">
+            <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            formControlName="workload"
+            tickInterval="1000"
+            min="0"
+            max="5"></mat-slider>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>4. Hours per week:</li>
+        <li>
+          <div >
+            <mat-form-field id="hoursPerWeek">
+              <input matInput placeholder="Input" formControlName="hoursPerWeek">
+            </mat-form-field>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>5. Textbook Used:</li>
+        <li id="textbookUsed">
+            <mat-slide-toggle formControlName="textbookUsed"></mat-slide-toggle>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>6. Grade Recieved:</li>
+        <li>
+            <mat-form-field>
+              <mat-select placeholder="Grade" formControlName="grade">
+                <mat-option *ngFor="let grade of grades" [value]="grade.grade">
+                  {{grade.gradeValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>7. Your major:</li>
+        <li>
+          <div >
+            <mat-form-field>
+              <input matInput placeholder="Input" formControlName="major">
+            </mat-form-field>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>8. Tell us more:</li>
+        <li>
+          <div >
+              <mat-form-field id="commentBox">
+                <textarea matInput placeholder="Comments..." formControlName="comments"></textarea>
+              </mat-form-field>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li>
+          <div >
+              <mat-checkbox formControlName="termsOfService">I have agreed to the terms and services.</mat-checkbox>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+
+
+    <div style="margin-bottom: 100px;" class="items">
+      <ul>
+        <li>
+            <button mat-button>Submit</button>
+        </li>
+        <li>
+            <button mat-button>Cancel</button>
+        </li>
+      </ul>
+    </div>
+      
+  </div>
+</form>

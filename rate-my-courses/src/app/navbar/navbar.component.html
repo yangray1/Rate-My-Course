@@ -1,16 +1,24 @@
 <mat-toolbar color="primary">
+
   <mat-toolbar-row>
     <span>RateMyCourses</span>
     <span class="spacer"></span>
     <!-- <button mat-button>About</button> -->
+
+    <!-- if not logged in, thens show about. OTHERWISE show menu-->
     <button *ngIf="!loggedIn" mat-button>About</button>
     <button *ngIf="loggedIn" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+      
+      <!-- person icon-->
       <mat-icon>person</mat-icon>
     </button>
+
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="logout()">Logout</button>
       <button mat-menu-item>Settings</button>
       <button mat-menu-item>About</button>
     </mat-menu>
+
   </mat-toolbar-row>
+
 </mat-toolbar>

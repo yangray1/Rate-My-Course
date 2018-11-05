@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
+import { WriteReviewComponent } from './write-review/write-review.component';
+import { ReportUserComponent } from './report-user/report-user.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     AdminDashboardComponent,
     UserDashboardComponent,
     NavbarComponent,
+    WriteReviewComponent,
+    ReportUserComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
