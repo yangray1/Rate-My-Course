@@ -1,4 +1,4 @@
-<form [formGroup]="reviewForm" novalidate (ngSubmit)="onSubmit()">
+<form id="reviewForm" [formGroup]="reviewForm" novalidate (ngSubmit)="onSubmit()">
   <div id="header">
     <h1>CSC209</h1>
     <h4>University of Toronto</h4>
@@ -6,11 +6,11 @@
 
   <div class="form">
     <br>
-    <h3>Ready to rate CSC209?</h3>
+    <h3>Ready to rate CSC209? <span id="smallText">The fate of the course is in your fingertips!</span></h3>
     <div class="items">
-      <ul class= "i">
-        <li>1. Rate the course</li>
-        <li class="slider">
+      <ul>
+        <li class="textbox">1. Rate the course</li>
+        <li class="selectors">
             <mat-slider
             thumbLabel
             [displayWith]="formatLabel"
@@ -26,8 +26,8 @@
 
     <div class="items">
       <ul>
-        <li>2. Level of difficulty</li>
-        <li class="slider">
+        <li class="textbox"> 2. Level of difficulty</li>
+        <li class="selectors">
             <mat-slider
             thumbLabel
             [displayWith]="formatLabel"
@@ -43,8 +43,8 @@
 
     <div class="items">
       <ul>
-        <li>3. Workload</li>
-        <li class="slider">
+        <li class="textbox">3. Workload</li>
+        <li class="selectors">
             <mat-slider
             thumbLabel
             [displayWith]="formatLabel"
@@ -60,8 +60,8 @@
 
     <div class="items">
       <ul>
-        <li>4. Hours per week:</li>
-        <li>
+        <li class="textbox">4. Hours per week:</li>
+        <li class="selectors">
           <div >
             <mat-form-field id="hoursPerWeek">
               <input matInput placeholder="Input" formControlName="hoursPerWeek">
@@ -76,8 +76,8 @@
 
     <div class="items">
       <ul>
-        <li>5. Textbook Used:</li>
-        <li id="textbookUsed">
+        <li class="textbox">5. Textbook Used:</li>
+        <li class="selectors">
             <mat-slide-toggle formControlName="textbookUsed"></mat-slide-toggle>
         </li>
       </ul>
@@ -87,8 +87,8 @@
 
     <div class="items">
       <ul>
-        <li>6. Grade Recieved:</li>
-        <li>
+        <li class="textbox">6. Grade Recieved:</li>
+        <li class="selectors">
             <mat-form-field>
               <mat-select placeholder="Grade" formControlName="grade">
                 <mat-option *ngFor="let grade of grades" [value]="grade.grade">
@@ -105,8 +105,8 @@
 
     <div class="items">
       <ul>
-        <li>7. Your major:</li>
-        <li>
+        <li class="textbox">7. Your major:</li>
+        <li class="selectors">
           <div >
             <mat-form-field>
               <input matInput placeholder="Input" formControlName="major">
@@ -121,9 +121,10 @@
 
     <div class="items">
       <ul>
-        <li>8. Tell us more:</li>
+        <li class="textbox">8. Tell us more: (OPTIONAL)</li>
+        <br>
         <li>
-          <div >
+          <div>
               <mat-form-field id="commentBox">
                 <textarea matInput placeholder="Comments..." formControlName="comments"></textarea>
               </mat-form-field>
@@ -139,7 +140,7 @@
     <div class="items">
       <ul>
         <li>
-          <div >
+          <div id = "checkbox">
               <mat-checkbox formControlName="termsOfService">I have agreed to the terms and services.</mat-checkbox>
           </div>
         </li>
@@ -147,18 +148,16 @@
     </div>
     <br>
     <br>
-
-
-    <div style="margin-bottom: 100px;" class="items">
+      
+  </div>
+  <div style="margin-bottom: 100px;" class="buttons">
       <ul>
         <li>
-            <button mat-raised-button color="primary" type="submit">Submit</button>
+            <button id="submit" mat-raised-button color="primary" type="submit">Submit</button>
         </li>
         <li>
-            <button mat-raised-button color="primary" type="submit">Cancel</button>
+            <button mat-raised-button color="primary" type="button" (click)="cancel()" >Cancel</button>
         </li>
       </ul>
     </div>
-      
-  </div>
 </form>

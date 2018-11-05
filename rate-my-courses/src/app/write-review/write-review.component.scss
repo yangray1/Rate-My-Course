@@ -1,23 +1,66 @@
-#header {
-    margin-left: 50px;
+#reviewForm{
+    display: flex!important;
+    flex-direction: column;
+    align-content: center!important;
+    align-items: center!important;
+    justify-content: center!important;
 }
-.form {
+#header {
+    // margin-left: 50px;
+    display: flex!important;
+    flex-direction: column;
+    align-content: center!important;
+    align-items: center!important;
+    justify-content: center!important;
+}
+
+#header h1 {
+    margin: 0px;
+    margin-top: 20px;
+    font-size: 50px;
+}
+
+#header h4{
+    margin: 0px;
+    font-size: 20px;
+
+}
+#smallText {
+    font-size: 12px;
+}
+.form h3 {
+    font-size: 30px;
+
+}
+.items ul li{
+    list-style: none;
+    float:left;
+    font-size: 20px;
+}
+
+
+.selectors {
     margin-left: 50px;
 }
 
-.items li{
+
+#submit {
+    margin-right: 20px;
+}
+#commentBox {
+    margin-top: 10px;
+    margin-left: 50px;
+    width: 380px;
+}
+
+.buttons ul li{
     list-style: none;
     float:left;
 }
-
-.slider {
-    margin-left: 50px;
+#checkbox {
+    margin-bottom: 30px;
 }
 
-#hoursPerWeek {
-    margin-left: 10px;
-}
-
-#textbookUsed {
-    margin-left: 10px;
+.textbox {
+    width: 200px;
 }
