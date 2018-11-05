@@ -7,13 +7,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, 
+  MatTabsModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ReviewsComponent } from './reviews/reviews.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    LayoutModule
+    LayoutModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
