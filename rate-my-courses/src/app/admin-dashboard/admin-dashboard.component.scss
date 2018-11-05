@@ -19,3 +19,9 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+.table-container {
+  position: relative;
+  max-height: 80%;
+  overflow: auto;
+}

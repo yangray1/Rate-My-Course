@@ -6,6 +6,7 @@ export class User {
     programOfStudy: string[];
     password: string;
     isAdmin: boolean;
+    banned: boolean;
 
     constructor(
         firstName: string,
@@ -22,5 +23,6 @@ export class User {
         this.programOfStudy = programOfStudy;
         this.password = password;
         this.isAdmin = false;
+        this.banned = false;
     }
 }

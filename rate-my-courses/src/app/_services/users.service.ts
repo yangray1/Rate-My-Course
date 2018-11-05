@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { User } from '../_model/user';
 
@@ -18,7 +19,8 @@ export class UsersService {
         'HPS'
       ],
       password: 'password1234',
-      isAdmin: false
+      isAdmin: false,
+      banned: false
     },
     {
       firstName: 'Ad',
@@ -30,7 +32,8 @@ export class UsersService {
         'Statistics'
       ],
       password: 'admin123',
-      isAdmin: true
+      isAdmin: true,
+      banned: false
     },
   ];
 
@@ -47,5 +50,23 @@ export class UsersService {
 
   public addNewUser(newUser: User) {
     this.users.push(newUser);
+  }
+
+  public getAllUsers(): User[] {
+    return this.users;
+  }
+
+  public saveUser(user: User, origUsername: string) {
+    const index = this.users.map(function(e) { return e.username; }).indexOf(origUsername);
+    if (index >= 0) {
+      this.users.splice(index, 1);
+      this.users.push(user);
+    }
+  }
+
+  public banUser(userName: string) {
+    const user: User = this.users.filter(e => e.username === userName)[0];
+    user.banned = true;
+    this.saveUser(user, userName);
   }
 }

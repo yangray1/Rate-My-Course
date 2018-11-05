@@ -1,10 +1,10 @@
-import { RegisterComponent } from './../register/register.component';
 import { LoginService } from './../_services/login.service';
 import { UsersService } from './../_services/users.service';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
+import { RegisterComponent } from './register/register.component';
 
 @Component({
   selector: 'app-login',

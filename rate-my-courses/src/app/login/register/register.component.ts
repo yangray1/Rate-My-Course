@@ -2,8 +2,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent, MatDialogRef } from '@angular/material';
-import { User } from '../_model/user';
-import { UsersService } from '../_services/users.service';
+import { UsersService } from 'src/app/_services/users.service';
+import { User } from 'src/app/_model/user';
 
 @Component({
   selector: 'app-register',

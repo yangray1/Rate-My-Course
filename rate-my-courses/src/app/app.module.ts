@@ -1,3 +1,4 @@
+import { RequestReportService } from './_services/request-report.service';
 import { LoginService } from './_services/login.service';
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,13 +9,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegisterComponent } from './login/register/register.component';
+import { EditUserComponent } from './admin-dashboard/edit-user/edit-user.component';
+import { RespondRequestComponent } from './admin-dashboard/respond-request/respond-request.component';
+import { RespondReportComponent } from './admin-dashboard/respond-report/respond-report.component';
+import { UsersService } from './_services/users.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     AdminDashboardComponent,
     UserDashboardComponent,
     NavbarComponent,
+    RegisterComponent,
+    EditUserComponent,
+    RespondRequestComponent,
+    RespondReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,17 +40,18 @@ import { NavbarComponent } from './navbar/navbar.component';
     MaterialModule,
     ReactiveFormsModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
+    FormsModule,
   ],
   entryComponents: [
-    RegisterComponent
+    RegisterComponent,
+    EditUserComponent,
+    RespondReportComponent,
+    RespondRequestComponent
   ],
   providers: [
     LoginService,
+    RequestReportService,
+    UsersService,
   ],
   bootstrap: [AppComponent]
 })
