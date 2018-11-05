@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ReportedReviewsComponent } from './reported-reviews/reported-reviews.component';
 
 // const routes: Routes = [
 //   //paths are localhost:4200/login , /user-dashboard, etc
