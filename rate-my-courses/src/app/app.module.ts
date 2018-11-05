@@ -18,8 +18,6 @@ import { EditUserComponent } from './admin-dashboard/edit-user/edit-user.compone
 import { RespondRequestComponent } from './admin-dashboard/respond-request/respond-request.component';
 import { RespondReportComponent } from './admin-dashboard/respond-report/respond-report.component';
 import { UsersService } from './_services/users.service';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule} from '@angular/material';
-import { LayoutModule } from '@angular/cdk/layout';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
 import { StickyHeaderComponent } from './sticky-header/sticky-header.component';
@@ -32,6 +30,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, 
+  MatTabsModule } from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
+import { ReviewsComponent } from './reviews/reviews.component'
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     WriteReviewComponent,
     ReportUserComponent,
     UserProfileComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    LayoutModule
+    LayoutModule,
+    MatTabsModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, div, p {
+  font-family: "Montserrat";
+}
+
+.card {
+    max-width: 1000px;
+    min-height: 225px;
+  }
+  
+.header-image {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Xxxtentacion.jpg/220px-Xxxtentacion.jpg');
+  background-size: cover;
+  margin-bottom: 5px;
+}
+
+.written-review {
+  margin-left: 70px;
+  margin-top: 0px;
+  float: left;
+}
+
+.review-side {
+  float: left;
+}
