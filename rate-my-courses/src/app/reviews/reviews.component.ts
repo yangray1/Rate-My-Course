@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { REVIEWS } from '../hardcoded-reviews'
-import { Review } from '../review' 
+import { Review } from '../review';
 
-import { ReviewService } from '../_services/review.service'
-import { TouchSequence } from 'selenium-webdriver';
+import { ReviewService } from '../_services/review.service';
 
 @Component({
   selector: 'app-reviews',
@@ -12,17 +10,14 @@ import { TouchSequence } from 'selenium-webdriver';
 })
 export class ReviewsComponent implements OnInit {
 
-  allReviews;
+  course: string;
+  allReviews: Review[];
 
-  constructor(private reviewService: ReviewService) { 
-  }
-
-  getReviews(){
-    this.allReviews = this.reviewService.getReviews();
+  constructor(private reviewService: ReviewService) {
+    this.course = 'CSC209'; // Pass in later during the course searchbar
+    this.allReviews = this.reviewService.getReviews(this.course);
   }
 
   ngOnInit() {
-    this.allReviews = this.reviewService.getReviews();
   }
-
 }

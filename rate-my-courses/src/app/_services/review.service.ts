@@ -1,31 +1,43 @@
 import { Injectable } from '@angular/core';
-import { REVIEWS } from '../hardcoded-reviews';
+import { REVIEWS } from './hardcoded-reviews';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
 
-  private allReviews: Review[];
+  private allReviews: Review[] = [];
 
-  constructor(
-  ) {
+  constructor() {
     this.allReviews = REVIEWS;
   }
 
-  getReviews(): Review[]{
-    return this.allReviews;
+  getReviews(course: string): Review[] {
+    return this.allReviews.filter(review => review.course === course);
   }
 
   deleteReview(review: Review) {
   }
 
-  addReview(review: Review){
+  addReview(review: Review) {
     this.allReviews.push(review);
+  }
+
+  getAllCourses() {
+    return this.allReviews.map(review => review.course);
   }
 }
 
-
 export interface Review {
-
+  course: string;
+  reviewer: string;
+  profName: string;
+  overallRating: number;
+  difficulty: number;
+  workload: number;
+  hoursPerWeek: number;
+  textbookUsed: boolean;
+  gradeReceived: string;
+  writtenReview: string;
+  score: number;
 }
