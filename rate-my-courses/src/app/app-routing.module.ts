@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.component';
+
 
 // const routes: Routes = [
 //   //paths are localhost:4200/login , /user-dashboard, etc
@@ -26,7 +28,8 @@ const routes: Routes = [
   { path: 'my-ratings', component: MyRatingsComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: '**', redirectTo: '' },
+  { path: 'user-dashboard2', component: UserDashboard2Component},
+  { path: '**', redirectTo: 'user-dashboard2' },
 ];
 
 @NgModule({
