@@ -31,6 +31,7 @@ export class UserDashboard2Component {
       alert("Invalid fields. Please fill in all the required fields.");
       return;
     }
+    // Verify the login credentials before proceeding.
     alert("Information suceesfully changed!")
     this.router.navigate(
       ['/user-dashboard2'],

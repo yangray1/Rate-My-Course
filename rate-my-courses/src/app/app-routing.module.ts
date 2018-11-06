@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'user-dashboard2', component: UserDashboard2Component},
-  { path: '**', redirectTo: 'user-dashboard2' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

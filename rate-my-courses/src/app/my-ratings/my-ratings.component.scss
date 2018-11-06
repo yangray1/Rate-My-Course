@@ -3,8 +3,9 @@
     margin-right: 35px;
     margin-left: auto;
 
-    float: right;
-    margin-top: -10px;
+    // Need this to be able to be side by side with changeInformation as window decrease
+    // guess not?
+    // margin-top: -1px;
     text-align: center;
 
 }
