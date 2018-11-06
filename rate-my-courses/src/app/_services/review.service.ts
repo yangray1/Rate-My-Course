@@ -11,20 +11,17 @@ export class ReviewService {
   constructor(
   ) {
     this.allReviews = REVIEWS;
-    alert("how many times is this called?")
   }
 
-  getReviews(){
+  getReviews(): Review[]{
     return this.allReviews;
   }
 
   deleteReview(review: Review) {
   }
 
-  addReview(){
-    this.allReviews.push({course: "CSC209", reviewer: "Yuh", profName: "E Z", overallRating: 4, difficulty: 1, workload: 1, hoursPerWeek: 3, textbookUsed: true, gradeReceived: "A+", writtenReview: "testing", score: 0});
-    // alert(this.allReviews.length);
-    // return REVIEWS;
+  addReview(review: Review){
+    this.allReviews.push(review);
   }
 }
 

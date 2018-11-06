@@ -16,6 +16,7 @@ export class WriteReviewComponent implements OnInit {
   
   reviewForm = this.fb.group({
     course: [null, Validators.required],
+    profName: [null, Validators.required],
     overallRating: [null, Validators.required],
     levelOfDifficulty: [null, Validators.required],
     workload: [null, Validators.required],
@@ -49,9 +50,7 @@ export class WriteReviewComponent implements OnInit {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private reviewService: ReviewService
-    ) { 
-      // reviewService.addReview();
-    }
+    ) {}
 
   ngOnInit() {
   }
@@ -65,8 +64,34 @@ export class WriteReviewComponent implements OnInit {
     }
     this.success = true;
 
-    // reviewService.addReview();
-    let x = new Review(reviewService)
+    let course = this.reviewForm.controls['course'].value;
+    let profName = this.reviewForm.controls['profName'].value;
+    let overallRating = this.reviewForm.controls['overallRating'].value;
+    let levelOfDifficulty = this.reviewForm.controls['levelOfDifficulty'].value;
+    let workload = this.reviewForm.controls['workload'].value;
+    let hoursPerWeek = this.reviewForm.controls['hoursPerWeek'].value; // string
+    let textbookUsed = this.reviewForm.controls['textbookUsed'].value;
+    let grade = this.reviewForm.controls['grade'].value;
+    let major = this.reviewForm.controls['major'].value;
+    let comments = this.reviewForm.controls['comments'].value;
+
+    // alert(hoursPerWeek.constructor.name)
+
+    let reviewToAdd = {
+      course: course,
+      reviewer: "GetLoggedInUser Here!",
+      profName: profName,
+      overallRating: overallRating,
+      difficulty: levelOfDifficulty,
+      workload: workload,
+      hoursPerWeek: hoursPerWeek,
+      textbookUsed: textbookUsed,
+      gradeReceived: grade,
+      writtenReview: comments,
+      score: 0
+    }
+
+    this.reviewService.addReview(reviewToAdd);
     
     this.router.navigate(
       ['../user-dashboard'],

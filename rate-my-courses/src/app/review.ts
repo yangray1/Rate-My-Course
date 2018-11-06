@@ -12,8 +12,4 @@ export class Review {
     gradeReceived: string;
     writtenReview: string;
     score: number;
-
-    constructor(private reviewService: ReviewService){
-        reviewService.addReview();
-    }
 }

@@ -12,18 +12,17 @@ import { TouchSequence } from 'selenium-webdriver';
 })
 export class ReviewsComponent implements OnInit {
 
-  allReviews: Review[];
+  allReviews;
 
   constructor(private reviewService: ReviewService) { 
-    this.allReviews = reviewService.getReviews();
-    // alert(reviewService.allReviews.length);
   }
 
   getReviews(){
-    // this.allReviews = this.reviewService.getReviews();
+    this.allReviews = this.reviewService.getReviews();
   }
 
   ngOnInit() {
+    this.allReviews = this.reviewService.getReviews();
   }
 
 }
