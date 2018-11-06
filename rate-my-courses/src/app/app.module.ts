@@ -1,5 +1,8 @@
 import { RequestReportService } from './_services/request-report.service';
 import { LoginService } from './_services/login.service';
+
+import { ReviewService } from './_services/review.service';
+
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -78,6 +81,7 @@ import { ReviewsComponent } from './reviews/reviews.component'
     LoginService,
     RequestReportService,
     UsersService,
+    ReviewService,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,

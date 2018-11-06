@@ -1,4 +1,5 @@
 export class Review {
+    course: string;
     reviewer: string;
     profName: string;
     overallRating: number;

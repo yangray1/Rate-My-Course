@@ -9,6 +9,8 @@ import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { ReviewsComponent } from './reviews/reviews.component'
+
 // const routes: Routes = [
 //   //paths are localhost:4200/login , /user-dashboard, etc
 //   // Redirects to that page & display its html
@@ -26,6 +28,8 @@ const routes: Routes = [
   { path: 'my-ratings', component: MyRatingsComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-profile', component: UserProfileComponent },
+  { path: 'view-reviews', component: ReviewsComponent},
+  { path: 'write-reviews', component: WriteReviewComponent},
   { path: '**', redirectTo: '' },
 ];
 
