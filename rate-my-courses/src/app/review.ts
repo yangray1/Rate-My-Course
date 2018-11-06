@@ -1,4 +1,7 @@
+import { ReviewService } from './_services/review.service'
+
 export class Review {
+    course: string;
     reviewer: string;
     profName: string;
     overallRating: number;

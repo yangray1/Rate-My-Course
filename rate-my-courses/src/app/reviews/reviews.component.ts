@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { REVIEWS } from '../hardcoded-reviews'
+import { Review } from '../review';
+
+import { ReviewService } from '../_services/review.service';
 
 @Component({
   selector: 'app-reviews',
@@ -8,11 +10,14 @@ import { REVIEWS } from '../hardcoded-reviews'
 })
 export class ReviewsComponent implements OnInit {
 
-  allReviews = REVIEWS;
+  course: string;
+  allReviews: Review[];
 
-  constructor() { }
+  constructor(private reviewService: ReviewService) {
+    this.course = 'CSC209'; // Pass in later during the course searchbar
+    this.allReviews = this.reviewService.getReviews(this.course);
+  }
 
   ngOnInit() {
   }
-
 }

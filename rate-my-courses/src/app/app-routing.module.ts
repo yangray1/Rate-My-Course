@@ -11,6 +11,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.component';
 
 
+import { ReviewsComponent } from './reviews/reviews.component'
+
 // const routes: Routes = [
 //   //paths are localhost:4200/login , /user-dashboard, etc
 //   // Redirects to that page & display its html
@@ -29,6 +31,8 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'user-dashboard2', component: UserDashboard2Component},
+  { path: 'view-reviews', component: ReviewsComponent},
+  { path: 'write-reviews', component: WriteReviewComponent},
   { path: '**', redirectTo: '' },
 ];
 

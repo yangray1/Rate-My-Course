@@ -1,14 +1,50 @@
 <form id="reviewForm" [formGroup]="reviewForm" novalidate (ngSubmit)="onSubmit()">
   <div id="header">
-    <h1>CSC209</h1>
+    <h1>Rate a course!</h1>
     <h4>University of Toronto</h4>
   </div>
 
   <div class="form">
     <br>
-    <h3>Ready to rate CSC209? <span id="smallText">The fate of the course is in your fingertips!</span></h3>
+    <h3>Ready to rate a course? <span id="smallText">The fate of the course is in your fingertips!</span></h3>
+
+      <div class="items">
+          <ul>
+            <li class="textbox">Course name:</li>
+            <li class="selectors">
+              <div >
+                <mat-form-field>
+                  <input matInput placeholder="ex. CSC258" formControlName="course">
+                </mat-form-field>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div class="items">
+            <ul>
+              <li class="textbox">Instructor name:</li>
+              <li class="selectors">
+                <div >
+                  <mat-form-field>
+                    <input matInput placeholder="" formControlName="profName">
+                  </mat-form-field>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <br>
+          <br>
+          <br>
+
     <div class="items">
+
+      
       <ul>
+      
         <li class="textbox">1. Rate the course</li>
         <li class="selectors">
             <mat-slider
@@ -64,7 +100,7 @@
         <li class="selectors">
           <div >
             <mat-form-field id="hoursPerWeek">
-              <input matInput placeholder="Input" formControlName="hoursPerWeek">
+              <input matInput placeholder="" formControlName="hoursPerWeek">
             </mat-form-field>
           </div>
         </li>
@@ -109,7 +145,7 @@
         <li class="selectors">
           <div >
             <mat-form-field>
-              <input matInput placeholder="Input" formControlName="major">
+              <input matInput placeholder="" formControlName="major">
             </mat-form-field>
           </div>
         </li>
