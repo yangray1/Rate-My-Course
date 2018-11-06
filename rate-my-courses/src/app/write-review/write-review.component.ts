@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ReviewsComponent } from '../reviews/reviews.component'
 import { ReviewService } from '../_services/review.service'
+import { Review } from '../review';
 
 
 @Component({
@@ -47,13 +48,14 @@ export class WriteReviewComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    reviewService: ReviewService
+    private reviewService: ReviewService
     ) { 
       // reviewService.addReview();
     }
 
   ngOnInit() {
   }
+
 
   onSubmit(reviewService: ReviewService){
     this.submitted = true;
@@ -63,7 +65,8 @@ export class WriteReviewComponent implements OnInit {
     }
     this.success = true;
 
-    reviewService.addReview();
+    // reviewService.addReview();
+    let x = new Review(reviewService)
     
     this.router.navigate(
       ['../user-dashboard'],

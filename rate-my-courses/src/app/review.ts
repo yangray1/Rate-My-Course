@@ -1,3 +1,5 @@
+import { ReviewService } from './_services/review.service'
+
 export class Review {
     course: string;
     reviewer: string;
@@ -10,4 +12,8 @@ export class Review {
     gradeReceived: string;
     writtenReview: string;
     score: number;
+
+    constructor(private reviewService: ReviewService){
+        reviewService.addReview();
+    }
 }

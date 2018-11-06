@@ -11,6 +11,7 @@ export class ReviewService {
   constructor(
   ) {
     this.allReviews = REVIEWS;
+    alert("how many times is this called?")
   }
 
   getReviews(){

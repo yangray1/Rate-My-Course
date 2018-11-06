@@ -14,7 +14,7 @@ export class ReviewsComponent implements OnInit {
 
   allReviews: Review[];
 
-  constructor(reviewService: ReviewService) { 
+  constructor(private reviewService: ReviewService) { 
     this.allReviews = reviewService.getReviews();
     // alert(reviewService.allReviews.length);
   }
