@@ -57,10 +57,17 @@
     list-style: none;
     float:left;
 }
-#checkbox {
-    margin-bottom: 30px;
+.buttons{
+    margin-left: -50px;
 }
 
 .textbox {
     width: 200px;
+}
+
+.checkbox ul li{
+    list-style: none;
+    float:left;
+    font-size: 20px;
+    margin-left: 40px;
 }

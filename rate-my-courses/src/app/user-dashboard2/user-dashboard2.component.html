@@ -1,7 +1,8 @@
+<button  mat-icon-button (click)="newReview()">
 <h1 >{{name}}</h1>
 <div>
   <div class="grid-container">
-
+   
     <mat-grid-list cols="1" rowHeight="465px">
       <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
         <mat-card class="dashboard-card">
