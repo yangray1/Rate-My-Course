@@ -1,13 +1,14 @@
 <div class="option-container"> 
-  <p>Check what other people think about that <strong>HARD</strong> course before taking it </p>
-  <mat-grid-list cols="6" rowHeight="100px" gutterSize="2px">
-    <mat-grid-tile
+  <a routerLink="/search-course"><p>Find the right class for <strong>YOU</strong>.</p></a>
+  <mat-grid-list cols="6" rowHeight="300px" gutterSize="2px">
+    <!-- <mat-grid-tile
         *ngFor="let tile of tiles"
         [colspan]="tile.cols"
         [rowspan]="tile.rows"
         [style.background]="tile.color">
         <a routerLink="{{tile.link}}">{{tile.text}}</a>
-    </mat-grid-tile>
+    </mat-grid-tile> -->
+    <img src="assets/img/background.png">
   </mat-grid-list>
 </div>
 
