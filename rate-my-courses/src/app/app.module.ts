@@ -37,6 +37,9 @@ import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButt
 import { LayoutModule } from '@angular/cdk/layout';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.component';
+import { EditProfileComponent } from './user-dashboard/edit-profile/edit-profile.component';
+import { EditCoursesComponent } from './user-dashboard/edit-courses/edit-courses.component';
+import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,9 @@ import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.compo
     UserProfileComponent,
     ReviewsComponent,
     UserDashboard2Component,
+    EditProfileComponent,
+    EditCoursesComponent,
+    EditReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +91,8 @@ import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.compo
     RespondRequestComponent,
     LoginComponent,
     WriteReviewComponent,
+    EditProfileComponent,
+    EditCoursesComponent
   ],
   providers: [
     LoginService,

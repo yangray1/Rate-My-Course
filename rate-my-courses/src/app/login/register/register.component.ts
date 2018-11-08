@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatChipInputEvent, MatDialogRef } from '@angular/material';
 import { UsersService } from 'src/app/_services/users.service';
-import { User } from 'src/app/_model/user';
 
 @Component({
   selector: 'app-register',
@@ -57,14 +56,18 @@ export class RegisterComponent {
   }
 
   register() {
-    this.userService.addNewUser(new User(
-      this.addressForm.controls.firstName.value,
-      this.addressForm.controls.lastName.value,
-      this.addressForm.controls.username.value,
-      this.addressForm.controls.yearOfStudy.value,
-      this.programs,
-      this.addressForm.controls.password.value
-    ));
+    this.userService.addNewUser({
+      firstName: this.addressForm.controls.firstName.value,
+      lastName: this.addressForm.controls.lastName.value,
+      username: this.addressForm.controls.username.value,
+      yearOfStudy: this.addressForm.controls.yearOfStudy.value,
+      programOfStudy: this.programs,
+      courses: [],
+      takenCourses: [],
+      password: this.addressForm.controls.password.value,
+      isAdmin: false,
+      banned: true
+    });
     console.log(this.addressForm);
     this.registerDialogRef.close();
   }

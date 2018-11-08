@@ -1,15 +1,15 @@
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { User, UsersService } from 'src/app/_services/users.service';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { UsersService, User } from 'src/app/_services/users.service';
-import { MatDialogRef, MatChipInputEvent, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatChipInputEvent } from '@angular/material';
+import { EditUserComponent } from 'src/app/admin-dashboard/edit-user/edit-user.component';
 
 @Component({
-  selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.scss']
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.scss']
 })
-export class EditUserComponent {
-
+export class EditProfileComponent implements OnInit {
   visible = true;
   selectable = true;
   removable = true;
@@ -20,6 +20,7 @@ export class EditUserComponent {
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
+
   constructor(
     private userService: UsersService,
     public dialogRef: MatDialogRef<EditUserComponent>,
@@ -27,6 +28,9 @@ export class EditUserComponent {
   ) {
     this.user = data;
     this.origUsername = this.user.username;
+  }
+
+  ngOnInit() {
   }
 
   add(event: MatChipInputEvent) {
@@ -55,5 +59,4 @@ export class EditUserComponent {
     console.log(this.user);
     this.dialogRef.close();
   }
-
 }

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Review } from '../review';
 
@@ -13,9 +14,15 @@ export class ReviewsComponent implements OnInit {
   course: string;
   allReviews: Review[];
 
-  constructor(private reviewService: ReviewService) {
+  constructor(
+    private reviewService: ReviewService,
+    private route: ActivatedRoute
+  ) {
     this.course = 'CSC209'; // Pass in later during the course searchbar
     this.allReviews = this.reviewService.getReviews(this.course);
+    this.route.params.subscribe(params => {
+      console.log(params.course);
+    });
   }
 
   ngOnInit() {

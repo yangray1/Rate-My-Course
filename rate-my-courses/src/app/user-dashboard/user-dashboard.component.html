@@ -1,24 +1,70 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list cols="4" rowHeight="350px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
             {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
+            <button *ngIf="card.title !== 'All Reviews'" mat-icon-button class="more-button" (click)="edit(card.title)">
+              <mat-icon>edit</mat-icon>
             </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+        <mat-card-content *ngIf="card.title === 'User Info'" class="dashboard-card-content">
+          <h1>{{card.cardData.user.firstName + ' ' + card.cardData.user.lastName}}</h1>
+          <h3> {{card.cardData.user.programOfStudy.join(', ')}} </h3>
+          <mat-table [dataSource]="card.cardData.tableData">
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+              <mat-cell *matCellDef="let element"> <strong>{{element.title}}</strong> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="data">
+              <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.data}} </mat-cell>
+            </ng-container>
+            <mat-row mat-button *matRowDef="let row; columns: title"></mat-row>
+          </mat-table>
+        </mat-card-content>
+        <mat-card-content *ngIf="card.title === 'All Reviews'" class="dashboard-card-content">
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let review of card.cardData.allReviews">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong> {{review.course}} </strong>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <strong>Overall Rating: {{review.overallRating}} </strong>
+                </mat-panel-description>
+                <mat-panel-description>
+                  <strong>Difficulty: {{review.difficulty}} </strong>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p> {{review.writtenReview}} </p>
+              <mat-action-row>
+                <button mat-button color="primary">Edit</button>
+                <button mat-button color="primary">Remove</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+        <mat-card-content *ngIf="card.title === 'Courses'" class="dashboard-card-content">
+          <mat-list>
+            <h2>Currently Taking</h2>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let course of card.cardData.currentlyTaking" (click)="viewCourse(course)">
+              <mat-divider></mat-divider>
+              {{course}}
+            </mat-list-item>
+            <h2>Taken</h2>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let course of card.cardData.taken" (click)="viewCourse(course)">
+              <mat-divider></mat-divider>
+              {{course}}
+            </mat-list-item>
+          </mat-list>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-
+</div>

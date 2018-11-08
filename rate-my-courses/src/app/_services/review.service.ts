@@ -16,6 +16,10 @@ export class ReviewService {
     return this.allReviews.filter(review => review.course === course);
   }
 
+  getReviewsByUser(username: string): Review[] {
+    return this.allReviews.filter(review => review.reviewer === username);
+  }
+
   deleteReview(review: Review) {
   }
 
