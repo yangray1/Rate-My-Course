@@ -21,14 +21,16 @@ export class ReviewService {
   }
 
   deleteReview(review: Review) {
+    this.allReviews = this.allReviews.filter(e => e !== review);
   }
 
   addReview(review: Review) {
     this.allReviews.push(review);
   }
 
-  getAllCourses() {
-    return this.allReviews.map(review => review.course);
+  saveReview(review: Review, origReview: Review) {
+    this.deleteReview(origReview);
+    this.addReview(review);
   }
 }
 

@@ -5,6 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ReviewsComponent } from '../reviews/reviews.component'
 import { ReviewService } from '../_services/review.service'
 import { Review } from '../review';
+import { Observable } from 'rxjs';
+import { CoursesService } from '../_services/courses.service';
+import { startWith, map } from 'rxjs/operators';
 
 
 @Component({
@@ -13,7 +16,7 @@ import { Review } from '../review';
   styleUrls: ['./write-review.component.scss']
 })
 export class WriteReviewComponent implements OnInit {
-  
+
   reviewForm = this.fb.group({
     course: [null, Validators.required],
     profName: [null, Validators.required],
@@ -28,43 +31,54 @@ export class WriteReviewComponent implements OnInit {
     termsOfService: [null, Validators.requiredTrue],
   });
 
+  searchCourse: string;
+  courses: string[];
+
+  filteredCourses: Observable<string[]>;
+
   submitted = false;
   success = false;
 
   grades: Grade[] = [
-    {grade: 'A+', gradeValue: 'A+'},
-    {grade: 'A', gradeValue: 'A'},
-    {grade: 'A-', gradeValue: 'A-'},
-    {grade: 'B+', gradeValue: 'B+'},
-    {grade: 'B', gradeValue: 'B'},
-    {grade: 'B-', gradeValue: 'B-'},
-    {grade: 'C+', gradeValue: 'C+'},
-    {grade: 'C', gradeValue: 'C'},
-    {grade: 'C-', gradeValue: 'C-'},
-    {grade: 'D+', gradeValue: 'D+'},
-    {grade: 'D', gradeValue: 'D'},
-    {grade: 'D-', gradeValue: 'D-'},
-    {grade: 'F', gradeValue: 'F'}
+    { grade: 'A+', gradeValue: 'A+' },
+    { grade: 'A', gradeValue: 'A' },
+    { grade: 'A-', gradeValue: 'A-' },
+    { grade: 'B+', gradeValue: 'B+' },
+    { grade: 'B', gradeValue: 'B' },
+    { grade: 'B-', gradeValue: 'B-' },
+    { grade: 'C+', gradeValue: 'C+' },
+    { grade: 'C', gradeValue: 'C' },
+    { grade: 'C-', gradeValue: 'C-' },
+    { grade: 'D+', gradeValue: 'D+' },
+    { grade: 'D', gradeValue: 'D' },
+    { grade: 'D-', gradeValue: 'D-' },
+    { grade: 'F', gradeValue: 'F' }
   ];
   constructor(private fb: FormBuilder,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private reviewService: ReviewService
-    ) {}
+    private reviewService: ReviewService,
+    private coursesService: CoursesService,
+  ) { }
 
   ngOnInit() {
+    this.courses = this.coursesService.getAllCourses();
+    this.filteredCourses = this.reviewForm.controls['course'].valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
 
-  onSubmit(reviewService: ReviewService){
+  onSubmit(reviewService: ReviewService) {
     this.submitted = true;
-    if (this.reviewForm.invalid){
+    if (this.reviewForm.invalid) {
       alert("Invalid fields. Please fill in all the required fields.");
       return;
     }
     this.success = true;
 
-    let course = this.reviewForm.controls['course'].value;
+    const course: string = this.reviewForm.controls['course'].value;
     let profName = this.reviewForm.controls['profName'].value;
     let overallRating = this.reviewForm.controls['overallRating'].value;
     let levelOfDifficulty = this.reviewForm.controls['levelOfDifficulty'].value;
@@ -78,7 +92,7 @@ export class WriteReviewComponent implements OnInit {
     // alert(hoursPerWeek.constructor.name)
 
     let reviewToAdd = {
-      course: course,
+      course: course.toUpperCase(),
       reviewer: "GetLoggedInUser Here!",
       profName: profName,
       overallRating: overallRating,
@@ -91,13 +105,23 @@ export class WriteReviewComponent implements OnInit {
       score: 0
     }
 
+    if (!this.courses.includes(course.toUpperCase())) {
+      // new course window pops up
+      console.log('new course ' + course.toUpperCase());
+    }
+
     this.reviewService.addReview(reviewToAdd);
-    
+
     this.router.navigate(
       ['../user-dashboard'],
       { relativeTo: this.activeRoute }
     );
 
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toUpperCase();
+    return this.courses.filter(course => course.includes(filterValue));
   }
 }
 export interface Grade {

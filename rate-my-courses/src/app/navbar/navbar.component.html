@@ -1,11 +1,20 @@
+<div class="sticky">
+
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
-    <div class="logo mat-elevation-z4" matRipple (click)="goHome()">RateMyCourses</div>
+    <div class="logo" matRipple (click)="goHome()">RateMyCourses</div>
     <!-- <a routerLink="/" color="primary"><span>RateMyCourses</span></a> -->
-    <mat-form-field style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
-      <input matInput placeholder="Search for a Course">
-    </mat-form-field>
+    <form (submit)="search()" style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
+      <mat-form-field style="width: 100%;">
+        <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
+      </mat-form-field>
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let course of filteredCourses | async" [value]="course" (click)="search(course)">
+          {{course}}
+        </mat-option>
+      </mat-autocomplete>
+    </form>
     <button mat-icon-button (click)="newReview()">
       <mat-icon>note_add</mat-icon>
     </button>
@@ -23,3 +32,4 @@
   </mat-toolbar-row>
 
 </mat-toolbar>
+</div>

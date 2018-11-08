@@ -15,11 +15,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.scss'],
 })
-export class UserDashboardComponent {
+export class UserDashboardComponent implements OnInit {
   /** Based on the screen size, switch from standard to one column per row */
   cards: any;
   user: User;
   userReviews: Review[];
+
+  editing = false;
+  origReview: Review;
 
   title = [
     'title', 'data'
@@ -35,6 +38,16 @@ export class UserDashboardComponent {
     private matDialog: MatDialog,
     private router: Router,
   ) {
+    this.route.params.subscribe(params => {
+      this.user = this.userService.getUserByUsername(params.username);
+      this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+      console.log(this.userReviews);
+      console.log(this.user);
+      this.setCards();
+    });
+  }
+
+  ngOnInit() {
     this.route.params.subscribe(params => {
       this.user = this.userService.getUserByUsername(params.username);
       this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
@@ -90,6 +103,30 @@ export class UserDashboardComponent {
       );
     }
     console.log(section);
+  }
+
+  editReview(review: Review) {
+    this.editing = true;
+    this.origReview = review;
+  }
+
+  saveReview(review: Review) {
+    this.reviewService.saveReview(review, this.origReview);
+    this.editing = false;
+  }
+
+  cancelChange(review: Review) {
+    this.editing = false;
+  }
+
+  removeReview(review: Review) {
+    this.reviewService.deleteReview(review);
+    this.ngOnInit();
+    this.editing = false;
+  }
+
+  reset() {
+    this.editing = false;
   }
 
   viewCourse(course: string) {
