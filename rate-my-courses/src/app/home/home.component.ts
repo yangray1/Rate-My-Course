@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit {
   }
 
   tiles: Tile[] = [
-    {text: 'Find a Course', cols: 2, rows: 1, color: 'lightblue', link: "/view-reviews"}, // Services will instantiate themselves AGAIN if we simply type the link
-    {text: 'Rate a Course', cols: 2, rows: 1, color: 'lightblue', link: "/write-reviews"},
-    {text: 'Search for a Course', cols: 2, rows: 1, color: 'lightblue', link: "/search-course"},
+    // {text: 'Find a Course', cols: 2, rows: 1, color: 'lightblue', link: "/view-reviews"}, // Services will instantiate themselves AGAIN if we simply type the link
+    // {text: 'Rate a Course', cols: 2, rows: 1, color: 'lightblue', link: "/write-reviews"},
     {text: '', cols: 2, rows: 1, color: '', link: ""},
-    {text: 'My Ratings', cols: 2, rows: 1, color: 'lightblue', link: "/my-ratings"},
+    {text: 'Find a course', cols: 2, rows: 1, color: 'lightblue', link: "/search-course"},
+    {text: '', cols: 2, rows: 1, color: '', link: ""},
   ];
 
 }
