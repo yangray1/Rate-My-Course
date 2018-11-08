@@ -10,6 +10,7 @@ import { User } from '../_services/users.service';
 import { CoursesService } from '../_services/courses.service';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { SuggestionDialogComponent } from './suggestion-dialog/suggestion-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -104,6 +105,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
       {
         width: '600px',
         height: '700px'
+      }
+    );
+  }
+
+  suggestion() {
+    this.matDialog.open(
+      SuggestionDialogComponent,
+      {
+        width: '500px',
+        data: { user: this.user }
       }
     );
   }

@@ -42,6 +42,8 @@ import { EditProfileComponent } from './user-dashboard/edit-profile/edit-profile
 import { EditCoursesComponent } from './user-dashboard/edit-courses/edit-courses.component';
 import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.component';
 import { NewCourseDialogComponent } from './user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component';
+import { ReportDialogComponent } from './reviews/report-dialog/report-dialog.component';
+import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion-dialog.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { NewCourseDialogComponent } from './user-dashboard/edit-courses/new-cour
     EditCoursesComponent,
     EditReviewComponent,
     NewCourseComponent,
-    NewCourseDialogComponent
+    NewCourseDialogComponent,
+    ReportDialogComponent,
+    SuggestionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -97,7 +101,9 @@ import { NewCourseDialogComponent } from './user-dashboard/edit-courses/new-cour
     WriteReviewComponent,
     EditProfileComponent,
     EditCoursesComponent,
-    NewCourseDialogComponent
+    NewCourseDialogComponent,
+    ReportDialogComponent,
+    SuggestionDialogComponent
   ],
   providers: [
     LoginService,

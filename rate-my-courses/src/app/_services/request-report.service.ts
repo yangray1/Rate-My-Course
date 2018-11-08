@@ -20,22 +20,22 @@ export class RequestReportService {
       }
     },
     {
-      username: '', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-{
-      username: '', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-{
-      username: '', // If username is empty, this is an anon request
+      username: 'yangray1', // If username is empty, this is an anon request
       description: 'This is an anonymous request.',
       content: { request: 'This is more anonymous content.', type: 'request' }
     },
     {
-      username: '', // If username is empty, this is an anon request
+      username: 'yangray1', // If username is empty, this is an anon request
+      description: 'This is an anonymous request.',
+      content: { request: 'This is more anonymous content.', type: 'request' }
+    },
+    {
+      username: 'yangray1', // If username is empty, this is an anon request
+      description: 'This is an anonymous request.',
+      content: { request: 'This is more anonymous content.', type: 'request' }
+    },
+    {
+      username: 'yangray1', // If username is empty, this is an anon request
       description: 'This is an anonymous request.',
       content: { request: 'This is more anonymous content.', type: 'request' }
     },
@@ -47,17 +47,17 @@ export class RequestReportService {
       description: 'Inaccurate Review',
       content: {
         type: 'report',
-        reported: 'wongma73',
-        request: 'He doesn\'t even go to this school.',
+        report: 'He doesn\'t even go to this school.',
         review: {
-          title: 'I HATE THIS CLASS',
-          content: 'This class sucks so much.'
+          username: 'yangray1', // If username is empty, this is an anon request
+          description: 'This is an anonymous request.',
+          content: { request: 'This is more anonymous content.', type: 'request' }
         }
       }
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
   getAllRequests(): RequestReport[] {
     return this.requests;
@@ -65,6 +65,14 @@ export class RequestReportService {
 
   getAllReports(): RequestReport[] {
     return this.reports;
+  }
+
+  saveReport(report: RequestReport) {
+    this.reports.push(report);
+  }
+
+  saveRequest(request: RequestReport) {
+    this.requests.push(request);
   }
 }
 
