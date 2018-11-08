@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private matDialog: MatDialog
   ) {
-    this.loggedIn = false;
+    this.loggedIn = true;
   }
 
   // this is executed when the component is loaded up
@@ -71,7 +71,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   newReview() {
     const matDialogRef = this.matDialog.open(
       WriteReviewComponent,
-      { width: '500px' }
+      { width: '600px',
+        height: '700px'}
     );
   }
 

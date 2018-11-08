@@ -6,7 +6,8 @@
 
   <div class="form">
     <br>
-    <h3>Ready to rate a course? <span id="smallText">The fate of the course is in your fingertips!</span></h3>
+    <h3>Ready to rate a course?</h3>
+    <div><span id="smallText">The fate of the course is in your fingertips!</span></div>
 
       <div class="items">
           <ul>
@@ -14,7 +15,7 @@
             <li class="selectors">
               <div >
                 <mat-form-field>
-                  <input matInput placeholder="ex. CSC258" formControlName="course">
+                  <input class = "input"matInput placeholder="Ex: CSC258" formControlName="course">
                 </mat-form-field>
               </div>
             </li>
@@ -30,7 +31,7 @@
               <li class="selectors">
                 <div >
                   <mat-form-field>
-                    <input matInput placeholder="" formControlName="profName">
+                    <input matInput placeholder="Ex: Steve Engles" formControlName="profName">
                   </mat-form-field>
                 </div>
               </li>
@@ -100,7 +101,7 @@
         <li class="selectors">
           <div >
             <mat-form-field id="hoursPerWeek">
-              <input matInput placeholder="" formControlName="hoursPerWeek">
+              <input matInput placeholder="Ex: 10" formControlName="hoursPerWeek">
             </mat-form-field>
           </div>
         </li>
@@ -145,7 +146,7 @@
         <li class="selectors">
           <div >
             <mat-form-field>
-              <input matInput placeholder="" formControlName="major">
+              <input matInput placeholder="Ex: Life science" formControlName="major">
             </mat-form-field>
           </div>
         </li>
@@ -172,8 +173,8 @@
     <br>
     <br>
     <br>
-
-    <div class="items">
+    
+    <div class="checkbox">
       <ul>
         <li>
           <div id = "checkbox">
