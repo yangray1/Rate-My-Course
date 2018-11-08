@@ -26,10 +26,6 @@ export class ReviewService {
   addReview(review: Review) {
     this.allReviews.push(review);
   }
-
-  getAllCourses() {
-    return this.allReviews.map(review => review.course);
-  }
 }
 
 export interface Review {

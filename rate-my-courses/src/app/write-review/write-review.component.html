@@ -9,51 +9,51 @@
     <h3>Ready to rate a course?</h3>
     <div><span id="smallText">The fate of the course is in your fingertips!</span></div>
 
-      <div class="items">
-          <ul>
-            <li class="textbox">Course name:</li>
-            <li class="selectors">
-              <div >
-                <mat-form-field>
-                  <input class = "input"matInput placeholder="Ex: CSC258" formControlName="course">
-                </mat-form-field>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <br>
-        <br>
-        <br>
-
-        <div class="items">
-            <ul>
-              <li class="textbox">Instructor name:</li>
-              <li class="selectors">
-                <div >
-                  <mat-form-field>
-                    <input matInput placeholder="Ex: Steve Engles" formControlName="profName">
-                  </mat-form-field>
-                </div>
-              </li>
-            </ul>
+    <div class="items">
+      <ul>
+        <li class="textbox">Course name:</li>
+        <li class="selectors">
+          <div>
+            <mat-form-field>
+              <input matInput class="input" formControlName="course" placeholder="Ex: CSC258" [matAutocomplete]="auto">
+            </mat-form-field>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let course of filteredCourses | async" [value]="course" (click)="search(course)">
+                {{course}}
+              </mat-option>
+            </mat-autocomplete>
           </div>
-          <br>
-          <br>
-          <br>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="items">
+      <ul>
+        <li class="textbox">Instructor name:</li>
+        <li class="selectors">
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Ex: Steve Engles" formControlName="profName">
+            </mat-form-field>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <br>
+    <br>
 
     <div class="items">
 
-      
+
       <ul>
-      
+
         <li class="textbox">1. Rate the course</li>
         <li class="selectors">
-            <mat-slider
-            thumbLabel
-            [displayWith]="formatLabel"
-            formControlName="overallRating"
-            tickInterval="1000"
-            min="0"
+          <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="overallRating" tickInterval="1000" min="0"
             max="5"></mat-slider>
         </li>
       </ul>
@@ -65,13 +65,8 @@
       <ul>
         <li class="textbox"> 2. Level of difficulty</li>
         <li class="selectors">
-            <mat-slider
-            thumbLabel
-            [displayWith]="formatLabel"
-            formControlName="levelOfDifficulty"
-            tickInterval="1000"
-            min="0"
-            max="5"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="levelOfDifficulty" tickInterval="1000"
+            min="0" max="5"></mat-slider>
         </li>
       </ul>
     </div>
@@ -82,13 +77,7 @@
       <ul>
         <li class="textbox">3. Workload</li>
         <li class="selectors">
-            <mat-slider
-            thumbLabel
-            [displayWith]="formatLabel"
-            formControlName="workload"
-            tickInterval="1000"
-            min="0"
-            max="5"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="workload" tickInterval="1000" min="0" max="5"></mat-slider>
         </li>
       </ul>
     </div>
@@ -99,7 +88,7 @@
       <ul>
         <li class="textbox">4. Hours per week:</li>
         <li class="selectors">
-          <div >
+          <div>
             <mat-form-field id="hoursPerWeek">
               <input matInput placeholder="Ex: 10" formControlName="hoursPerWeek">
             </mat-form-field>
@@ -115,7 +104,7 @@
       <ul>
         <li class="textbox">5. Textbook Used:</li>
         <li class="selectors">
-            <mat-slide-toggle formControlName="textbookUsed"></mat-slide-toggle>
+          <mat-slide-toggle formControlName="textbookUsed"></mat-slide-toggle>
         </li>
       </ul>
     </div>
@@ -126,13 +115,13 @@
       <ul>
         <li class="textbox">6. Grade Recieved:</li>
         <li class="selectors">
-            <mat-form-field>
-              <mat-select placeholder="Grade" formControlName="grade">
-                <mat-option *ngFor="let grade of grades" [value]="grade.grade">
-                  {{grade.gradeValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Grade" formControlName="grade">
+              <mat-option *ngFor="let grade of grades" [value]="grade.grade">
+                {{grade.gradeValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </li>
       </ul>
     </div>
@@ -144,7 +133,7 @@
       <ul>
         <li class="textbox">7. Your major:</li>
         <li class="selectors">
-          <div >
+          <div>
             <mat-form-field>
               <input matInput placeholder="Ex: Life science" formControlName="major">
             </mat-form-field>
@@ -162,9 +151,9 @@
         <br>
         <li>
           <div>
-              <mat-form-field id="commentBox">
-                <textarea matInput placeholder="Comments..." formControlName="comments"></textarea>
-              </mat-form-field>
+            <mat-form-field id="commentBox">
+              <textarea matInput placeholder="Comments..." formControlName="comments"></textarea>
+            </mat-form-field>
           </div>
         </li>
       </ul>
@@ -173,28 +162,28 @@
     <br>
     <br>
     <br>
-    
+
     <div class="checkbox">
       <ul>
         <li>
-          <div id = "checkbox">
-              <mat-checkbox formControlName="termsOfService">I have agreed to the terms and services.</mat-checkbox>
+          <div id="checkbox">
+            <mat-checkbox formControlName="termsOfService">I have agreed to the terms and services.</mat-checkbox>
           </div>
         </li>
       </ul>
     </div>
     <br>
     <br>
-      
+
   </div>
   <div style="margin-bottom: 100px;" class="buttons">
-      <ul>
-        <li>
-            <button id="submit" mat-raised-button color="primary" type="submit">Submit</button>
-        </li>
-        <li>
-            <button mat-raised-button color="primary" type="button" (click)="cancel()" >Cancel</button>
-        </li>
-      </ul>
-    </div>
+    <ul>
+      <li>
+        <button id="submit" mat-raised-button color="primary" type="submit">Submit</button>
+      </li>
+      <li>
+        <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
+      </li>
+    </ul>
+  </div>
 </form>
