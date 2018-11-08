@@ -121,7 +121,7 @@ export class WriteReviewComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.courses.filter(course => course.includes(filterValue));
+    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
   }
 }
 export interface Grade {

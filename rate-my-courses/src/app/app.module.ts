@@ -1,3 +1,4 @@
+import { NewCourseComponent } from 'src/app/new-course/new-course.component';
 import { RequestReportService } from './_services/request-report.service';
 import { LoginService } from './_services/login.service';
 
@@ -32,7 +33,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, 
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
   MatTabsModule, MatInputModule, MatSelectModule, MatRadioModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ReviewsComponent } from './reviews/reviews.component';
@@ -40,6 +41,7 @@ import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.compo
 import { EditProfileComponent } from './user-dashboard/edit-profile/edit-profile.component';
 import { EditCoursesComponent } from './user-dashboard/edit-courses/edit-courses.component';
 import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.component';
+import { NewCourseDialogComponent } from './user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.co
     EditProfileComponent,
     EditCoursesComponent,
     EditReviewComponent,
+    NewCourseComponent,
+    NewCourseDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,8 @@ import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.co
     LoginComponent,
     WriteReviewComponent,
     EditProfileComponent,
-    EditCoursesComponent
+    EditCoursesComponent,
+    NewCourseDialogComponent
   ],
   providers: [
     LoginService,

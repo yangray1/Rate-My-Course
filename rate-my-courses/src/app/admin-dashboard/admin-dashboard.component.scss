@@ -25,3 +25,10 @@
   max-height: 80%;
   overflow: auto;
 }
+
+.tableRow {
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(110, 110, 110);
+  }
+}

@@ -1,6 +1,6 @@
 <div class="grid-container">
   <!-- <h1 class="mat-h1">Dashboard</h1> -->
-  <mat-grid-list cols="3" rowHeight="300px">
+  <mat-grid-list cols="4" rowHeight="300px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
 
       <mat-card class="dashboard-card">
@@ -27,8 +27,8 @@
               <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row mat-button *matRowDef="let row; columns: displayedColumns" (click)="select(row)"></mat-row>
+            <!-- <mat-header-row *matHeaderRowDef="card.tableData.displayedColumns; sticky: true"></mat-header-row> -->
+            <mat-row mat-button *matRowDef="let row; columns: displayedColumns" (click)="select(row)" class="tableRow"></mat-row>
           </mat-table>
 
         </mat-card-content>
