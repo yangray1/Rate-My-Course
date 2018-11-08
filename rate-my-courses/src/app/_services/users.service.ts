@@ -1,6 +1,5 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { User } from '../_model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,8 @@ export class UsersService {
         'Statistics',
         'HPS'
       ],
+      courses: ['CSC309', 'CSC301', 'CSC369'],
+      takenCourses: ['CSC209', 'CSC207', 'CSC236', 'CSC258'],
       password: 'password1234',
       isAdmin: false,
       banned: false
@@ -31,6 +32,10 @@ export class UsersService {
         'Computer Science',
         'Statistics'
       ],
+      courses: [
+
+      ],
+      takenCourses: [],
       password: 'admin123',
       isAdmin: true,
       banned: false
@@ -52,6 +57,10 @@ export class UsersService {
     this.users.push(newUser);
   }
 
+  public getUserByUsername(username: string): User {
+    return this.users.filter(user => user.username === username)[0];
+  }
+
   public getAllUsers(): User[] {
     return this.users;
   }
@@ -69,4 +78,17 @@ export class UsersService {
     user.banned = true;
     this.saveUser(user, userName);
   }
+}
+
+export interface User {
+    firstName: string;
+    lastName: string;
+    username: string;
+    yearOfStudy: number;
+    programOfStudy: string[];
+    courses: string[];
+    takenCourses: string[];
+    password: string;
+    isAdmin: boolean;
+    banned: boolean;
 }

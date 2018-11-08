@@ -1,4 +1,3 @@
-import { User } from 'src/app/_model/user';
 import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -6,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { LoginService } from '../_services/login.service';
 import { LoginComponent } from '../login/login.component';
 import { WriteReviewComponent } from '../write-review/write-review.component';
+import { User } from '../_services/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private matDialog: MatDialog
   ) {
-    this.loggedIn = false;
+    this.loggedIn = true;
   }
 
   // this is executed when the component is loaded up
@@ -35,12 +35,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
       // Bind the given variable validLogin, to this.loggedIn
       this.loggedIn = validLogin;
-      console.log('change');
+      console.log(this.loggedIn);
     });
   }
 
   logout() {
     this.loggedIn = false;
+    this.router.navigate(['/']);
   }
 
   login() {
@@ -50,6 +51,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     ).afterClosed().subscribe(response => {
       this.user = response.user;
       this.isAdmin = response.user.isAdmin;
+      this.dashboard();
       console.log(response);
     });
   }
@@ -58,7 +60,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.isAdmin) {
       this.router.navigate(['/admin-dashboard']);
     } else {
-      this.router.navigate(['/user-profile']);
+      this.router.navigate(['/user-dashboard/' + this.user.username]);
     }
   }
 
@@ -69,7 +71,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   newReview() {
     const matDialogRef = this.matDialog.open(
       WriteReviewComponent,
-      { width: '500px' }
+      { width: '600px',
+        height: '700px'}
     );
   }
 

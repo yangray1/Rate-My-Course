@@ -1,5 +1,8 @@
 import { RequestReportService } from './_services/request-report.service';
 import { LoginService } from './_services/login.service';
+
+import { ReviewService } from './_services/review.service';
+
 import { MaterialModule } from './material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +26,6 @@ import { HomeComponent } from './home/home.component';
 import { StickyHeaderComponent } from './sticky-header/sticky-header.component';
 import { SearchCourseComponent } from './search-course/search-course.component';
 
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MyRatingsComponent } from './my-ratings/my-ratings.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -31,9 +33,13 @@ import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, 
-  MatTabsModule } from '@angular/material';
+  MatTabsModule, MatInputModule, MatSelectModule, MatRadioModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
-import { ReviewsComponent } from './reviews/reviews.component'
+import { ReviewsComponent } from './reviews/reviews.component';
+import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.component';
+import { EditProfileComponent } from './user-dashboard/edit-profile/edit-profile.component';
+import { EditCoursesComponent } from './user-dashboard/edit-courses/edit-courses.component';
+import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +61,11 @@ import { ReviewsComponent } from './reviews/reviews.component'
     WriteReviewComponent,
     ReportUserComponent,
     UserProfileComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    UserDashboard2Component,
+    EditProfileComponent,
+    EditCoursesComponent,
+    EditReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +75,14 @@ import { ReviewsComponent } from './reviews/reviews.component'
     ReactiveFormsModule,
     LayoutModule,
     FormsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
   ],
   entryComponents: [
     RegisterComponent,
@@ -73,11 +91,14 @@ import { ReviewsComponent } from './reviews/reviews.component'
     RespondRequestComponent,
     LoginComponent,
     WriteReviewComponent,
+    EditProfileComponent,
+    EditCoursesComponent
   ],
   providers: [
     LoginService,
     RequestReportService,
     UsersService,
+    ReviewService,
     MatGridListModule,
     MatCardModule,
     MatMenuModule,

@@ -1,0 +1,61 @@
+<form novalidate>
+  <mat-card class="shipping-card">
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First Name" [(ngModel)]="user.firstName" name="firstName">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" [(ngModel)]="user.username" name="username">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="number" placeholder="Year of Study" [(ngModel)]="user.yearOfStudy" name="yearOfStudy">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let program of user.programOfStudy" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(program)">
+                {{program}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Program of Study" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Password" [(ngModel)]="user.password" name="password">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions style="overflow: hidden;">
+      <div class="center">
+        <button mat-raised-button color="primary" type="button" (click)="save()">Save</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</form>

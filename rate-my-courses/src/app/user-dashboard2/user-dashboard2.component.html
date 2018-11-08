@@ -1,0 +1,77 @@
+<button  mat-icon-button (click)="newReview()">
+<h1 >{{name}}</h1>
+<div>
+  <div class="grid-container">
+   
+    <mat-grid-list cols="1" rowHeight="465px">
+      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card">
+
+          <mat-card-header class = "cardTitleHeader">
+            <mat-card-title class="cardTitle">
+              {{card.title}}
+              <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                <mat-icon>more_vert</mat-icon>
+              </button> -->
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item>Expand</button>
+                <button mat-menu-item>Remove</button>
+              </mat-menu>
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content class="dashboard-card-content">
+            
+              <form id="changeInfo" [formGroup]="changeInfoForm" novalidate (ngSubmit)="onSave()">
+                  <ul>
+                    <li class="caption">
+                        <p>New Display Name:</p>
+                    </li>
+                    <li class="field">
+                      <mat-form-field>
+                        <input matInput formControlName="displayName" placeholder ="Display Name" >
+                      </mat-form-field>
+                    </li>
+                  </ul>
+      
+                  <ul>
+                    <li class="caption">
+                        <p>Old Password:</p>
+                    </li>
+                    <li class="field">
+                      <mat-form-field>
+                        <input matInput formControlName="oldPassword" placeholder="password" type="password">
+                      </mat-form-field>
+                    </li>
+                  </ul>
+      
+                  <ul>
+                    <li class="caption">
+                        <p>New Password:</p>
+                    </li>
+                    <li class="field">
+                      <mat-form-field>
+                        <input matInput formControlName="newPassword" placeholder="password" type="password">
+                      </mat-form-field>
+                    </li>
+                  </ul>
+                  
+                  <ul>
+                    <li id= "submit">
+                      <button mat-raised-button color="primary" type="submit">Save</button>
+                    </li>
+                  </ul>
+                </form>
+          
+    
+
+
+          </mat-card-content>
+
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <app-my-ratings></app-my-ratings>
+
+</div>

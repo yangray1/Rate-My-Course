@@ -1,6 +1,14 @@
-import { Component } from '@angular/core';
+import { EditCoursesComponent } from './edit-courses/edit-courses.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { MatDialog } from '@angular/material';
+import { UsersService, User } from './../_services/users.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../_services/login.service';
+import { ReviewService, Review } from '../_services/review.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -9,25 +17,82 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 })
 export class UserDashboardComponent {
   /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
+  cards: any;
+  user: User;
+  userReviews: Review[];
+
+  title = [
+    'title', 'data'
+  ];
+
+  userSessionSubscription: Subscription;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private reviewService: ReviewService,
+    private route: ActivatedRoute,
+    private userService: UsersService,
+    private matDialog: MatDialog,
+    private router: Router,
+  ) {
+    this.route.params.subscribe(params => {
+      this.user = this.userService.getUserByUsername(params.username);
+      this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+      console.log(this.userReviews);
+      console.log(this.user);
+      this.setCards();
+    });
+  }
+
+  setCards() {
+    this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map(({ matches }) => {
+
+        const userData = [
+          { title: 'Username', data: this.user.username },
+          { title: 'Year', data: this.user.yearOfStudy },
+          { title: 'Banned', data: this.user.banned ? 'Yes' : 'No' },
         ];
-      }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+        if (matches) {
+          return [
+            { title: 'User Info', cols: 4, rows: 1, cardData: { user: this.user, tableData: userData } },
+            { title: 'Courses', cols: 4, rows: 2, cardData: { currentlyTaking: this.user.courses, taken: this.user.takenCourses } },
+            { title: 'All Reviews', cols: 4, rows: 3, cardData: { allReviews: this.userReviews } },
+          ];
+        }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+        return [
+          { title: 'User Info', cols: 1, rows: 1, cardData: { user: this.user, tableData: userData } },
+          { title: 'All Reviews', cols: 3, rows: 3, cardData: { allReviews: this.userReviews } },
+          { title: 'Courses', cols: 1, rows: 2, cardData: { currentlyTaking: this.user.courses, taken: this.user.takenCourses } },
+        ];
+      })
+    );
+  }
+
+  edit(section: string) {
+    if (section === 'User Info') {
+      this.matDialog.open(
+        EditProfileComponent,
+        {
+          data: this.user,
+          width: '500px'
+        }
+      );
+    } else if (section === 'Courses') {
+      this.matDialog.open(
+        EditCoursesComponent,
+        {
+          data: this.user,
+          width: '500px'
+        }
+      );
+    }
+    console.log(section);
+  }
+
+  viewCourse(course: string) {
+    this.router.navigate(['/view-reviews/' + course]);
+  }
 }

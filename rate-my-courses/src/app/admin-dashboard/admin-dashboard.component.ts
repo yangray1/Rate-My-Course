@@ -27,6 +27,7 @@ export class AdminDashboardComponent {
     this.setCards();
   }
 
+  // what happens when you click on that box.
   select(row: any) {
     let matDialogRef: MatDialogRef<any>;
     if (row.content.type === 'user') {

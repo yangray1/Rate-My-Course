@@ -1,3 +1,4 @@
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -8,6 +9,10 @@ import { LoginComponent } from './login/login.component';
 import { WriteReviewComponent } from './write-review/write-review.component';
 import { ReportUserComponent } from './report-user/report-user.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserDashboard2Component } from './user-dashboard2/user-dashboard2.component';
+
+
+import { ReviewsComponent } from './reviews/reviews.component';
 
 // const routes: Routes = [
 //   //paths are localhost:4200/login , /user-dashboard, etc
@@ -26,6 +31,10 @@ const routes: Routes = [
   { path: 'my-ratings', component: MyRatingsComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-profile', component: UserProfileComponent },
+  { path: 'user-dashboard2', component: UserDashboard2Component},
+  { path: 'user-dashboard/:username', component: UserDashboardComponent},
+  { path: 'view-reviews/:course', component: ReviewsComponent},
+  { path: 'write-reviews', component: WriteReviewComponent},
   { path: '**', redirectTo: '' },
 ];
 

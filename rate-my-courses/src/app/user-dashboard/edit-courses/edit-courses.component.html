@@ -1,0 +1,32 @@
+<mat-dialog-content>
+  <div class="example-container">
+    <h3>Currently Taking</h3>
+
+    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="currentlyTaking" [cdkDropListConnectedTo]="[doneList]"
+      class="example-list" (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of currentlyTaking" cdkDrag>
+        {{item}}
+        <button (click)="deleteTaking(item)" mat-raised-button color="alert">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h3>Taken</h3>
+
+    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="taken" [cdkDropListConnectedTo]="[todoList]" class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of taken" cdkDrag>
+        {{item}}
+        <button (click)="deleteTaken(item)" mat-raised-button color="alert">Delete</button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="save()" mat-raised-button color="primary">Save</button>
+  <button (click)="add()" mat-raised-button color="primary">Add</button>
+  <mat-form-field style="padding-left: 10px;">
+    <input matInput placeholder="New Course!" [(ngModel)]="newCourse" name="newCourse">
+  </mat-form-field>
+</mat-dialog-actions>
