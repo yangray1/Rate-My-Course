@@ -73,15 +73,15 @@ export class AdminDashboardComponent {
 
         if (matches) {
           return [
-            { title: 'Requests', cols: 3, rows: 1, tableData: this.requestReportService.getAllRequests() },
-            { title: 'Reports', cols: 3, rows: 2, tableData: this.requestReportService.getAllReports() },
-            { title: 'Users', cols: 3, rows: 1, tableData: allUsers },
+            { title: 'Requests', cols: 3, rows: 2, tableData: this.requestReportService.getAllRequests() },
+            { title: 'Reports', cols: 3, rows: 3, tableData: this.requestReportService.getAllReports() },
+            { title: 'Users', cols: 3, rows: 2, tableData: allUsers },
           ];
         } else {
           return [
-            { title: 'Requests', cols: 1, rows: 1, tableData: this.requestReportService.getAllRequests() },
-            { title: 'Reports', cols: 2, rows: 2, tableData: this.requestReportService.getAllReports() },
-            { title: 'Users', cols: 1, rows: 1, tableData: allUsers },
+            { title: 'Requests', cols: 1, rows: 2, tableData: this.requestReportService.getAllRequests() },
+            { title: 'Reports', cols: 2, rows: 4, tableData: this.requestReportService.getAllReports() },
+            { title: 'Users', cols: 1, rows: 2, tableData: allUsers },
           ];
         }
       })

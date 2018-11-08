@@ -1,10 +1,12 @@
+<div class="sticky">
+
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
-    <div class="logo mat-elevation-z4" matRipple (click)="goHome()">RateMyCourses</div>
+    <div class="logo" matRipple (click)="goHome()">RateMyCourses</div>
     <!-- <a routerLink="/" color="primary"><span>RateMyCourses</span></a> -->
     <form (submit)="search()" style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
-      <mat-form-field>
+      <mat-form-field style="width: 100%;">
         <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
       </mat-form-field>
       <mat-autocomplete #auto="matAutocomplete">
@@ -30,3 +32,4 @@
   </mat-toolbar-row>
 
 </mat-toolbar>
+</div>

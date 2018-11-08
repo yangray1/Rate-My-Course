@@ -16,7 +16,9 @@
           <mat-table [dataSource]="card.cardData.tableData">
             <ng-container matColumnDef="title">
               <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-              <mat-cell *matCellDef="let element"> <strong>{{element.title}}</strong> </mat-cell>
+              <mat-cell *matCellDef="let element">
+                <h4>{{element.title}}</h4>
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="data">
@@ -28,22 +30,27 @@
         </mat-card-content>
         <mat-card-content *ngIf="card.title === 'All Reviews'" class="dashboard-card-content">
           <mat-accordion>
-            <mat-expansion-panel *ngFor="let review of card.cardData.allReviews">
+            <mat-expansion-panel *ngFor="let review of card.cardData.allReviews" (closed)="reset()" (opened)="reset()">
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  <strong> {{review.course}} </strong>
+                  {{review.course}}
                 </mat-panel-title>
                 <mat-panel-description>
-                  <strong>Overall Rating: {{review.overallRating}} </strong>
+                  Overall Rating: {{review.overallRating}}
                 </mat-panel-description>
                 <mat-panel-description>
-                  <strong>Difficulty: {{review.difficulty}} </strong>
+                  Difficulty: {{review.difficulty}}
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p> {{review.writtenReview}} </p>
+              <p *ngIf="!editing"> {{review.writtenReview}} </p>
+              <mat-form-field *ngIf="editing" class="editReview">
+                <textarea matInput cdkTextareaAutosize [(ngModel)]="review.writtenReview" name="writtenReview"></textarea>
+              </mat-form-field>
               <mat-action-row>
-                <button mat-button color="primary">Edit</button>
-                <button mat-button color="primary">Remove</button>
+                <button mat-button *ngIf="!editing" color="primary" (click)="editReview(review)">Edit</button>
+                <button mat-button *ngIf="editing" color="primary" (click)="saveReview(review)">Save</button>
+                <button mat-button *ngIf="editing" color="primary" (click)="reset()">Cancel</button>
+                <button mat-button *ngIf="!editing" color="primary" (click)="removeReview(review)">Remove</button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
@@ -52,13 +59,13 @@
           <mat-list>
             <h2>Currently Taking</h2>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let course of card.cardData.currentlyTaking" (click)="viewCourse(course)">
+            <mat-list-item *ngFor="let course of card.cardData.currentlyTaking" (click)="viewCourse(course)" class="course">
               <mat-divider></mat-divider>
               {{course}}
             </mat-list-item>
             <h2>Taken</h2>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let course of card.cardData.taken" (click)="viewCourse(course)">
+            <mat-list-item *ngFor="let course of card.cardData.taken" (click)="viewCourse(course)" class="course">
               <mat-divider></mat-divider>
               {{course}}
             </mat-list-item>

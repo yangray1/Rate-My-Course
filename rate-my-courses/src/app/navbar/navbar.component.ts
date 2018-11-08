@@ -33,10 +33,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
     private coursesService: CoursesService,
   ) {
-    this.loggedIn = true;
+    this.loggedIn = false;
   }
 
   private _filter(value: string): string[] {
@@ -65,6 +66,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.searchBarControl.valueChanges.subscribe(value => {
       this.searchCourse = value;
     });
+    console.log(this.activatedRoute.pathFromRoot);
   }
 
   logout() {
