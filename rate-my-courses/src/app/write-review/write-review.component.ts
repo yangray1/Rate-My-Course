@@ -78,7 +78,7 @@ export class WriteReviewComponent implements OnInit {
     }
     this.success = true;
 
-    let course = this.reviewForm.controls['course'].value;
+    const course: string = this.reviewForm.controls['course'].value;
     let profName = this.reviewForm.controls['profName'].value;
     let overallRating = this.reviewForm.controls['overallRating'].value;
     let levelOfDifficulty = this.reviewForm.controls['levelOfDifficulty'].value;
@@ -92,7 +92,7 @@ export class WriteReviewComponent implements OnInit {
     // alert(hoursPerWeek.constructor.name)
 
     let reviewToAdd = {
-      course: course,
+      course: course.toUpperCase(),
       reviewer: "GetLoggedInUser Here!",
       profName: profName,
       overallRating: overallRating,
@@ -103,6 +103,11 @@ export class WriteReviewComponent implements OnInit {
       gradeReceived: grade,
       writtenReview: comments,
       score: 0
+    }
+
+    if (!this.courses.includes(course.toUpperCase())) {
+      // new course window pops up
+      console.log('new course ' + course.toUpperCase());
     }
 
     this.reviewService.addReview(reviewToAdd);
