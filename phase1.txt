@@ -1,1 +1,24 @@
-# team16 phase1.txt
+How to use our app:
+
+Install Angular through node.js with npm install -g @angular/cli (if it isn’t installed already)
+cd to the ./rate-my-courses/ directory
+Run npm install
+Run the app with ng serve -o
+Then, go to your chrome browser and type in ‘localhost:4200’ into the URL.
+
+When you go to localhost:4200, you will be greeted with the home page. Click the “user” icon in the top right corner to login. 
+To login as a user, use “yangray1” as username  and “password1234” as password. 
+To Login as an admin, login in with “admin1” as the username and “admin123” as the password.
+
+Navigate to the home page by clicking the “RateMyCourses” button on the top left.
+
+User specs:
+Users can change their display name in the user dashboard, as well as add course that they are taking through the user dashboard as well
+Users will be able to post reviews by clicking on the “add review” icon on the top right corner. 
+Users will be able to search for reviews of courses with the search bar on the top navigation bar
+
+Admin specs:
+The admin dashboard allows for admins to view hardcoded requests for improvements of the app and reports of inappropriate reviews
+The admin dashboard also allows admins to change user information (display name, password, etc)
+Admins can also change course information
+Admins will be able to search for reviews and post reviews just like users can
