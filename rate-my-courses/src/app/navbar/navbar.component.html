@@ -5,8 +5,8 @@
   <mat-toolbar-row>
     <div class="logo" matRipple (click)="goHome()">RateMyCourses</div>
     <!-- <a routerLink="/" color="primary"><span>RateMyCourses</span></a> -->
-    <form (submit)="search()" style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
-      <mat-form-field style="width: 100%;">
+    <form (submit)="search()" class="search-bar">
+      <mat-form-field class="width-full">
         <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
       </mat-form-field>
       <mat-autocomplete #auto="matAutocomplete">

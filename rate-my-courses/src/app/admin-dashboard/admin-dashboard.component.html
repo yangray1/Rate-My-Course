@@ -42,7 +42,7 @@
                   {{review.username}}
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <div *ngIf="review.content.type === 'report'" style="float: left;">
+              <div class="float" *ngIf="review.content.type === 'report'">
                 <mat-card class="review-side mat-elevation-z8">
                   <mat-card-header>
                     <div mat-card-avatar class="header-image"></div>
@@ -64,16 +64,16 @@
                   {{review.content.review.writtenReview}}
                 </div>
               </div>
-              <mat-card class="mat-elevation-z14" style="float: left; margin-top: 20px; width: 100%;">
+              <mat-card class="justification mat-elevation-z14">
                 <mat-card-content>
                   <!-- <p *ngIf="review.content.type === 'report'"> -->
-                    <h3>Justifications/Explanations</h3>
-                    <div>
-                      {{review.content.type === 'report' ? review.content.report: review.content.request}}
-                    </div>
+                  <h3>Justifications/Explanations</h3>
+                  <div>
+                    {{review.content.type === 'report' ? review.content.report: review.content.request}}
+                  </div>
                   <!-- </p> -->
                   <!-- <p *ngIf="review.content.type === 'request'"> -->
-                    <!-- {{review.content.request}} -->
+                  <!-- {{review.content.request}} -->
                   <!-- </p> -->
                 </mat-card-content>
               </mat-card>
@@ -82,7 +82,7 @@
                 <button mat-button color="primary" (click)="removeReview(review.content.review, review)">Remove Review</button>
               </mat-action-row>
               <mat-action-row *ngIf="card.title === 'Requests'">
-                <button mat-button color="primary" (click)="acknowledge(review.content.request)">Ban User</button>
+                <button mat-button color="primary" (click)="acknowledge(review.content.request)">Acknowledge</button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>

@@ -8,8 +8,6 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { EditUserComponent } from './edit-user/edit-user.component';
-import { RespondRequestComponent } from './respond-request/respond-request.component';
-import { RespondReportComponent } from './respond-report/respond-report.component';
 import { NewCourseDialogComponent } from '../user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component';
 import { Review } from '../_services/review.service';
 
@@ -51,19 +49,6 @@ export class AdminDashboardComponent implements OnInit {
       matDialogRef.afterClosed().subscribe((_) => {
         this.setCards();
       });
-    } else if (row.content.type === 'request') {
-      matDialogRef = this.matDialog.open(
-        RespondRequestComponent,
-        { data: row.content }
-      );
-    } else if (row.content.type === 'report') {
-      matDialogRef = this.matDialog.open(
-        RespondReportComponent,
-        {
-          data: row.content,
-          width: '500px',
-        }
-      );
     } else if (row.content.type === 'course') {
       this.matDialog.open(
         NewCourseDialogComponent,
