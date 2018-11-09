@@ -3,6 +3,7 @@ p {
     position: absolute;
     top: 40%;
     left: 50%;
+    font-size: 70px;
     transform: translate(-50%, -50%);  
     z-index: 1;
 }
@@ -12,7 +13,7 @@ a {
 }
 
 a:hover {
-    color: red;
+    color: rgb(151, 22, 168);
 }
 
 .option-container {

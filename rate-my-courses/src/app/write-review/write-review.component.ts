@@ -92,6 +92,7 @@ export class WriteReviewComponent implements OnInit {
     // alert(hoursPerWeek.constructor.name)
 
     let reviewToAdd = {
+      id: this.reviewService.next(),
       course: course.toUpperCase(),
       reviewer: "GetLoggedInUser Here!",
       profName: profName,
@@ -121,7 +122,7 @@ export class WriteReviewComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.courses.filter(course => course.includes(filterValue));
+    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
   }
 }
 export interface Grade {

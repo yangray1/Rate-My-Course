@@ -5,8 +5,8 @@
   <mat-toolbar-row>
     <div class="logo" matRipple (click)="goHome()">RateMyCourses</div>
     <!-- <a routerLink="/" color="primary"><span>RateMyCourses</span></a> -->
-    <form (submit)="search()" style="font-size: 0.65em; width: 100%; padding-left: 30px; padding-right: 30px;">
-      <mat-form-field style="width: 100%;">
+    <form (submit)="search()" class="search-bar">
+      <mat-form-field class="width-full">
         <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
       </mat-form-field>
       <mat-autocomplete #auto="matAutocomplete">
@@ -24,6 +24,7 @@
 
     <mat-menu #menu="matMenu">
       <button *ngIf="loggedIn" mat-menu-item (click)="dashboard()">Dashboard</button>
+      <button *ngIf="loggedIn" mat-menu-item (click)="suggestion()">Suggestion?</button>
       <button *ngIf="loggedIn" mat-menu-item (click)="logout()">Logout</button>
       <button *ngIf="!loggedIn" mat-menu-item (click)="login()">Login/Register</button>
       <button mat-menu-item>About</button>

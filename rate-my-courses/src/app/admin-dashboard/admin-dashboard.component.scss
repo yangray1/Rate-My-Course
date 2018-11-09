@@ -1,3 +1,81 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.float {
+  float: left;
+}
+
+.justification {
+  float: left;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+.table-container {
+  position: relative;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.tableRow {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(110, 110, 110);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body,
+div,
+p {
+  font-family: "Montserrat";
+}
+
+.card {
+  max-width: 1000px;
+  min-height: 225px;
+}
+
+.header-image {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg/600px-Default_profile_picture_%28male%29_on_Facebook.jpg');
+  background-size: cover;
+  margin-bottom: 5px;
+}
+
+.written-review {
+  margin-left: 250px;
+}
+
+.review-side {
+  float: left;
+  width: 200px;
+}
+
 .grid-container {
   margin: 20px;
 }

@@ -1,0 +1,29 @@
+<div class="form mat-elevation-z8">
+  <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>New Report</mat-card-title>
+        <mat-card-subtitle>What is wrong with this review?</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Description" formControlName="description">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput cdkTextareaAutosize placeholder="Report" formControlName="report"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

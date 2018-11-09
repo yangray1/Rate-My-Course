@@ -26,7 +26,7 @@
 <mat-dialog-actions>
   <button (click)="save()" mat-raised-button color="primary">Save</button>
   <button (click)="add()" mat-raised-button color="primary">Add</button>
-  <mat-form-field style="padding-left: 10px;">
+  <mat-form-field class="padding-left">
     <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
   </mat-form-field>
   <mat-autocomplete #auto="matAutocomplete">

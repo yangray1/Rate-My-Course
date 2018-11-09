@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RespondRequestComponent } from './respond-request.component';
+import { NewCourseDialogComponent } from './new-course-dialog.component';
 
-describe('RespondRequestComponent', () => {
-  let component: RespondRequestComponent;
-  let fixture: ComponentFixture<RespondRequestComponent>;
+describe('NewCourseDialogComponent', () => {
+  let component: NewCourseDialogComponent;
+  let fixture: ComponentFixture<NewCourseDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RespondRequestComponent ]
+      declarations: [ NewCourseDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RespondRequestComponent);
+    fixture = TestBed.createComponent(NewCourseDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,19 +1,22 @@
-import { RequestReportService } from './../_services/request-report.service';
+import { ReviewService } from './../_services/review.service';
+import { CoursesService } from 'src/app/_services/courses.service';
+import { Course } from './../_services/courses.service';
+import { RequestReportService, RequestReport } from './../_services/request-report.service';
 import { UsersService } from './../_services/users.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { EditUserComponent } from './edit-user/edit-user.component';
-import { RespondRequestComponent } from './respond-request/respond-request.component';
-import { RespondReportComponent } from './respond-report/respond-report.component';
+import { NewCourseDialogComponent } from '../user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component';
+import { Review } from '../_services/review.service';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss'],
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit {
   /** Based on the screen size, switch from standard to one column per row */
   displayedColumns: string[] = ['username', 'description'];
   cards: any;
@@ -22,8 +25,13 @@ export class AdminDashboardComponent {
     private breakpointObserver: BreakpointObserver,
     private userService: UsersService,
     private requestReportService: RequestReportService,
+    private reviewService: ReviewService,
     private matDialog: MatDialog,
+    private courseService: CoursesService
   ) {
+  }
+
+  ngOnInit() {
     this.setCards();
   }
 
@@ -41,20 +49,35 @@ export class AdminDashboardComponent {
       matDialogRef.afterClosed().subscribe((_) => {
         this.setCards();
       });
-    } else if (row.content.type === 'request') {
-      matDialogRef = this.matDialog.open(
-        RespondRequestComponent,
-        { data: row.content }
-      );
-    } else if (row.content.type === 'report') {
-      matDialogRef = this.matDialog.open(
-        RespondReportComponent,
+    } else if (row.content.type === 'course') {
+      this.matDialog.open(
+        NewCourseDialogComponent,
         {
-          data: row.content,
+          data: { course: row.content.description, isAdmin: true },
           width: '500px',
         }
-      );
+      ).afterClosed().subscribe(result => {
+        if (result) {
+          this.ngOnInit();
+        }
+      });
     }
+  }
+
+  ban(username: string) {
+    this.userService.banUser(username);
+  }
+
+  removeReview(review: any, report: any) {
+    console.log(review);
+    this.reviewService.deleteReview(review);
+    console.log(this.reviewService.getReviews('CSC207'));
+    this.requestReportService.removeReport(report);
+    this.ngOnInit();
+  }
+
+  acknowledge(request: RequestReport) {
+    console.log(request);
   }
 
   setCards() {
@@ -62,6 +85,7 @@ export class AdminDashboardComponent {
       map(({ matches }) => {
 
         const allUsers: TableData[] = [];
+        const allCourses: TableData[] = [];
 
         this.userService.getAllUsers().forEach(user => {
           allUsers.push({
@@ -71,17 +95,26 @@ export class AdminDashboardComponent {
           });
         });
 
+        this.courseService.getAllCourseObjects().forEach((course: Course) => {
+          allCourses.push({
+            username: course.courseCode,
+            description: course.courseName,
+            content: { type: 'course', description: course }
+          });
+        });
         if (matches) {
           return [
-            { title: 'Requests', cols: 3, rows: 2, tableData: this.requestReportService.getAllRequests() },
-            { title: 'Reports', cols: 3, rows: 3, tableData: this.requestReportService.getAllReports() },
-            { title: 'Users', cols: 3, rows: 2, tableData: allUsers },
+            { title: 'Requests', cols: 4, rows: 2, tableData: this.requestReportService.getAllRequests() },
+            { title: 'Reports', cols: 4, rows: 3, tableData: this.requestReportService.getAllReports() },
+            { title: 'Users', cols: 4, rows: 2, tableData: allUsers },
+            { title: 'Courses', cols: 4, rows: 2, tableData: allCourses }
           ];
         } else {
           return [
-            { title: 'Requests', cols: 1, rows: 2, tableData: this.requestReportService.getAllRequests() },
-            { title: 'Reports', cols: 2, rows: 4, tableData: this.requestReportService.getAllReports() },
-            { title: 'Users', cols: 1, rows: 2, tableData: allUsers },
+            { title: 'Users', cols: 1, rows: 4, tableData: allUsers },
+            { title: 'Courses', cols: 1, rows: 4, tableData: allCourses },
+            { title: 'Requests', cols: 2, rows: 2, tableData: this.requestReportService.getAllRequests() },
+            { title: 'Reports', cols: 2, rows: 2, tableData: this.requestReportService.getAllReports() },
           ];
         }
       })

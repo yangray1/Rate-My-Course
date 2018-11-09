@@ -1,12 +1,14 @@
+import { NewCourseDialogComponent } from './new-course-dialog/new-course-dialog.component';
 import { Component, OnInit, Inject } from '@angular/core';
 import { UsersService, User } from 'src/app/_services/users.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { EditUserComponent } from 'src/app/admin-dashboard/edit-user/edit-user.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CoursesService } from 'src/app/_services/courses.service';
 import { startWith, map } from 'rxjs/operators';
+import { NewCourseComponent } from 'src/app/new-course/new-course.component';
 
 @Component({
   selector: 'app-edit-courses',
@@ -29,6 +31,7 @@ export class EditCoursesComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private coursesService: CoursesService,
+    private matDialog: MatDialog,
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
@@ -40,7 +43,7 @@ export class EditCoursesComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.courses.filter(course => course.includes(filterValue));
+    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -66,7 +69,21 @@ export class EditCoursesComponent implements OnInit {
   }
 
   add() {
-    this.currentlyTaking.push(this.searchCourse);
+    if (!this.coursesService.getAllCourses().includes(this.searchCourse)) {
+      this.matDialog.open(
+        NewCourseDialogComponent,
+        {
+          data: { course: { courseCode: this.searchCourse, courseName: '', courseDesc: '' }, idAdmin: false },
+          width: '500px'
+        }
+      ).afterClosed().subscribe(result => {
+        if (result) {
+          this.currentlyTaking.push(this.searchCourse);
+        }
+      });
+    } else {
+      this.currentlyTaking.push(this.searchCourse);
+    }
   }
 
   deleteTaken(course: string) {

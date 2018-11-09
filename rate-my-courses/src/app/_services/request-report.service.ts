@@ -20,22 +20,22 @@ export class RequestReportService {
       }
     },
     {
-      username: '', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-{
-      username: '', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-{
-      username: '', // If username is empty, this is an anon request
+      username: 'yangray1', // If username is empty, this is an anon request
       description: 'This is an anonymous request.',
       content: { request: 'This is more anonymous content.', type: 'request' }
     },
     {
-      username: '', // If username is empty, this is an anon request
+      username: 'yangray1', // If username is empty, this is an anon request
+      description: 'This is an anonymous request.',
+      content: { request: 'This is more anonymous content.', type: 'request' }
+    },
+    {
+      username: 'yangray1', // If username is empty, this is an anon request
+      description: 'This is an anonymous request.',
+      content: { request: 'This is more anonymous content.', type: 'request' }
+    },
+    {
+      username: 'yangray1', // If username is empty, this is an anon request
       description: 'This is an anonymous request.',
       content: { request: 'This is more anonymous content.', type: 'request' }
     },
@@ -47,17 +47,13 @@ export class RequestReportService {
       description: 'Inaccurate Review',
       content: {
         type: 'report',
-        reported: 'wongma73',
-        request: 'He doesn\'t even go to this school.',
-        review: {
-          title: 'I HATE THIS CLASS',
-          content: 'This class sucks so much.'
-        }
+        report: 'He doesn\'t even go to this school.',
+        review: { id: 2, course: "CSC207", reviewer: "yangray1", profName: "Ray Mond", overallRating: 2, difficulty: 4, workload: 4, hoursPerWeek: 20, textbookUsed: true, gradeReceived: "B", writtenReview: "this course is so hard :( this review is hardcoded", score: 0 }
       }
     },
   ];
 
-  constructor() {}
+  constructor() { }
 
   getAllRequests(): RequestReport[] {
     return this.requests;
@@ -65,6 +61,18 @@ export class RequestReportService {
 
   getAllReports(): RequestReport[] {
     return this.reports;
+  }
+
+  saveReport(report: RequestReport) {
+    this.reports.push(report);
+  }
+
+  saveRequest(request: RequestReport) {
+    this.requests.push(request);
+  }
+
+  removeReport(report: RequestReport) {
+    this.reports = this.reports.filter(e => e !== report);
   }
 }
 
