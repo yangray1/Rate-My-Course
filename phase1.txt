@@ -4,7 +4,7 @@ Install Angular through node.js with npm install -g @angular/cli (if it isn’t 
 cd to the ./rate-my-courses/ directory
 Run npm install
 Run the app with ng serve -o
-Then, go to your chrome browser and type in ‘localhost:4200’ into the URL.
+Then, go to your chrome browser and type in ‘localhost:4200’ into the URL (it should open automatically after ng serve though).
 
 When you go to localhost:4200, you will be greeted with the home page. Click the “user” icon in the top right corner to login. 
 To login as a user, use “yangray1” as username  and “password1234” as password. 
