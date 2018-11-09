@@ -1,3 +1,4 @@
+import { CoursesService } from 'src/app/_services/courses.service';
 import { EditCoursesComponent } from './edit-courses/edit-courses.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { MatDialog } from '@angular/material';
@@ -37,6 +38,7 @@ export class UserDashboardComponent implements OnInit {
     private userService: UsersService,
     private matDialog: MatDialog,
     private router: Router,
+    public courseService: CoursesService
   ) {
     this.route.params.subscribe(params => {
       this.user = this.userService.getUserByUsername(params.username);
@@ -120,6 +122,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   removeReview(review: Review) {
+    console.log(review);
     this.reviewService.deleteReview(review);
     this.ngOnInit();
     this.editing = false;

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { REVIEWS } from './hardcoded-reviews';
 
+let count = 3;
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReviewService {
 
   private allReviews: Review[] = [];
@@ -21,7 +23,7 @@ export class ReviewService {
   }
 
   deleteReview(review: Review) {
-    this.allReviews = this.allReviews.filter(e => e !== review);
+    this.allReviews = this.allReviews.filter(e => e.id !== review.id);
   }
 
   addReview(review: Review) {
@@ -32,9 +34,15 @@ export class ReviewService {
     this.deleteReview(origReview);
     this.addReview(review);
   }
+
+  next() {
+    count += 1;
+    return count;
+  }
 }
 
 export interface Review {
+  id: number;
   course: string;
   reviewer: string;
   profName: string;

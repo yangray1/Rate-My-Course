@@ -1,6 +1,7 @@
+import { ReviewService } from './../_services/review.service';
 import { CoursesService } from 'src/app/_services/courses.service';
 import { Course } from './../_services/courses.service';
-import { RequestReportService } from './../_services/request-report.service';
+import { RequestReportService, RequestReport } from './../_services/request-report.service';
 import { UsersService } from './../_services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -10,6 +11,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { RespondRequestComponent } from './respond-request/respond-request.component';
 import { RespondReportComponent } from './respond-report/respond-report.component';
 import { NewCourseDialogComponent } from '../user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component';
+import { Review } from '../_services/review.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -25,6 +27,7 @@ export class AdminDashboardComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private userService: UsersService,
     private requestReportService: RequestReportService,
+    private reviewService: ReviewService,
     private matDialog: MatDialog,
     private courseService: CoursesService
   ) {
@@ -74,6 +77,22 @@ export class AdminDashboardComponent implements OnInit {
         }
       });
     }
+  }
+
+  ban(username: string) {
+    this.userService.banUser(username);
+  }
+
+  removeReview(review: any, report: any) {
+    console.log(review);
+    this.reviewService.deleteReview(review);
+    console.log(this.reviewService.getReviews('CSC207'));
+    this.requestReportService.removeReport(report);
+    this.ngOnInit();
+  }
+
+  acknowledge(request: RequestReport) {
+    console.log(request);
   }
 
   setCards() {

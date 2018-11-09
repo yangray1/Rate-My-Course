@@ -92,6 +92,7 @@ export class WriteReviewComponent implements OnInit {
     // alert(hoursPerWeek.constructor.name)
 
     let reviewToAdd = {
+      id: this.reviewService.next(),
       course: course.toUpperCase(),
       reviewer: "GetLoggedInUser Here!",
       profName: profName,
