@@ -11,10 +11,10 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use('/', routes);
 
-app.use(express.static(__dirname + '/dist/rate-my-courses'));
+app.use(express.static(__dirname + '/../rate-my-courses' + '/dist/rate-my-courses'));
 
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/rate-my-courses/index.html'));
+    res.sendFile(path.join(__dirname + '/../rate-my-courses' + '/dist/rate-my-courses/index.html'));
 });
 
 module.exports = app;
