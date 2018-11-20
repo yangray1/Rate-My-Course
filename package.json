@@ -4,7 +4,7 @@
   "description": "project root",
   "main": "index.js",
   "scripts": {
-    "start": "node ./back-end/start.js",
+    "start": "cd back-end && npm install && node start.js",
     "heroku-postbuild": "cd rate-my-courses && npm install && npm run build"
   },
   "engines": {
