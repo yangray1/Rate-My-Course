@@ -12,6 +12,9 @@ app.use(bodyParser.json());
 app.use('/', routes);
 
 app.use(express.static(__dirname + '/dist/rate-my-courses'));
-app.sendFile(path.join(__dirname + '/dist/rate-my-courses/index.html'));
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/dist/rate-my-courses/index.html'));
+});
 
 module.exports = app;
