@@ -18,9 +18,9 @@
               <input matInput class="input" formControlName="course" placeholder="Ex: CSC258" [matAutocomplete]="auto">
             </mat-form-field>
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let course of filteredCourses | async" [value]="course" (click)="search(course)">
+              <!-- <mat-option *ngFor="let course of filteredCourses | async" [value]="course" (click)="search(course)">
                 {{course}}
-              </mat-option>
+              </mat-option> -->
             </mat-autocomplete>
           </div>
         </li>
@@ -53,8 +53,8 @@
 
         <li class="textbox">1. Rate the course</li>
         <li class="selectors">
-          <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="overallRating" tickInterval="1000" min="0"
-            max="5"></mat-slider>
+          <!-- <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="overallRating" tickInterval="1000" min="0"
+            max="5"></mat-slider> -->
         </li>
       </ul>
     </div>
@@ -65,8 +65,8 @@
       <ul>
         <li class="textbox"> 2. Level of difficulty</li>
         <li class="selectors">
-          <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="levelOfDifficulty" tickInterval="1000"
-            min="0" max="5"></mat-slider>
+          <!-- <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="levelOfDifficulty" tickInterval="1000"
+            min="0" max="5"></mat-slider> -->
         </li>
       </ul>
     </div>
@@ -77,7 +77,7 @@
       <ul>
         <li class="textbox">3. Workload</li>
         <li class="selectors">
-          <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="workload" tickInterval="1000" min="0" max="5"></mat-slider>
+          <!-- <mat-slider thumbLabel [displayWith]="formatLabel" formControlName="workload" tickInterval="1000" min="0" max="5"></mat-slider> -->
         </li>
       </ul>
     </div>
@@ -182,7 +182,7 @@
         <button id="submit" mat-raised-button color="primary" type="submit">Submit</button>
       </li>
       <li>
-        <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button>
+        <!-- <button mat-raised-button color="primary" type="button" (click)="cancel()">Cancel</button> -->
       </li>
     </ul>
   </div>
