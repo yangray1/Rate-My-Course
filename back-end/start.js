@@ -4,7 +4,7 @@ const dbConfig = require('./config/database.config');
 
 mongoose.Promise = global.Promise;
 
-const server = app.listen(3000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
     mongoose.connect(dbConfig.url, {
         useNewUrlParser: true
     }).then(() => {
