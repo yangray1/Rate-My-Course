@@ -1,7 +1,9 @@
 const User = require('../models/user.models');
 
 newUser = (req, res) => {
-    if (!req.body.content)
+    console.log(req.body)
+    console.log(req.headers)
+    if (res.body === {})
         return res.status(400).send({
             message: "User content can not be empty",
         });
@@ -18,6 +20,7 @@ newUser = (req, res) => {
         isAdmin: req.body.isAdmin,
         banned: req.body.banned,
     });
+
 
     user.save().then(data => {
         res.send(data);
