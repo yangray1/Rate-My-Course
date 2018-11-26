@@ -12,7 +12,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent, InvalidUsernamePasswordDialogComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -35,6 +35,7 @@ import { EditReviewComponent } from './user-dashboard/edit-review/edit-review.co
 import { NewCourseDialogComponent } from './user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component';
 import { ReportDialogComponent } from './reviews/report-dialog/report-dialog.component';
 import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,10 +57,12 @@ import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion
     NewCourseDialogComponent,
     ReportDialogComponent,
     SuggestionDialogComponent,
+    InvalidUsernamePasswordDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
@@ -83,7 +86,8 @@ import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion
     EditCoursesComponent,
     NewCourseDialogComponent,
     ReportDialogComponent,
-    SuggestionDialogComponent
+    SuggestionDialogComponent,
+    InvalidUsernamePasswordDialogComponent
   ],
   providers: [
     LoginService,

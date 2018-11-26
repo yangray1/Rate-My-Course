@@ -1,5 +1,8 @@
+import { User } from './users.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +45,10 @@ export class UsersService {
     },
   ];
 
-  constructor() { }
+  private API = 'http://localhost:3000';
+  private USER_API = this.API + '/api/users';
+
+  constructor(private http: HttpClient) { }
 
   public verifyLogin(username: string, password: string): any {
     const foundUser = this.users.filter(user => user.username === username);
@@ -57,8 +63,9 @@ export class UsersService {
     this.users.push(newUser);
   }
 
-  public getUserByUsername(username: string): User {
-    return this.users.filter(user => user.username === username)[0];
+  public getUserByUsername(username: string): Observable<User> {
+    console.log(this.getHttpHeaders());
+    return this.http.get<User>(this.USER_API + '/profile/' + username, this.getHttpHeaders());
   }
 
   public getAllUsers(): User[] {
@@ -66,7 +73,7 @@ export class UsersService {
   }
 
   public saveUser(user: User, origUsername: string) {
-    const index = this.users.map(function(e) { return e.username; }).indexOf(origUsername);
+    const index = this.users.map(function (e) { return e.username; }).indexOf(origUsername);
     if (index >= 0) {
       this.users.splice(index, 1);
       this.users.push(user);
@@ -78,17 +85,25 @@ export class UsersService {
     user.banned = true;
     this.saveUser(user, userName);
   }
-}
+
+  private getHttpHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwtToken') || ''
+      })
+    };
+  }
 
 export interface User {
-    firstName: string;
-    lastName: string;
-    username: string;
-    yearOfStudy: number;
-    programOfStudy: string[];
-    courses: string[];
-    takenCourses: string[];
-    password: string;
-    isAdmin: boolean;
-    banned: boolean;
+  firstName: string;
+  lastName: string;
+  username: string;
+  yearOfStudy: number;
+  programOfStudy: string[];
+  courses: string[];
+  takenCourses: string[];
+  password: string;
+  isAdmin: boolean;
+  banned: boolean;
 }

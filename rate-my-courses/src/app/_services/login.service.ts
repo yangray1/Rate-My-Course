@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { User } from './users.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private loggedInSource = new Subject<boolean>();
-  private userLoggedInSource = new Subject<User>();
+  private API = 'http://localhost:3000';
+  private LOGIN_API = this.API + '/api/login';
 
-  loggedIn$ = this.loggedInSource.asObservable();
-  userLoggedIn$ = this.userLoggedInSource.asObservable();
+  constructor(private http: HttpClient) {  }
 
-  login(confirm: boolean) {
-    this.loggedInSource.next(confirm);
-  }
-
-  inSession(user: User) {
-    console.log(user);
-    this.userLoggedInSource.next(user);
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(
+      this.LOGIN_API,
+      {
+        username: username,
+        password: password
+      }
+    );
   }
 }

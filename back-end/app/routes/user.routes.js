@@ -1,11 +1,13 @@
-const user = require('../controllers/user.controller');
 const express = require('express');
 const router = express.Router();
 
+const user = require('../controllers/user.controller');
+const authMiddleware = require('../../auth.middleware');
+
 const userRoute = '/api/users/';
 
-router.post(userRoute + 'save', user.newUser);
-router.get(userRoute + 'profile/:username', user.findUser);
-router.get(userRoute + 'allUsers', user.allUsers);
+router.post(userRoute + 'save', authMiddleware, user.newUser);
+router.get(userRoute + 'profile/:username', authMiddleware, user.findUser);
+router.get(userRoute + 'allUsers', authMiddleware, user.allUsers);
 
 module.exports = router;

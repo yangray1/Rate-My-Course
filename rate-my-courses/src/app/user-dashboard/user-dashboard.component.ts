@@ -41,21 +41,27 @@ export class UserDashboardComponent implements OnInit {
     public courseService: CoursesService
   ) {
     this.route.params.subscribe(params => {
-      this.user = this.userService.getUserByUsername(params.username);
-      this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
-      console.log(this.userReviews);
-      console.log(this.user);
-      this.setCards();
+      this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
+        this.user = res;
+        this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+        console.log(this.userReviews);
+        console.log(this.user);
+        this.setCards();
+      });
     });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.user = this.userService.getUserByUsername(params.username);
-      this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
-      console.log(this.userReviews);
-      console.log(this.user);
-      this.setCards();
+      console.log(localStorage.getItem('username'));
+      console.log(localStorage.getItem('jwtToken'));
+      this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
+        this.user = res;
+        this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+        console.log(this.userReviews);
+        console.log(this.user);
+        this.setCards();
+      });
     });
   }
 
