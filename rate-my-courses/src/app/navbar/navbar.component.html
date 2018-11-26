@@ -23,10 +23,10 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button *ngIf="loggedIn" mat-menu-item (click)="dashboard()">Dashboard</button>
-      <button *ngIf="loggedIn" mat-menu-item (click)="suggestion()">Suggestion?</button>
-      <button *ngIf="loggedIn" mat-menu-item (click)="logout()">Logout</button>
-      <button *ngIf="!loggedIn" mat-menu-item (click)="login()">Login/Register</button>
+      <button *ngIf="isLoggedIn()" mat-menu-item (click)="dashboard()">Dashboard</button>
+      <button *ngIf="isLoggedIn()" mat-menu-item (click)="suggestion()">Suggestion?</button>
+      <button *ngIf="isLoggedIn()" mat-menu-item (click)="logout()">Logout</button>
+      <button *ngIf="!isLoggedIn()" mat-menu-item (click)="login()">Login/Register</button>
       <button mat-menu-item>About</button>
     </mat-menu>
 

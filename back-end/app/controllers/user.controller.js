@@ -42,7 +42,9 @@ allUsers = (req, res) => {
 };
 
 findUser = (req, res) => {
-    User.findById(req.params.username).then(user => {
+    User.findOne({
+        username: req.params.username
+    }).then(user => {
         if (!user) {
             return res.status(404).send({
                 message: 'User not found with username ' + req.params.username
@@ -50,11 +52,6 @@ findUser = (req, res) => {
         }
         res.send(user);
     }).catch(err => {
-        if (err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: 'User not found with username ' + req.params.username
-            });
-        }
         return res.status(500).send({
             message: 'Error retrieving user with username ' + Request.params.username
         });

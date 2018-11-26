@@ -1,3 +1,4 @@
+import { UsersService } from 'src/app/_services/users.service';
 import { ReviewService } from './../_services/review.service';
 import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,11 +7,11 @@ import { Subscription, Observable } from 'rxjs';
 import { LoginService } from '../_services/login.service';
 import { LoginComponent } from '../login/login.component';
 import { WriteReviewComponent } from '../write-review/write-review.component';
-import { User } from '../_services/users.service';
 import { CoursesService } from '../_services/courses.service';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { SuggestionDialogComponent } from './suggestion-dialog/suggestion-dialog.component';
+import { User } from '../_services/users.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,9 +20,7 @@ import { SuggestionDialogComponent } from './suggestion-dialog/suggestion-dialog
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  loggedIn: boolean;
   user: User;
-  isAdmin: boolean;
 
   searchCourse: string;
   courses: string[];
@@ -37,13 +36,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
     private coursesService: CoursesService,
+    private userService: UsersService
   ) {
-    this.loggedIn = false;
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
     return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
+  }
+
+  isLoggedIn() {
+    return localStorage.getItem('username');
   }
 
   search() {
@@ -53,16 +56,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // this is executed when the component is loaded up
   ngOnInit() {
     // Subscribe to the results
-    this.loginSubscription = this.loginService.loggedIn$.subscribe((validLogin: boolean) => {
-      // Bind the given variable validLogin, to this.loggedIn
-      this.loggedIn = validLogin;
-      console.log(this.loggedIn);
-    });
+    // this.loginSubscription = this.loginService.loggedIn$.subscribe((validLogin: boolean) => {
+    //   // Bind the given variable validLogin, to this.loggedIn
+    //   this.loggedIn = validLogin;
+    //   console.log(this.loggedIn);
+    // });
     this.courses = this.coursesService.getAllCourses();
     this.filteredCourses = this.searchBarControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+
+    if (localStorage.getItem('username')) {
+      this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
+        this.user = res;
+      });
+    }
 
     this.searchBarControl.valueChanges.subscribe(value => {
       this.searchCourse = value;
@@ -71,8 +80,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.loggedIn = false;
     this.router.navigate(['/']);
+    localStorage.clear();
   }
 
   login() {
@@ -80,15 +89,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
       LoginComponent,
       { width: '500px' }
     ).afterClosed().subscribe(response => {
-      this.user = response.user;
-      this.isAdmin = response.user.isAdmin;
-      this.dashboard();
+      this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
+        this.user = res;
+        this.dashboard();
+      });
       console.log(response);
     });
   }
 
   dashboard() {
-    if (this.isAdmin) {
+    if (localStorage.isAdmin === 'true') {
       this.router.navigate(['/admin-dashboard']);
     } else {
       this.router.navigate(['/user-dashboard/' + this.user.username]);
@@ -114,7 +124,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       SuggestionDialogComponent,
       {
         width: '500px',
-        data: { user: this.user }
+        data: { user: localStorage.user }
       }
     );
   }
