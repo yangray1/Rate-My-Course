@@ -94,6 +94,7 @@ export class UsersService {
       })
     };
   }
+}
 
 export interface User {
   firstName: string;
