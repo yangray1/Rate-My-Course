@@ -66,14 +66,26 @@ findUser = (req, res) => {
     });
 };
 
-updateUser = (req, res) => {};
+  
+updateUser = (req, res) => {
+  // findById auto finds by id, and the .user is whaty you put in the request body. Ex: {user: {..}}
+  User.findByIdAndUpdate(req.body.user._id, req.body.user).then(user => {
 
-deleteUser = (req, res) => {};
+      if (!user){
+        res.status(404).send({
+          message: "User not found with username " + username
+        });
+      }
+      res.send(user);
+      // update the user.
+      
+  })
+};
+
 
 module.exports = {
   newUser,
   allUsers,
   findUser,
-  updateUser,
-  deleteUser
+  updateUser
 };

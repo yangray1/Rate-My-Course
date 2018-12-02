@@ -9,5 +9,6 @@ const userRoute = '/api/users';
 router.post(userRoute + '/save', authMiddleware, user.newUser);
 router.get(userRoute + '/profile/:username', authMiddleware, user.findUser);
 router.get(userRoute + '/allUsers', user.allUsers); // authMiddleware, user.allUsers);
+router.patch(userRoute + '/updateUser', user.updateUser);
 
 module.exports = router;
