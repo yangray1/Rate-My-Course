@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user.models');
+const User = require('../models/user.modals');
 const authConfig = require('../../config/auth.config');
 
 module.exports = (req, res) => {
@@ -9,9 +9,9 @@ module.exports = (req, res) => {
     }).then(user => {
         if (user && user.password === req.body.password) {
             const token = jwt.sign({
-                    username: user.username,
-                    isAdmin: user.isAdmin
-                }, authConfig.secret);
+                username: user.username,
+                isAdmin: user.isAdmin
+            }, authConfig.secret);
 
             res.status(200).send({
                 success: true,

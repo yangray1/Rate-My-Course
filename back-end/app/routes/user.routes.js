@@ -4,10 +4,10 @@ const router = express.Router();
 const user = require('../controllers/user.controller');
 const authMiddleware = require('../../auth.middleware');
 
-const userRoute = '/api/users/';
+const userRoute = '/api/users';
 
-router.post(userRoute + 'save', authMiddleware, user.newUser);
-router.get(userRoute + 'profile/:username', authMiddleware, user.findUser);
-router.get(userRoute + 'allUsers', authMiddleware, user.allUsers);
+router.post(userRoute + '/save', authMiddleware, user.newUser);
+router.get(userRoute + '/profile/:username', authMiddleware, user.findUser);
+router.get(userRoute + '/allUsers', user.allUsers); // authMiddleware, user.allUsers);
 
 module.exports = router;

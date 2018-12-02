@@ -36,6 +36,7 @@ import { NewCourseDialogComponent } from './user-dashboard/edit-courses/new-cour
 import { ReportDialogComponent } from './reviews/report-dialog/report-dialog.component';
 import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NewReviewComponent } from './new-review/new-review.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReportDialogComponent,
     SuggestionDialogComponent,
     InvalidUsernamePasswordDialogComponent,
+    NewReviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { HttpClientModule } from '@angular/common/http';
     NewCourseDialogComponent,
     ReportDialogComponent,
     SuggestionDialogComponent,
-    InvalidUsernamePasswordDialogComponent
+    InvalidUsernamePasswordDialogComponent,
+    NewReviewComponent,
   ],
   providers: [
     LoginService,

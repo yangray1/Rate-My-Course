@@ -12,6 +12,7 @@ import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { SuggestionDialogComponent } from './suggestion-dialog/suggestion-dialog.component';
 import { User } from '../_services/users.service';
+import { NewReviewComponent } from '../new-review/new-review.component';
 
 @Component({
   selector: 'app-navbar',
@@ -89,11 +90,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
       LoginComponent,
       { width: '500px' }
     ).afterClosed().subscribe(response => {
-      this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
-        this.user = res;
-        this.dashboard();
-      });
-      console.log(response);
+      if (localStorage.getItem('username')) {
+        this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
+          this.user = res;
+          this.dashboard();
+        });
+        console.log(response);
+      }
     });
   }
 
@@ -111,7 +114,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   newReview() {
     const matDialogRef = this.matDialog.open(
-      WriteReviewComponent,
+      NewReviewComponent,
       {
         width: '600px',
         height: '700px'
