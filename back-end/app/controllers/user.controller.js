@@ -79,7 +79,6 @@ updateUser = (req, res) => {
         });
       }
       res.send(user);
-      // update the user.
       
   })
 };
