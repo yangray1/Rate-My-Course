@@ -70,8 +70,8 @@ findUser = (req, res) => {
 updateUser = (req, res) => {
   // We pass in the user object. Ex: {user: {..}}
   // We find by: Id and object.
-  // 1st argumnet, we get the id with the user object. users.id = xxxxx
-  // 2nd argumnet is the whole user object.
+  // 1st argumnet [id], we get the id with the user object. users.id = xxxxx
+  // 2nd argumnet [what you want to update]is the whole user object.
   User.findByIdAndUpdate(req.body.user._id, req.body.user).then(user => {
       if (!user){
         res.status(404).send({
