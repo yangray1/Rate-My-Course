@@ -68,7 +68,9 @@ findUser = (req, res) => {
 
   
 updateUser = (req, res) => {
-  // findById auto finds by id, and the .user is whaty you put in the request body. Ex: {user: {..}}
+  // We pass in the user object. Ex: {user: {..}}
+  // 1st argumnet, we get the id with the user object. users.id = xxxxx
+  // 2nd argumnet is the whole user object.
   User.findByIdAndUpdate(req.body.user._id, req.body.user).then(user => {
 
       if (!user){
