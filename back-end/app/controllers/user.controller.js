@@ -40,16 +40,15 @@ allUsers = (req, res) => {
     })
     .catch(err => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving all users."
+        message: err.message || "Some error occurred while retrieving all users."
       });
     });
 };
 
 findUser = (req, res) => {
   User.findOne({
-    username: req.params.username
-  })
+      username: req.params.username
+    })
     .then(user => {
       if (!user) {
         return res.status(404).send({
@@ -60,8 +59,7 @@ findUser = (req, res) => {
     })
     .catch(err => {
       return res.status(500).send({
-        message:
-          "Error retrieving user with username " + Request.params.username
+        message: "Error retrieving user with username " + Request.params.username
       });
     });
 };

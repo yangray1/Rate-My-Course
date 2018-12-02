@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const userRoutes = require('./app/routes/user.routes');
 const loginRoutes = require('./app/routes/login.routes');
+const requestReportRoutes = require('./app/routes/request-report.routes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use('/', userRoutes);
 app.use('/', loginRoutes);
+app.use('/', requestReportRoutes);
 
 app.use(express.static(__dirname + '/../rate-my-courses/dist/rate-my-courses'));
 
