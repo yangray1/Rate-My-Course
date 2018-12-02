@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 const UserSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
-    username: String,
+    username: {
+        type: String,
+        unique: true,
+        required: true
+    },
     yearOfStudy: Number,
     programOfStudy: [String],
     courses: [String],
