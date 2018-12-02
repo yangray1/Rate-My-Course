@@ -72,12 +72,12 @@ updateUser = (req, res) => {
   // 1st argumnet, we get the id with the user object. users.id = xxxxx
   // 2nd argumnet is the whole user object.
   User.findByIdAndUpdate(req.body.user._id, req.body.user).then(user => {
-
       if (!user){
         res.status(404).send({
           message: "User not found with username " + username
         });
       }
+      // Update the user.
       res.send(user);
       
   })
