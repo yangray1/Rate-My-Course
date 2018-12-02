@@ -87,5 +87,4 @@ module.exports = {
   allUsers,
   findUser,
   updateUser,
-  deleteUser
 };
