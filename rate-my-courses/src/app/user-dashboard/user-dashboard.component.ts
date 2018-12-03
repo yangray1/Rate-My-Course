@@ -6,7 +6,7 @@ import { UsersService, User } from './../_services/users.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { LoginService } from '../_services/login.service';
 import { ReviewService, Review } from '../_services/review.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -43,10 +43,14 @@ export class UserDashboardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
         this.user = res;
-        this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+        this.reviewService.getReviewsByUser(this.user.username).subscribe(reviews => {
+          this.userReviews = reviews;
+          this.setCards();
+
+    
         console.log(this.userReviews);
         console.log(this.user);
-        this.setCards();
+      });
       });
     });
   }
@@ -57,10 +61,13 @@ export class UserDashboardComponent implements OnInit {
       console.log(localStorage.getItem('jwtToken'));
       this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
         this.user = res;
-        this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+        this.reviewService.getReviewsByUser(this.user.username).subscribe((reviews) => {
+          this.userReviews = reviews
         console.log(this.userReviews);
         console.log(this.user);
         this.setCards();
+      });
+
       });
     });
   }
@@ -116,10 +123,10 @@ export class UserDashboardComponent implements OnInit {
   editReview(review: Review) {
     this.editing = true;
     this.origReview = review;
-  }
+  } 
 
   saveReview(review: Review) {
-    this.reviewService.saveReview(review, this.origReview);
+    this.reviewService.saveReview(review);
     this.editing = false;
   }
 

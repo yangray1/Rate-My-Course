@@ -6,8 +6,10 @@ const authMiddleware = require('../../auth.middleware');
 
 const reviewRoute = '/api/review';
 
-router.delete(reviewRoute + '/delete-review/:id', review.deleteReview);
-router.patch(reviewRoute + '/edit-review/:id', review.editReview);
+router.delete(reviewRoute + '/delete-review', review.deleteReview);
+router.patch(reviewRoute + '/edit-review', review.editReview);
 router.post(reviewRoute + '/add-review', review.addReview);
+router.get(reviewRoute + '/getReviewByCourse/:coursecode', review.getReviewsByCourse);
+router.get(reviewRoute + '/getReviewByUser/:user', review.getReviewsByUser);
 
 module.exports = router;

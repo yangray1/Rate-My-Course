@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Review } from '../review';
 
 import { ReviewService } from '../_services/review.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reviews',
@@ -34,7 +35,9 @@ export class ReviewsComponent implements OnInit {
       this.courseFound = this.coursesService.getAllCourses().includes(params.course);
       if (this.courseFound) {
         this.courseDesc = this.coursesService.getCourseDesc(this.course);
-        this.allReviews = this.reviewService.getReviews(this.course);
+        this.reviewService.getReviews(this.course).subscribe(reviews => {
+          this.allReviews = reviews;
+        });
       }
       console.log(params.course);
     });
