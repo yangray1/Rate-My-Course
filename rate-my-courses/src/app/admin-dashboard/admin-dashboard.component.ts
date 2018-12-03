@@ -95,13 +95,27 @@ export class AdminDashboardComponent implements OnInit {
           });
         });
 
-        this.courseService.getAllCourseObjects().forEach((course: Course) => {
-          allCourses.push({
-            username: course.courseCode,
-            description: course.courseName,
-            content: { type: 'course', description: course }
-          });
-        });
+        this.courseService.getAllCourses().subscribe( (courses: Course[]) => {
+          courses.forEach((course: Course) => {
+            allCourses.push({
+              username: course.courseCode,
+              description: course.courseName,
+              content: { type: 'course', description: course }
+            });
+          })
+        }
+        )
+        
+        
+        
+        
+        // forEach((course: Course) => {
+        //   allCourses.push({
+        //     username: course.courseCode,
+        //     description: course.courseName,
+        //     content: { type: 'course', description: course }
+        //   });
+        // })
         if (matches) {
           return [
             { title: 'Requests', cols: 4, rows: 2, tableData: this.requestReportService.getAllRequests() },

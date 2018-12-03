@@ -7,7 +7,7 @@ import { Subscription, Observable } from 'rxjs';
 import { LoginService } from '../_services/login.service';
 import { LoginComponent } from '../login/login.component';
 import { WriteReviewComponent } from '../write-review/write-review.component';
-import { CoursesService } from '../_services/courses.service';
+import { CoursesService, Course } from '../_services/courses.service';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { SuggestionDialogComponent } from './suggestion-dialog/suggestion-dialog.component';
@@ -39,11 +39,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private coursesService: CoursesService,
     private userService: UsersService
   ) {
+
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
+    return this.courses.filter(course => course.includes(filterValue));
   }
 
   isLoggedIn() {
@@ -62,7 +63,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     //   this.loggedIn = validLogin;
     //   console.log(this.loggedIn);
     // });
-    this.courses = this.coursesService.getAllCourses();
+    this.coursesService.getAllCourses().subscribe((allCourses: Course[]) => {
+      this.courses = allCourses.map(course => course.courseCode);
+    });
+
     this.filteredCourses = this.searchBarControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
