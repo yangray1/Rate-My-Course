@@ -70,9 +70,9 @@ addReview = (req, res) => {
     review.save().then((result) => {
 		// Save and send object that was saved
 		res.send(result)
-	}, (error) => {
+	}).catch(error => {
 		res.status(400).send({message: "Error adding review"}) // 400 for bad request
-	})
+	});
 }
 
 getReviewsByCourse = (req, res) => {

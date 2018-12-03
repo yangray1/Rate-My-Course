@@ -17,13 +17,13 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(express.static(__dirname + '/../rate-my-courses/dist/rate-my-courses'));
 app.use('/', userRoutes);
 app.use('/', loginRoutes);
 app.use('/', requestReportRoutes);
 app.use('/', reviewRoutes);
 app.use('/', courseRoutes);
 
-app.use(express.static(__dirname + '/../rate-my-courses/dist/rate-my-courses'));
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/../rate-my-courses/dist/rate-my-courses/index.html'));

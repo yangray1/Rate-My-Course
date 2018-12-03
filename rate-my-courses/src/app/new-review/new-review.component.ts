@@ -1,3 +1,4 @@
+import { ReviewService } from './../_services/review.service';
 import { CoursesService, Course } from "./../_services/courses.service";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators, FormControl } from "@angular/forms";
@@ -33,7 +34,10 @@ export class NewReviewComponent implements OnInit {
     overallRating: [null, Validators.required],
     difficulty: [null, Validators.required],
     workload: [null, Validators.required],
-    hours: [null, Validators.required]
+    hours: [null, Validators.required],
+    grade: [null, Validators.required],
+    description: [null, Validators.required],
+    textbookUsed: [null, Validators.required],
   });
 
   hasUnitNumber = false;
@@ -47,7 +51,8 @@ export class NewReviewComponent implements OnInit {
   filteredCourses: Observable<string[]>;
   constructor(
     private fb: FormBuilder,
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private reviewService: ReviewService
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +78,21 @@ export class NewReviewComponent implements OnInit {
   }
 
   onSubmit() {
-    alert("Thanks!");
+    this.reviewService.addReview({
+      course: this.searchBarControl.value,
+      reviewer: localStorage.getItem('username'),
+      profName: this.addressForm.controls['professor'].value,
+      overallRating: this.addressForm.controls['overallRating'].value,
+      difficulty: this.addressForm.controls['difficulty'].value,
+      workload: this.addressForm.controls['workload'].value,
+      hoursPerWeek: this.addressForm.controls['hours'].value,
+      gradeReceived: this.addressForm.controls['grade'].value,
+      textbookUsed:  this.addressForm.controls['textbookUsed'].value,
+      writtenReview: this.addressForm.controls['description'].value,
+      score: 5
+    }).subscribe(savedReview => {
+      console.log(savedReview);
+    });
   }
 }
 

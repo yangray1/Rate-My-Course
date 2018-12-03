@@ -45,6 +45,7 @@ export class ReviewsComponent implements OnInit {
             )
             this.reviewService.getReviews(this.course).subscribe(reviews => {
               this.allReviews = reviews;
+              console.log(this.allReviews);
             });
           }
         }

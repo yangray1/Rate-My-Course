@@ -6,7 +6,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { LoginService } from '../_services/login.service';
 import { LoginComponent } from '../login/login.component';
-import { WriteReviewComponent } from '../write-review/write-review.component';
 import { CoursesService, Course } from '../_services/courses.service';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';

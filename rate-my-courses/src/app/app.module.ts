@@ -24,7 +24,6 @@ import { HomeComponent } from './home/home.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { WriteReviewComponent } from './write-review/write-review.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
   MatTabsModule, MatInputModule, MatSelectModule, MatRadioModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -49,7 +48,6 @@ import { NewReviewComponent } from './new-review/new-review.component';
     RegisterComponent,
     EditUserComponent,
     HomeComponent,
-    WriteReviewComponent,
     ReviewsComponent,
     EditProfileComponent,
     EditCoursesComponent,
@@ -83,7 +81,6 @@ import { NewReviewComponent } from './new-review/new-review.component';
     RegisterComponent,
     EditUserComponent,
     LoginComponent,
-    WriteReviewComponent,
     EditProfileComponent,
     EditCoursesComponent,
     NewCourseDialogComponent,
