@@ -59,16 +59,16 @@ export class UserDashboardComponent implements OnInit {
         this.user = res;
         this.user.courses.forEach(course => {
           this.courseService.getCourse(course).subscribe(courseObj => {
-            this.courseDescMap[course] = courseObj.courseDesc.substring(0, 25) + "..";
+            this.courseDescMap[course] = courseObj.courseName;
           });
-          this.user.takenCourses.forEach(course => {
-            this.courseService.getCourse(course).subscribe(courseObj => {
-              this.courseDescMap[course] = courseObj.courseDesc.substring(0, 25) + "..";
-            });
-          });
-          this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
-          this.setCards();
         });
+        this.user.takenCourses.forEach(course => {
+          this.courseService.getCourse(course).subscribe(courseObj => {
+            this.courseDescMap[course] = courseObj.courseName;
+          });
+        });
+        this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+        this.setCards();
       });
     });
   }
@@ -92,9 +92,9 @@ export class UserDashboardComponent implements OnInit {
         }
 
         return [
-          { title: 'User Info', cols: 1, rows: 1, cardData: { user: this.user, tableData: userData } },
-          { title: 'All Reviews', cols: 3, rows: 3, cardData: { allReviews: this.userReviews } },
-          { title: 'Courses', cols: 1, rows: 2, cardData: { currentlyTaking: this.user.courses, taken: this.user.takenCourses } },
+          { title: 'User Info', cols: 2, rows: 1, cardData: { user: this.user, tableData: userData } },
+          { title: 'All Reviews', cols: 2, rows: 3, cardData: { allReviews: this.userReviews } },
+          { title: 'Courses', cols: 2, rows: 2, cardData: { currentlyTaking: this.user.courses, taken: this.user.takenCourses } },
         ];
       })
     );
@@ -151,6 +151,6 @@ export class UserDashboardComponent implements OnInit {
   }
 
   getCourseDescription(course: string) {
-    
+
   }
 }

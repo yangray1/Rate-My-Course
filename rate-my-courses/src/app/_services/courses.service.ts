@@ -55,7 +55,8 @@ export class CoursesService {
     },
   ];
 
-  private API = 'http://localhost:3000';
+  private API = 'https://rate-my-courses.herokuapp.com';
+  // private API = 'http://localhost:3000';
   private COURSE_API = this.API + '/api/courses';
 
   constructor(private http: HttpClient) { }
@@ -101,7 +102,7 @@ export class CoursesService {
     };
   }
 
-  
+
 }
 
 export interface Course {

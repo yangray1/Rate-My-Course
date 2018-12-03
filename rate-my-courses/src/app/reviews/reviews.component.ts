@@ -38,7 +38,7 @@ export class ReviewsComponent implements OnInit {
           if (this.courseFound) {
             this.coursesService.getCourse(this.course).subscribe(
               (course) => {
-                this.courseDesc = course.courseDesc;
+                this.courseDesc = course.courseName;
               }
             )
             this.allReviews = this.reviewService.getReviews(this.course);

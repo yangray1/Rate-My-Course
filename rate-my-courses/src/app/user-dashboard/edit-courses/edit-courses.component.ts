@@ -1,22 +1,25 @@
-import { NewCourseDialogComponent } from './new-course-dialog/new-course-dialog.component';
-import { Component, OnInit, Inject } from '@angular/core';
-import { UsersService, User } from 'src/app/_services/users.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { EditUserComponent } from 'src/app/admin-dashboard/edit-user/edit-user.component';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { CoursesService } from 'src/app/_services/courses.service';
-import { startWith, map } from 'rxjs/operators';
-import { NewCourseComponent } from 'src/app/new-course/new-course.component';
+import { NewCourseDialogComponent } from "./new-course-dialog/new-course-dialog.component";
+import { Component, OnInit, Inject } from "@angular/core";
+import { UsersService, User } from "src/app/_services/users.service";
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
+import { EditUserComponent } from "src/app/admin-dashboard/edit-user/edit-user.component";
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from "@angular/cdk/drag-drop";
+import { FormControl } from "@angular/forms";
+import { Observable } from "rxjs";
+import { CoursesService } from "src/app/_services/courses.service";
+import { startWith, map } from "rxjs/operators";
+import { NewCourseComponent } from "src/app/new-course/new-course.component";
 
 @Component({
-  selector: 'app-edit-courses',
-  templateUrl: './edit-courses.component.html',
-  styleUrls: ['./edit-courses.component.scss']
+  selector: "app-edit-courses",
+  templateUrl: "./edit-courses.component.html",
+  styleUrls: ["./edit-courses.component.scss"]
 })
 export class EditCoursesComponent implements OnInit {
-
   user: User;
 
   currentlyTaking: string[];
@@ -35,14 +38,6 @@ export class EditCoursesComponent implements OnInit {
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
-    this.coursesService.getAllCourses().subscribe(
-      (allCourses) => {
-        this.courses = allCourses.map((course) => course.courseCode)
-      }
-    )
-
-
-
     this.user = data;
     this.currentlyTaking = this.user.courses;
     this.taken = this.user.takenCourses;
@@ -50,26 +45,34 @@ export class EditCoursesComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    this.coursesService.getAllCourses().subscribe
-    return this.courses.filter(course => course.includes(filterValue))
-
-        
+    return this.courses
+      ? this.courses.filter(course => course.includes(filterValue))
+      : [];
   }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
+      moveItemInArray(
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
 
   ngOnInit() {
+    this.coursesService.getAllCourses().subscribe(allCourses => {
+      this.courses = allCourses.map(course => course.courseCode);
+    });
     this.filteredCourses = this.searchBarControl.valueChanges.pipe(
-      startWith(''),
+      startWith(""),
       map(value => this._filter(value))
     );
 
@@ -80,28 +83,39 @@ export class EditCoursesComponent implements OnInit {
 
   add() {
     if (!this.courses.includes(this.searchCourse)) {
-      this.matDialog.open(
-        NewCourseDialogComponent,
-        {
-          data: { course: { courseCode: this.searchCourse, courseName: '', courseDesc: '' }, idAdmin: false },
-          width: '500px'
-        }
-      ).afterClosed().subscribe(result => {
-        if (result) {
-          this.currentlyTaking.push(this.searchCourse);
-        }
-      });
+      this.matDialog
+        .open(NewCourseDialogComponent, {
+          data: {
+            course: {
+              courseCode: this.searchCourse,
+              courseName: "",
+              courseDesc: ""
+            },
+            idAdmin: false
+          },
+          width: "500px"
+        })
+        .afterClosed()
+        .subscribe(result => {
+          if (result) {
+            this.currentlyTaking.push(this.searchCourse);
+          }
+        });
     } else {
       this.currentlyTaking.push(this.searchCourse);
     }
   }
 
   deleteTaken(course: string) {
-    this.taken.slice(this.taken.indexOf(course), 1);
+    console.log(course);
+    this.taken = this.taken.filter(cs => cs !== course);
+    console.log(this.taken);
   }
 
   deleteTaking(course: string) {
-    this.currentlyTaking.slice(this.currentlyTaking.indexOf(course), 1);
+    console.log(course);
+    this.currentlyTaking = this.currentlyTaking.filter(cs => cs !== course);
+    console.log(this.currentlyTaking);
   }
 
   save() {

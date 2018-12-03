@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.courses.filter(course => course.includes(filterValue));
+    return this.courses ? this.courses.filter(course => course.includes(filterValue)) : [];
   }
 
   isLoggedIn() {
@@ -121,7 +121,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       NewReviewComponent,
       {
         width: '600px',
-        height: '700px'
+        height: '600px'
       }
     );
   }

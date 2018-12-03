@@ -1,31 +1,30 @@
-import { CoursesService, Course } from './../_services/courses.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { User } from '../_services/users.service';
+import { CoursesService, Course } from "./../_services/courses.service";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Observable } from "rxjs";
+import { startWith, map } from "rxjs/operators";
+import { User } from "../_services/users.service";
 
 @Component({
-  selector: 'app-new-review',
-  templateUrl: './new-review.component.html',
-  styleUrls: ['./new-review.component.scss'],
+  selector: "app-new-review",
+  templateUrl: "./new-review.component.html",
+  styleUrls: ["./new-review.component.scss"]
 })
 export class NewReviewComponent implements OnInit {
-
   grades: Grade[] = [
-    { grade: 'A+', gradeValue: 'A+' },
-    { grade: 'A', gradeValue: 'A' },
-    { grade: 'A-', gradeValue: 'A-' },
-    { grade: 'B+', gradeValue: 'B+' },
-    { grade: 'B', gradeValue: 'B' },
-    { grade: 'B-', gradeValue: 'B-' },
-    { grade: 'C+', gradeValue: 'C+' },
-    { grade: 'C', gradeValue: 'C' },
-    { grade: 'C-', gradeValue: 'C-' },
-    { grade: 'D+', gradeValue: 'D+' },
-    { grade: 'D', gradeValue: 'D' },
-    { grade: 'D-', gradeValue: 'D-' },
-    { grade: 'F', gradeValue: 'F' }
+    { grade: "A+", gradeValue: "A+" },
+    { grade: "A", gradeValue: "A" },
+    { grade: "A-", gradeValue: "A-" },
+    { grade: "B+", gradeValue: "B+" },
+    { grade: "B", gradeValue: "B" },
+    { grade: "B-", gradeValue: "B-" },
+    { grade: "C+", gradeValue: "C+" },
+    { grade: "C", gradeValue: "C" },
+    { grade: "C-", gradeValue: "C-" },
+    { grade: "D+", gradeValue: "D+" },
+    { grade: "D", gradeValue: "D" },
+    { grade: "D-", gradeValue: "D-" },
+    { grade: "F", gradeValue: "F" }
   ];
 
   addressForm = this.fb.group({
@@ -46,20 +45,18 @@ export class NewReviewComponent implements OnInit {
 
   searchBarControl: FormControl = new FormControl();
   filteredCourses: Observable<string[]>;
-  constructor(private fb: FormBuilder, private coursesService: CoursesService) { }
+  constructor(
+    private fb: FormBuilder,
+    private coursesService: CoursesService
+  ) {}
 
   ngOnInit(): void {
-    this.coursesService.getAllCourses().subscribe(
-      (allCourses: Course[]) => {
-        this.courses = allCourses.map((course) => course.courseCode)
-      }
-    )
-
-
-
+    this.coursesService.getAllCourses().subscribe((allCourses: Course[]) => {
+      this.courses = allCourses.map(course => course.courseCode);
+    });
 
     this.filteredCourses = this.searchBarControl.valueChanges.pipe(
-      startWith(''),
+      startWith(""),
       map(value => this._filter(value))
     );
 
@@ -70,11 +67,13 @@ export class NewReviewComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.courses.filter(course => course.includes(filterValue));
+    return this.courses
+      ? this.courses.filter(course => course.includes(filterValue))
+      : [];
   }
 
   onSubmit() {
-    alert('Thanks!');
+    alert("Thanks!");
   }
 }
 
