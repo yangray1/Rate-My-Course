@@ -43,7 +43,9 @@ export class ReviewsComponent implements OnInit {
                 this.courseDesc = course.courseDesc;
               }
             )
-            this.allReviews = this.reviewService.getReviews(this.course);
+            this.reviewService.getReviews(this.course).subscribe(reviews => {
+              this.allReviews = reviews;
+            });
           }
         }
       )
