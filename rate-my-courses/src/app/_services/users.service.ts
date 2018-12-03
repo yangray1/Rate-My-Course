@@ -45,7 +45,9 @@ export class UsersService {
     },
   ];
 
-  private API = 'https://rate-my-courses.herokuapp.com';
+
+  private API = 'http://localhost:3000';
+  // private API = 'https://rate-my-courses.herokuapp.com';
   private USER_API = this.API + '/api/users';
 
   constructor(private http: HttpClient) { }

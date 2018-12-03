@@ -7,56 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class CoursesService {
 
-  allCourses: Course[] = [
-    {
-      courseCode: 'CSC309',
-      courseName: 'Prog on the Web',
-      courseDesc: 'Learn to program on the weeb'
-    },
-    {
-      courseCode: 'CSC373',
-      courseName: 'Algo Design & Analysis',
-      courseDesc: 'A L G O R I T H M S'
-    },
-    {
-      courseCode: 'PHL245',
-      courseName: 'Mod Symbolic Logic',
-      courseDesc: 'BIRD'
-    },
-    {
-      courseCode: 'CSC301',
-      courseName: 'Intro to Soft Eng',
-      courseDesc: 'C, more like SAD'
-    },
-    {
-      courseCode: 'CSC369',
-      courseName: 'Operating Systems',
-      courseDesc: 'BIRD'
-    },
-    {
-      courseCode: 'CSC207',
-      courseName: 'Software Design',
-      courseDesc: 'BIRD'
-    },
-    {
-      courseCode: 'CSC236',
-      courseName: 'Intro to Theory Comp',
-      courseDesc: 'BIRD'
-    },
-    {
-      courseCode: 'CSC258',
-      courseName: 'Computer Organization',
-      courseDesc: 'BIRD'
-    },
-    {
-      courseCode: 'CSC209',
-      courseName: 'Soft Tools and Sys Prog',
-      courseDesc: 'BIRD'
-    },
-  ];
-
-  private API = 'https://rate-my-courses.herokuapp.com';
-  // private API = 'http://localhost:3000';
+  // private API = 'https://rate-my-courses.herokuapp.com';
+  private API = 'http://localhost:3000';
   private COURSE_API = this.API + '/api/courses';
 
   constructor(private http: HttpClient) { }
