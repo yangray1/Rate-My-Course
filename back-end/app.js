@@ -25,7 +25,7 @@ app.use('/', reviewRoutes);
 app.use('/', courseRoutes);
 
 
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/../rate-my-courses/dist/rate-my-courses/index.html'));
 });
 
