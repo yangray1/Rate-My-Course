@@ -3,7 +3,7 @@ const Course = require("../models/course.modals");
 getAllCourseCodes = (req, res) => {
     Course.find({}, {courseCode: 1}).then(
         (courses) => {
-            res.send({ courses })
+            res.send(courses)
         }
     ).catch((error) => {
 		res.status(400).send(error)
@@ -16,7 +16,7 @@ getCourseByCourseCode = (req, res) => {
     Course.find({courseCode: course_code}).then(
         (course) => {
             if (course.length != 0){
-                res.send({ course })
+                res.send(course[0])
             }
             res.status(404).send()
         }
@@ -34,7 +34,7 @@ addCourse = (req, res) => {
 
     new_course.save().then(
         (course) => {
-            res.send({ course });
+            res.send(course);
         }
     ).catch(err => {
         res.status(500).send({
@@ -45,12 +45,9 @@ addCourse = (req, res) => {
 
 /* {courseCode: ______, courseName: ____, courseDesc: _____} */
 modifyCourse = (req, res) => {
-    const course_id = req.params.course_id; // the mongo generated _id
-
-    Course.findById(course_id).then(
+    Course.findOne({courseCode: req.params.course_code}).then(
         (course) => {
             if (!course){
-                console.log("cannot find this id")
                 res.status(404).send()
             }
             else{
@@ -65,6 +62,7 @@ modifyCourse = (req, res) => {
             res.send(course)
         }
     ).catch((error) => {
+        console.log(error)
 		res.status(400).send(error)
 	})
 }

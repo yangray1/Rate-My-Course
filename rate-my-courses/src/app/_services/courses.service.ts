@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -53,32 +55,49 @@ export class CoursesService {
     },
   ];
 
-  constructor() { }
+  private API = 'localhost:3000';
+  private COURSE_API = this.API + '/api/courses';
 
-  getAllCourses(): string[] {
-    return this.allCourses.map(course => course.courseCode);
+  constructor(private http: HttpClient) { }
+
+  getAllCourses(): Observable<Course[]> {
+    // return this.allCourses.map(course => course.courseCode);
+    return this.http.get<Course[]>(this.COURSE_API + '/getAllCourseCodes', this.getHttpHeaders());
+    // get as list of strings TODO
   }
 
-  getAllCourseObjects(): Course[] {
-    return this.allCourses;
+  // getAllCourseObjects(): Observable<Course[]> {
+  //   return this.http.get<Course[]>(this.COURSE_API + '/getAllCourseCodes', this.getHttpHeaders());
+  // }
+
+  addCourse(newCourse: Course): Observable<Course> {
+    return this.http.post<Course>(this.COURSE_API + '/save', newCourse, this.getHttpHeaders())
   }
 
-  addCourse(newCourse: Course) {
-    this.allCourses.push(newCourse);
+  saveCourse(course: Course): Observable<Course> {
+    // console.log(course);
+    // const index = this.getAllCourses().indexOf(origCourse.courseCode);
+    // if (index >= 0) {
+    //   this.allCourses.splice(index, 1);
+    // }
+    // this.allCourses.push(course);
+    return this.http.patch<Course>(this.COURSE_API + '/modify/' + course.courseCode, course, this.getHttpHeaders())
   }
 
-  saveCourse(course: Course, origCourse: Course) {
-    console.log(course);
-    const index = this.getAllCourses().indexOf(origCourse.courseCode);
-    if (index >= 0) {
-      this.allCourses.splice(index, 1);
-    }
-    this.allCourses.push(course);
+  getCourse(courseCode: string): Observable<Course> {
+    return this.http.get<Course>(this.COURSE_API + '/getCourseByCourseCode/' + courseCode, this.getHttpHeaders())
   }
 
-  getCourseDesc(courseName: string): string {
-    return this.allCourses.filter(course => course.courseCode === courseName)[0].courseName;
+  private getHttpHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwtToken') || ''
+      })
+    };
   }
+
+  
 }
 
 export interface Course {
