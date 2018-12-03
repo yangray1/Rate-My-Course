@@ -31,17 +31,29 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.course = params.course; // Pass in later during the course searchbar
-      this.courseFound = this.coursesService.getAllCourses().includes(params.course);
-      if (this.courseFound) {
-        this.courseDesc = this.coursesService.getCourseDesc(this.course);
-        this.allReviews = this.reviewService.getReviews(this.course);
-      }
+      this.coursesService.getAllCourses().subscribe(
+        (allCourses) => {
+
+          this.courseFound = allCourses.map(course => course.courseCode).includes(params.course);
+          if (this.courseFound) {
+            this.coursesService.getCourse(this.course).subscribe(
+              (course) => {
+                this.courseDesc = course.courseDesc;
+              }
+            )
+            this.allReviews = this.reviewService.getReviews(this.course);
+          }
+        }
+      )
       console.log(params.course);
     });
   }
 
   courseAdded() {
-    this.courseFound = true;
+    this.coursesService.getCourse(this.course).subscribe(courseObject => {
+      this.courseDesc = courseObject.courseDesc;
+      this.courseFound = true;
+    })
     console.log(this.courseFound);
   }
 

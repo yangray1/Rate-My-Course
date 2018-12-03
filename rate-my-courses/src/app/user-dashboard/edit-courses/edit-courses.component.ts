@@ -35,7 +35,14 @@ export class EditCoursesComponent implements OnInit {
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
-    this.courses = this.coursesService.getAllCourses();
+    this.coursesService.getAllCourses().subscribe(
+      (allCourses) => {
+        this.courses = allCourses.map((course) => course.courseCode)
+      }
+    )
+
+
+
     this.user = data;
     this.currentlyTaking = this.user.courses;
     this.taken = this.user.takenCourses;
@@ -43,7 +50,10 @@ export class EditCoursesComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
+    this.coursesService.getAllCourses().subscribe
+    return this.courses.filter(course => course.includes(filterValue))
+
+        
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -69,7 +79,7 @@ export class EditCoursesComponent implements OnInit {
   }
 
   add() {
-    if (!this.coursesService.getAllCourses().includes(this.searchCourse)) {
+    if (!this.courses.includes(this.searchCourse)) {
       this.matDialog.open(
         NewCourseDialogComponent,
         {

@@ -63,7 +63,7 @@
               <mat-divider></mat-divider>
               {{course}}
               <div class="spacer"></div>
-              {{courseService.getCourseDesc(course)}}
+              {{courseDescMap[course]}}
             </mat-list-item>
             <h2>Taken</h2>
             <mat-divider></mat-divider>
@@ -71,7 +71,7 @@
               <mat-divider></mat-divider>
               {{course}}
               <div class="spacer"></div>
-              {{courseService.getCourseDesc(course)}}
+              {{courseDescMap[course]}}
             </mat-list-item>
           </mat-list>
         </mat-card-content>

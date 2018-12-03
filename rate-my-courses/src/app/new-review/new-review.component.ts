@@ -1,4 +1,4 @@
-import { CoursesService } from './../_services/courses.service';
+import { CoursesService, Course } from './../_services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -49,7 +49,15 @@ export class NewReviewComponent implements OnInit {
   constructor(private fb: FormBuilder, private coursesService: CoursesService) { }
 
   ngOnInit(): void {
-    this.courses = this.coursesService.getAllCourses();
+    this.coursesService.getAllCourses().subscribe(
+      (allCourses: Course[]) => {
+        this.courses = allCourses.map((course) => course.courseCode)
+      }
+    )
+
+
+
+
     this.filteredCourses = this.searchBarControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -62,7 +70,7 @@ export class NewReviewComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
+    return this.courses.filter(course => course.includes(filterValue));
   }
 
   onSubmit() {

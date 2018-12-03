@@ -66,11 +66,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.coursesService.getAllCourses().subscribe((allCourses: Course[]) => {
       this.courses = allCourses.map(course => course.courseCode);
     });
-
     this.filteredCourses = this.searchBarControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+
 
     if (localStorage.getItem('username')) {
       this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {

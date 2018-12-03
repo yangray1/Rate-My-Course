@@ -34,7 +34,9 @@ export class NewCourseComponent implements OnInit {
       courseCode: this.addressForm.controls['courseCode'].value,
       courseName: this.addressForm.controls['courseName'].value,
       courseDesc: this.addressForm.controls['courseDesc'].value
-    });
-    this.courseAdded.emit(true);
+    }).subscribe((course) => {
+      console.log(course)
+      this.courseAdded.emit(true);
+    })
   }
 }

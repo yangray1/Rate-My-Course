@@ -62,7 +62,11 @@ export class WriteReviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.getAllCourses();
+    this.coursesService.getAllCourses().subscribe(
+      (allCourses) => {
+        this.courses = allCourses.map(course => course.courseCode)
+      }
+    )
     this.filteredCourses = this.reviewForm.controls['course'].valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -122,7 +126,7 @@ export class WriteReviewComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toUpperCase();
-    return this.coursesService.getAllCourses().filter(course => course.includes(filterValue));
+    return this.courses.filter(course => course.includes(filterValue));
   }
 }
 export interface Grade {

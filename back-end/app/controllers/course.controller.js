@@ -1,7 +1,7 @@
 const Course = require("../models/course.modals");
 
 getAllCourseCodes = (req, res) => {
-    Course.find({}, {courseCode: 1}).then(
+    Course.find().then(
         (courses) => {
             res.send(courses)
         }

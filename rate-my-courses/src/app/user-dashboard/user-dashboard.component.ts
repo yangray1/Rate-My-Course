@@ -29,6 +29,8 @@ export class UserDashboardComponent implements OnInit {
     'title', 'data'
   ];
 
+  courseDescMap: Object = {};
+
   userSessionSubscription: Subscription;
 
   constructor(
@@ -53,14 +55,20 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(localStorage.getItem('username'));
-      console.log(localStorage.getItem('jwtToken'));
       this.userService.getUserByUsername(localStorage.getItem('username')).subscribe(res => {
         this.user = res;
-        this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
-        console.log(this.userReviews);
-        console.log(this.user);
-        this.setCards();
+        this.user.courses.forEach(course => {
+          this.courseService.getCourse(course).subscribe(courseObj => {
+            this.courseDescMap[course] = courseObj.courseDesc.substring(0, 25) + "..";
+          });
+          this.user.takenCourses.forEach(course => {
+            this.courseService.getCourse(course).subscribe(courseObj => {
+              this.courseDescMap[course] = courseObj.courseDesc.substring(0, 25) + "..";
+            });
+          });
+          this.userReviews = this.reviewService.getReviewsByUser(this.user.username);
+          this.setCards();
+        });
       });
     });
   }
@@ -140,5 +148,9 @@ export class UserDashboardComponent implements OnInit {
 
   viewCourse(course: string) {
     this.router.navigate(['/view-reviews/' + course]);
+  }
+
+  getCourseDescription(course: string) {
+    
   }
 }
