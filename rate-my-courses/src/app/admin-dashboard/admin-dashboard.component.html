@@ -14,7 +14,7 @@
           </mat-card-title>
         </mat-card-header>
 
-        <mat-card-content class="table-container mat-elevation-z8">
+        <mat-card-content class="table-container mat-elevation-z18">
 
           <mat-table [dataSource]="card.tableData" *ngIf="card.title === 'Courses' || card.title === 'Users'">
             <ng-container matColumnDef="username">
@@ -42,8 +42,8 @@
                   {{review.username}}
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <div class="float" *ngIf="review.content.type === 'report'">
-                <mat-card class="review-side mat-elevation-z8">
+              <div class="float" *ngIf="review.type === 'report'">
+                <mat-card class="review-side mat-elevation-z18">
                   <mat-card-header>
                     <div mat-card-avatar class="header-image"></div>
                     <mat-card-title>
@@ -64,12 +64,12 @@
                   {{review.content.review.writtenReview}}
                 </div>
               </div>
-              <mat-card class="justification mat-elevation-z14">
+              <mat-card class="justification mat-elevation-z18">
                 <mat-card-content>
                   <!-- <p *ngIf="review.content.type === 'report'"> -->
                   <h3>Justifications/Explanations</h3>
                   <div>
-                    {{review.content.type === 'report' ? review.content.report: review.content.request}}
+                    {{review.type === 'report' ? review.content.report: review.content.request}}
                   </div>
                   <!-- </p> -->
                   <!-- <p *ngIf="review.content.type === 'request'"> -->
@@ -80,9 +80,10 @@
               <mat-action-row *ngIf="card.title === 'Reports'">
                 <button mat-button color="primary" (click)="ban(review.content.review.reviewer)">Ban User</button>
                 <button mat-button color="primary" (click)="removeReview(review.content.review, review)">Remove Review</button>
+                <button mat-button color="primary" (click)="resolve(review)">Resolve</button>
               </mat-action-row>
               <mat-action-row *ngIf="card.title === 'Requests'">
-                <button mat-button color="primary" (click)="acknowledge(review.content.request)">Acknowledge</button>
+                <button mat-button color="primary" (click)="resolve(review)">Resolve</button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>

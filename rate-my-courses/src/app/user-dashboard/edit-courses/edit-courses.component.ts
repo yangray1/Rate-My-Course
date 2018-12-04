@@ -81,8 +81,8 @@ export class EditCoursesComponent implements OnInit {
     });
   }
 
-  add() {
-    if (!this.courses.includes(this.searchCourse)) {
+  add(course?) {
+    if (!this.courses.includes(course ? course : this.searchCourse)) {
       this.matDialog
         .open(NewCourseDialogComponent, {
           data: {
@@ -121,8 +121,10 @@ export class EditCoursesComponent implements OnInit {
   save() {
     this.user.courses = this.currentlyTaking;
     this.user.takenCourses = this.taken;
-    this.userService.saveUser(this.user, this.user.username);
+    this.userService.saveUser(this.user).subscribe(savedUser => {
+      console.log(savedUser);
+      this.dialogRef.close();
+    });
     console.log(this.user);
-    this.dialogRef.close();
   }
 }

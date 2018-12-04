@@ -12,7 +12,6 @@ import { Breakpoints, BreakpointObserver } from "@angular/cdk/layout";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { EditUserComponent } from "./edit-user/edit-user.component";
 import { NewCourseDialogComponent } from "../user-dashboard/edit-courses/new-course-dialog/new-course-dialog.component";
-import { Review } from "../_services/review.service";
 
 @Component({
   selector: "app-admin-dashboard",
@@ -26,6 +25,10 @@ export class AdminDashboardComponent implements OnInit {
 
   allCourses: TableData[] = [];
 
+  allRequests: RequestReport[];
+  allReports: RequestReport[];
+  allUsers: TableData[] = [];
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private userService: UsersService,
@@ -36,29 +39,81 @@ export class AdminDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-this.courseService.getAllCourses().subscribe((courses: Course[]) => {
-          courses.forEach((course: Course) => {
-            this.allCourses.push({
-              username: course.courseCode,
-              description: course.courseName,
-              content: { type: "course", description: course }
-            });
-          });
-          console.log(this.allCourses);
-          this.setCards();
+    this.allCourses = [];
+    this.allRequests = [];
+    this.allReports = [];
+    this.allUsers = [];
+    this.courseService.getAllCourses().subscribe((courses: Course[]) => {
+      courses.forEach((course: Course) => {
+        this.allCourses.push({
+          username: course.courseCode,
+          description: course.courseName,
+          content: { type: "course", description: course }
         });
+      });
+      this.requestReportService.getAllReports().subscribe(reports => {
+        console.log(reports);
+        this.allReports = reports;
+        this.requestReportService.getAllRequests().subscribe(requests => {
+          this.allRequests = requests;
+          this.userService.getAllUsers().subscribe(users => {
+            users.forEach(user => {
+              this.allUsers.push({
+                username: user.username,
+                description: user.firstName + " " + user.lastName,
+                content: { type: "user", user: user }
+              });
+            });
+            this.setCards();
+          });
+        });
+      });
+    });
   }
 
   // what happens when you click on that box.
   select(row: any) {
+    this.allCourses = [];
+    this.allRequests = [];
+    this.allReports = [];
+    this.allUsers = [];
     let matDialogRef: MatDialogRef<any>;
     if (row.content.type === "user") {
       matDialogRef = this.matDialog.open(EditUserComponent, {
         data: row.content.user,
         width: "500px"
       });
-      matDialogRef.afterClosed().subscribe(_ => {
-        this.setCards();
+      matDialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+        if (result) {
+          // this.courseService.getAllCourses().subscribe((courses: Course[]) => {
+          //   courses.forEach((course: Course) => {
+          //     this.allCourses.push({
+          //       username: course.courseCode,
+          //       description: course.courseName,
+          //       content: { type: "course", description: course }
+          //     });
+          //   });
+          //   this.requestReportService.getAllReports().subscribe(reports => {
+          //     this.allReports = reports;
+          //     this.requestReportService.getAllRequests().subscribe(requests => {
+          //       this.allRequests = requests;
+          //       console.log(this.allCourses);
+          //       this.userService.getAllUsers().subscribe(users => {
+          //         users.forEach(user => {
+          //           this.allUsers.push({
+          //             username: user.username,
+          //             description: user.firstName + " " + user.lastName,
+          //             content: { type: "user", user: user }
+          //           });
+          //         });
+          //         this.setCards();
+          //       });
+          //     });
+          //   });
+          // });
+          this.ngOnInit();
+        }
       });
     } else if (row.content.type === "course") {
       this.matDialog
@@ -81,70 +136,57 @@ this.courseService.getAllCourses().subscribe((courses: Course[]) => {
 
   removeReview(review: any, report: any) {
     console.log(review);
-    this.reviewService.deleteReview(review);
-    console.log(this.reviewService.getReviews("CSC207"));
-    this.requestReportService.removeReport(report);
-    this.ngOnInit();
+    this.reviewService.deleteReview(review).subscribe(deletedReview => {
+      console.log(deletedReview);
+      this.ngOnInit();
+    });
   }
 
-  acknowledge(request: RequestReport) {
+  resolve(request: RequestReport) {
     console.log(request);
+    request.resolved = true;
+    this.requestReportService
+      .saveRequestReport(request)
+      .subscribe(savedRequestReport => {
+        console.log(savedRequestReport);
+      });
   }
 
   setCards() {
     this.cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
       map(({ matches }) => {
-        const allUsers: TableData[] = [];
-
-        this.userService.getAllUsers().forEach(user => {
-          allUsers.push({
-            username: user.username,
-            description: user.firstName + " " + user.lastName,
-            content: { type: "user", user: user }
-          });
-        });
-
-
-
-        // forEach((course: Course) => {
-        //   allCourses.push({
-        //     username: course.courseCode,
-        //     description: course.courseName,
-        //     content: { type: 'course', description: course }
-        //   });
-        // })
         if (matches) {
           return [
+            { title: "Users", cols: 4, rows: 2, tableData: this.allUsers },
+            { title: "Courses", cols: 4, rows: 2, tableData: this.allCourses },
             {
               title: "Requests",
               cols: 4,
               rows: 2,
-              tableData: this.requestReportService.getAllRequests()
+              tableData: this.allRequests
             },
             {
               title: "Reports",
               cols: 4,
               rows: 3,
-              tableData: this.requestReportService.getAllReports()
-            },
-            { title: "Users", cols: 4, rows: 2, tableData: allUsers },
-            { title: "Courses", cols: 4, rows: 2, tableData: this.allCourses }
+              tableData: this.allReports
+            }
           ];
         } else {
           return [
-            { title: "Users", cols: 1, rows: 4, tableData: allUsers },
-            { title: "Courses", cols: 1, rows: 4, tableData: this.allCourses },
+            { title: "Users", cols: 2, rows: 2, tableData: this.allUsers },
+            { title: "Courses", cols: 2, rows: 2, tableData: this.allCourses },
             {
               title: "Requests",
               cols: 2,
               rows: 2,
-              tableData: this.requestReportService.getAllRequests()
+              tableData: this.allRequests
             },
             {
               title: "Reports",
               cols: 2,
               rows: 2,
-              tableData: this.requestReportService.getAllReports()
+              tableData: this.allReports
             }
           ];
         }

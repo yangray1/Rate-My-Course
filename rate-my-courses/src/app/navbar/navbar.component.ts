@@ -120,7 +120,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       NewReviewComponent,
       {
         width: '600px',
-        height: '600px'
+        height: '700px'
       }
     );
   }

@@ -31,13 +31,17 @@ export class SuggestionDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.reportService.saveReport({
+    this.reportService.newRequestReport({
       username: this.user.username,
       description: this.suggestionForm.controls['description'].value,
+      resolved: false,
+      type: 'request',
       content: {
-        type: 'request',
         request: this.suggestionForm.controls['request'].value,
       }
+    }).subscribe(savedRequestReport => {
+      console.log(savedRequestReport);
+      this.dialogRef.close();
     });
   }
 }

@@ -60,25 +60,25 @@ export class UsersService {
     }
   }
 
-  public addNewUser(newUser: User) {
-    this.users.push(newUser);
+  public addNewUser(newUser: User): Observable<User> {
+    return this.http.post<User>(this.USER_API + '/save', newUser);
   }
 
   public getUserByUsername(username: string): Observable<User> {
-    console.log(this.getHttpHeaders());
     return this.http.get<User>(this.USER_API + '/profile/' + username, this.getHttpHeaders());
   }
 
-  public getAllUsers(): User[] {
-    return this.users;
+  public getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.USER_API + '/allUsers', this.getHttpHeaders());
   }
 
-  public saveUser(user: User, origUsername: string) {
-    const index = this.users.map(function (e) { return e.username; }).indexOf(origUsername);
-    if (index >= 0) {
-      this.users.splice(index, 1);
-      this.users.push(user);
-    }
+  public saveUser(user: User) {
+    return this.http.patch(this.USER_API + '/updateUser', user, this.getHttpHeaders());
+    // const index = this.users.map(function (e) { return e.username; }).indexOf(origUsername);
+    // if (index >= 0) {
+    //   this.users.splice(index, 1);
+    //   this.users.push(user);
+    // }
   }
 
   public banUser(userName: string) {

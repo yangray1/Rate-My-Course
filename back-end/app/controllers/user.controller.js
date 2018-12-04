@@ -1,36 +1,37 @@
 const User = require("../models/user.modals");
+const bcrypt = require("bcryptjs");
 
 newUser = (req, res) => {
-  console.log(req.body);
-  console.log(req.headers);
   if (res.body === {})
     return res.status(400).send({
       message: "User content can not be empty"
     });
 
-  const user = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    username: req.body.username,
-    yearOfStudy: req.body.yearOfStudy,
-    programOfStudy: req.body.programOfStudy,
-    courses: req.body.courses,
-    takenCourses: req.body.takenCourses,
-    password: req.body.password,
-    isAdmin: req.body.isAdmin,
-    banned: req.body.banned
-  });
+  bcrypt.genSalt(10).then(salt => {
+    return bcrypt.hash(req.body.password, salt)
+  }).then(hash => {
 
-  user
-    .save()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the User."
-      });
+    const user = new User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      yearOfStudy: req.body.yearOfStudy,
+      programOfStudy: req.body.programOfStudy,
+      courses: req.body.courses,
+      takenCourses: req.body.takenCourses,
+      password: hash,
+      isAdmin: req.body.isAdmin,
+      banned: req.body.banned
     });
+
+    return user.save()
+  }).then(newUser => {
+    res.send(newUser);
+  }).catch(err => {
+    res.status(500).send({
+      message: err || "Some error occurred while creating the User."
+    });
+  });
 };
 
 allUsers = (req, res) => {
@@ -64,20 +65,20 @@ findUser = (req, res) => {
     });
 };
 
-  
+
 updateUser = (req, res) => {
   // We pass in the user object. Ex: {user: {..}}
   // 1st argumnet, we get the id with the user object. users.id = xxxxx
   // 2nd argumnet is the whole user object.
-  User.findByIdAndUpdate(req.body.user._id, req.body.user).then(user => {
-      if (!user){
-        res.status(404).send({
-          message: "User not found with username " + username
-        });
-      }
-      // Update the user.
-      res.send(user);
-      
+  User.findByIdAndUpdate(req.body._id, req.body).then(user => {
+    if (!user) {
+      res.status(404).send({
+        message: "User not found with username " + username
+      });
+    }
+    // Update the user.
+    res.send(user);
+
   })
 };
 

@@ -66,9 +66,11 @@ export class RegisterComponent {
       takenCourses: [],
       password: this.addressForm.controls.password.value,
       isAdmin: false,
-      banned: true
+      banned: false
+    }).subscribe(newUser => {
+      console.log(newUser);
+      this.registerDialogRef.close();
     });
     console.log(this.addressForm);
-    this.registerDialogRef.close();
   }
 }

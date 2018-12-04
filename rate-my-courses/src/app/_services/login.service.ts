@@ -8,13 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginService {
 
-  private API = 'https://rate-my-courses.herokuapp.com';
+  // private API = 'https://rate-my-courses.herokuapp.com';
+  private API = 'http://localhost:3000'
   private LOGIN_API = this.API + '/api/login';
 
   constructor(private http: HttpClient) {  }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.LOGIN_API, {
+    console.log(username, password);
+    return this.http.post<any>(this.LOGIN_API, {
         username: username,
         password: password
       });

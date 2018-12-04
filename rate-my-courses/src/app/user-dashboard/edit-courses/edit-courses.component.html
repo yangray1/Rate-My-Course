@@ -30,7 +30,7 @@
     <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
   </mat-form-field>
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let course of filteredCourses | async" [value]="course">
+    <mat-option *ngFor="let course of filteredCourses | async" [value]="course" (click)="add(course)" >
       {{course}}
     </mat-option>
   </mat-autocomplete>

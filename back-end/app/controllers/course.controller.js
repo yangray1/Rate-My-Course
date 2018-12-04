@@ -1,7 +1,7 @@
 const Course = require("../models/course.modals");
 
 getAllCourseCodes = (req, res) => {
-    Course.find().then(
+    Course.find().sort({courseCode: 1}).then(
         (courses) => {
             res.send(courses)
         }
@@ -13,12 +13,13 @@ getAllCourseCodes = (req, res) => {
 getCourseByCourseCode = (req, res) => {
     const course_code = req.params.course_code;
 
-    Course.find({courseCode: course_code}).then(
+    Course.findOne({courseCode: course_code}).then(
         (course) => {
             if (course.length != 0){
-                res.send(course[0])
+                res.send(course)
+            } else {
+                res.status(404).send()
             }
-            res.status(404).send()
         }
     ).catch((error) => {
 		res.status(400).send(error)
@@ -45,6 +46,7 @@ addCourse = (req, res) => {
 
 /* {courseCode: ______, courseName: ____, courseDesc: _____} */
 modifyCourse = (req, res) => {
+    console.log(req.params);
     Course.findOne({courseCode: req.params.course_code}).then(
         (course) => {
             if (!course){
