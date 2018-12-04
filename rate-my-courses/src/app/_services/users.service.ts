@@ -84,7 +84,7 @@ export class UsersService {
   public banUser(userName: string) {
     const user: User = this.users.filter(e => e.username === userName)[0];
     user.banned = true;
-    this.saveUser(user, userName);
+    // this.saveUser(user, userName);
   }
 
   private getHttpHeaders() {

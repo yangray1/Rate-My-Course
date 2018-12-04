@@ -55,8 +55,9 @@ export class EditProfileComponent implements OnInit {
   }
 
   save() {
-    this.userService.saveUser(this.user, this.origUsername);
-    console.log(this.user);
-    this.dialogRef.close();
+    this.userService.saveUser(this.user).subscribe(savedUser => {
+      console.log(savedUser);
+      this.dialogRef.close();
+    });
   }
 }
