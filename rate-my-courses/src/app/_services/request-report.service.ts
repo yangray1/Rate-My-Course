@@ -7,7 +7,9 @@ import { Observable } from "rxjs";
 })
 export class RequestReportService {
 
-  private API = "http://localhost:3000";
+  // private API = "http://localhost:3000";
+
+  private API = 'https://rate-my-courses.herokuapp.com';
   private reportRequestAPI = this.API + "/api/requestsReports";
 
   constructor(private http: HttpClient) {}

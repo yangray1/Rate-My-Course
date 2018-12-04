@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 
 export class ReviewService {
 
-  private API = 'http://localhost:3000'
+  private API = 'https://rate-my-courses.herokuapp.com';
+  // private API = 'http://localhost:3000'
   private REVIEW_API = this.API + '/api/review';
 
   constructor(private http: HttpClient) {
