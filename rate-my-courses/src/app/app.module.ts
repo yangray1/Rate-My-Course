@@ -36,6 +36,7 @@ import { ReportDialogComponent } from './reviews/report-dialog/report-dialog.com
 import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewReviewComponent } from './new-review/new-review.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { NewReviewComponent } from './new-review/new-review.component';
     SuggestionDialogComponent,
     InvalidUsernamePasswordDialogComponent,
     NewReviewComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
