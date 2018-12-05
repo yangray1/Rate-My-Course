@@ -27,7 +27,7 @@ module.exports = (req, res) => {
             token: token
         });
     }).catch(err => {
-        return res.status(500).send({
+        return res.send({
             message: err + ': Error retrieving user with username ' + req.body.username
         });
     });

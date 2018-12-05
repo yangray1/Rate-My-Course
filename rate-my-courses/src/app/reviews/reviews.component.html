@@ -26,11 +26,12 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>Like</button>
-                <button mat-menu-item>Dislike</button>
+                <button mat-menu-item (click)="upvoteReview(review)">Like</button>
+                <button mat-menu-item (click)="downvoteReview(review)">Dislike</button>
                 <button mat-menu-item (click)="report(review)">Report</button>
               </mat-menu>
             </mat-card-title>
+            <span class="vote-display">Votes: {{review.score}}</span>
           </mat-card-header>
           <mat-card-content>
             <mat-card class="review-side mat-elevation-z8">
@@ -47,7 +48,7 @@
                 Hours Per Week: {{review.hoursPerWeek}} <br>
                 Textbook Used: {{review.textbookUsed}} <br>
                 Grade Received: {{review.gradeReceived}} <br>
-                Reputation: {{review.score}} <br>
+                <!-- Reputation: {{review.score}} <br> -->
               </mat-card-content>
             </mat-card>
             <div class="written-review">

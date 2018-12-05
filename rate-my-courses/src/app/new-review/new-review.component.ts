@@ -89,7 +89,7 @@ export class NewReviewComponent implements OnInit {
       gradeReceived: this.addressForm.controls['grade'].value,
       textbookUsed:  this.addressForm.controls['textbookUsed'].value,
       writtenReview: this.addressForm.controls['description'].value,
-      score: 5
+      score: 0
     }).subscribe(savedReview => {
       console.log(savedReview);
     });

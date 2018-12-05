@@ -28,7 +28,7 @@ newUser = (req, res) => {
   }).then(newUser => {
     res.send(newUser);
   }).catch(err => {
-    res.status(500).send({
+    res.status(200).send({
       message: err || "Some error occurred while creating the User."
     });
   });

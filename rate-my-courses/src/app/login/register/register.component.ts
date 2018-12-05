@@ -1,8 +1,18 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatChipInputEvent, MatDialogRef } from '@angular/material';
-import { UsersService } from 'src/app/_services/users.service';
+import { MatChipInputEvent, MatDialogRef, MatDialog } from '@angular/material';
+import { UsersService, User } from 'src/app/_services/users.service';
+
+@Component({
+  selector: 'app-username-taken-dialog-component',
+  template: `
+<div mat-dialog-content>
+  Username already taken, please try something different!
+</div>
+  `
+})
+export class UsernameTakenComponent {  }
 
 @Component({
   selector: 'app-register',
@@ -31,7 +41,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UsersService,
-    private registerDialogRef: MatDialogRef<RegisterComponent>
+    private registerDialogRef: MatDialogRef<RegisterComponent>,
+    private userTakenRef: MatDialog
   ) { }
 
   add(event: MatChipInputEvent) {
@@ -67,9 +78,13 @@ export class RegisterComponent {
       password: this.addressForm.controls.password.value,
       isAdmin: false,
       banned: false
-    }).subscribe(newUser => {
+    }).subscribe((newUser: any) => {
       console.log(newUser);
-      this.registerDialogRef.close();
+      if (newUser.message) {
+        this.userTakenRef.open(UsernameTakenComponent);
+      } else {
+        this.registerDialogRef.close();
+      }
     });
     console.log(this.addressForm);
   }

@@ -72,4 +72,24 @@ export class ReviewsComponent implements OnInit {
       }
     );
   }
+
+  upvoteReview(review: Review) {
+    this.reviewService.upvoteReview(review).subscribe((result) => {
+      console.log(result);
+      this.reviewService.getReviews(this.course).subscribe(reviews => {
+        this.allReviews = reviews;
+        console.log(this.allReviews);
+      });
+    })
+  }
+
+  downvoteReview(review: Review) {
+    this.reviewService.downvoteReview(review).subscribe((result) => {
+      console.log(result);
+      this.reviewService.getReviews(this.course).subscribe(reviews => {
+        this.allReviews = reviews;
+        console.log(this.allReviews);
+      });
+    })
+  }
 }
