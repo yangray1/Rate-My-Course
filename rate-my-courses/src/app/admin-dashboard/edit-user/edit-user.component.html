@@ -1,4 +1,4 @@
-<form novalidate>
+<form [formGroup]="editUserForm" novalidate>
   <mat-card class="shipping-card">
     <mat-card-content>
       <div class="row">
@@ -17,15 +17,8 @@
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Username" [(ngModel)]="user.username" name="username">
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
           <h5 style="float: left;">Year of Study: {{user.yearOfStudy}}</h5>
-          <mat-slider style="float: left; margin-left: 10px;" min="1" max="5" tickInterval="1" [(ngModel)]="user.yearOfStudy"
+          <mat-slider style="float: left; margin-left: 10px;" min="1" max="5" tickInterval="1" formControlName="yearOfStudy"
             name="yearOfStudy"></mat-slider>
         </div>
       </div>
