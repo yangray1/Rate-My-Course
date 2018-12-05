@@ -1,10 +1,12 @@
 import { ReviewService } from './../_services/review.service';
 import { CoursesService, Course } from "./../_services/courses.service";
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FormBuilder, Validators, FormControl, FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { User } from "../_services/users.service";
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: "app-new-review",
@@ -52,7 +54,8 @@ export class NewReviewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private coursesService: CoursesService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private matDialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +80,8 @@ export class NewReviewComponent implements OnInit {
       : [];
   }
 
+  @Output() closeModalEvent = new EventEmitter<boolean>();
+
   onSubmit() {
     this.reviewService.addReview({
       course: this.searchBarControl.value,
@@ -87,11 +92,13 @@ export class NewReviewComponent implements OnInit {
       workload: this.addressForm.controls['workload'].value,
       hoursPerWeek: this.addressForm.controls['hours'].value,
       gradeReceived: this.addressForm.controls['grade'].value,
-      textbookUsed:  this.addressForm.controls['textbookUsed'].value,
+      textbookUsed:  Boolean(this.addressForm.controls['textbookUsed'].value),
       writtenReview: this.addressForm.controls['description'].value,
       score: 5
     }).subscribe(savedReview => {
-      console.log(savedReview);
+      if (savedReview){
+        this.matDialog.closeAll()
+      }
     });
   }
 }
