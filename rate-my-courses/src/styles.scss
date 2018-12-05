@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./theme.scss";
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
@@ -11,7 +12,7 @@ body, html {
 body {
     font-family: 'Montserrat';
     font-size: 18px;
-    // background: lightpink;
+    background: lightpink;
 }
 
 a {

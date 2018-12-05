@@ -117,7 +117,10 @@ export class UserDashboardComponent implements OnInit {
           data: this.user,
           width: '500px'
         }
-      );
+      ).afterClosed().subscribe(res => {
+        console.log(res);
+        this.ngOnInit();
+      });
     } else if (section === 'Courses') {
       this.matDialog.open(
         EditCoursesComponent,

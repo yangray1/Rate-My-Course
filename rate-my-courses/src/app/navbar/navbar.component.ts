@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    this.router.navigate(['/view-reviews/' + this.searchCourse]);
+    this.router.navigate(['/view-reviews/' + this.searchCourse.toUpperCase()]);
   }
 
   // this is executed when the component is loaded up

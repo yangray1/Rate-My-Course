@@ -73,10 +73,6 @@ export class AdminDashboardComponent implements OnInit {
 
   // what happens when you click on that box.
   select(row: any) {
-    this.allCourses = [];
-    this.allRequests = [];
-    this.allReports = [];
-    this.allUsers = [];
     let matDialogRef: MatDialogRef<any>;
     if (row.content.type === "user") {
       matDialogRef = this.matDialog.open(EditUserComponent, {
@@ -85,35 +81,17 @@ export class AdminDashboardComponent implements OnInit {
       });
       matDialogRef.afterClosed().subscribe(result => {
         console.log(result);
-        if (result) {
-          // this.courseService.getAllCourses().subscribe((courses: Course[]) => {
-          //   courses.forEach((course: Course) => {
-          //     this.allCourses.push({
-          //       username: course.courseCode,
-          //       description: course.courseName,
-          //       content: { type: "course", description: course }
-          //     });
-          //   });
-          //   this.requestReportService.getAllReports().subscribe(reports => {
-          //     this.allReports = reports;
-          //     this.requestReportService.getAllRequests().subscribe(requests => {
-          //       this.allRequests = requests;
-          //       console.log(this.allCourses);
-          //       this.userService.getAllUsers().subscribe(users => {
-          //         users.forEach(user => {
-          //           this.allUsers.push({
-          //             username: user.username,
-          //             description: user.firstName + " " + user.lastName,
-          //             content: { type: "user", user: user }
-          //           });
-          //         });
-          //         this.setCards();
-          //       });
-          //     });
-          //   });
-          // });
-          this.ngOnInit();
-        }
+        this.userService.getAllUsers().subscribe(users => {
+          this.allUsers = [];
+          users.forEach(user => {
+            this.allUsers.push({
+              username: user.username,
+              description: user.firstName + " " + user.lastName,
+              content: { type: "user", user: user }
+            });
+          });
+          this.setCards();
+        });
       });
     } else if (row.content.type === "course") {
       this.matDialog
@@ -123,9 +101,17 @@ export class AdminDashboardComponent implements OnInit {
         })
         .afterClosed()
         .subscribe(result => {
-          if (result) {
-            this.ngOnInit();
-          }
+          this.courseService.getAllCourses().subscribe((courses: Course[]) => {
+            this.allCourses = [];
+            courses.forEach((course: Course) => {
+              this.allCourses.push({
+                username: course.courseCode,
+                description: course.courseName,
+                content: { type: "course", description: course }
+              });
+            });
+            this.setCards();
+          });
         });
     }
   }

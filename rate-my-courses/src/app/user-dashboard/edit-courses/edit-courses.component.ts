@@ -102,7 +102,9 @@ export class EditCoursesComponent implements OnInit {
           }
         });
     } else {
-      this.currentlyTaking.push(this.searchCourse);
+      if (!this.currentlyTaking.includes(this.searchCourse)) {
+        this.currentlyTaking.push(this.searchCourse);
+      }
     }
   }
 

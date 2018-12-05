@@ -4,14 +4,14 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="First Name" [(ngModel)]="user.firstName" name="firstName">
+            <input matInput placeholder="First Name" formControlName="firstName" name="firstName">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName">
+            <input matInput placeholder="Last Name" formControlName="lastName" name="lastName">
           </mat-form-field>
         </div>
       </div>
@@ -24,9 +24,9 @@
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput type="number" placeholder="Year of Study" [(ngModel)]="user.yearOfStudy" name="yearOfStudy">
-          </mat-form-field>
+          <h5 style="float: left;">Year of Study: {{user.yearOfStudy}}</h5>
+          <mat-slider style="float: left; margin-left: 10px;" min="1" max="5" tickInterval="1" [(ngModel)]="user.yearOfStudy"
+            name="yearOfStudy"></mat-slider>
         </div>
       </div>
       <div class="row">

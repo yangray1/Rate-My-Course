@@ -73,6 +73,7 @@ export class NewCourseDialogComponent implements OnInit {
   onSubmit() {
     console.log(this.isAdmin);
     if (this.isAdmin) {
+      console.log("saving course");
       this.courseService
         .saveCourse({
           courseCode: this.addressForm.controls["courseCode"].value,
@@ -80,6 +81,7 @@ export class NewCourseDialogComponent implements OnInit {
           courseDesc: this.addressForm.controls["courseDesc"].value
         })
         .subscribe(savedCourses => {
+          console.log(savedCourses);
           this.dialogRef.close(true);
         });
     } else {
@@ -90,6 +92,7 @@ export class NewCourseDialogComponent implements OnInit {
           courseDesc: this.addressForm.controls["courseDesc"].value
         })
         .subscribe(savedCourses => {
+          console.log(savedCourses);
           this.dialogRef.close(true);
         });
     }
