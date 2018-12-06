@@ -25,3 +25,27 @@
 .col:last-child {
   margin-right: 0;
 }
+
+h4 {
+  float: left;
+} 
+
+mat-slider {
+  float: right; 
+  margin-left: 10px;
+}
+
+.grade-form {
+  float: right; 
+  margin-left: 10px;
+}
+
+.form-field-width {
+  width: 100%;
+}
+
+.textbook {
+  float: right; 
+  margin-left: 10px; 
+  margin-top: 10px;
+}
