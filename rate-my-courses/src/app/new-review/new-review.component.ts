@@ -1,10 +1,12 @@
-import { ReviewService } from './../_services/review.service';
+import { ReviewService } from "./../_services/review.service";
 import { CoursesService, Course } from "./../_services/courses.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { FormBuilder, Validators, FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { User } from "../_services/users.service";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { EditUserComponent } from "../admin-dashboard/edit-user/edit-user.component";
 
 @Component({
   selector: "app-new-review",
@@ -37,12 +39,14 @@ export class NewReviewComponent implements OnInit {
     hours: [null, Validators.required],
     grade: [null, Validators.required],
     description: [null, Validators.required],
-    textbookUsed: [null, Validators.required],
+    textbookUsed: [null, Validators.required]
   });
 
   hasUnitNumber = false;
 
   yearOfStudy = 1;
+
+  isNew;
 
   searchCourse: string;
   courses: string[];
@@ -52,10 +56,36 @@ export class NewReviewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private coursesService: CoursesService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    public dialogRef: MatDialogRef<EditUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
   ngOnInit(): void {
+    this.isNew = this.data.isNew;
+    if (!this.isNew) {
+      this.searchBarControl.setValue(this.data.course);
+      this.addressForm.controls["professor"].setValue(
+        this.data.profName
+      );
+      this.addressForm.controls["overallRating"].setValue(
+        this.data.overallRating
+      );
+      this.addressForm.controls["difficulty"].setValue(this.data.difficulty);
+      this.addressForm.controls["workload"].setValue(this.data.workload);
+      this.addressForm.controls["hours"].setValue(this.data.hoursPerWeek);
+      this.addressForm.controls["grade"].setValue(this.data.gradeReceived);
+      this.addressForm.controls["textbookUsed"].setValue(
+        this.data.textbookUsed
+      );
+      this.addressForm.controls["description"].setValue(
+        this.data.writtenReview
+      );
+    } else {
+      this.addressForm.controls["textbookUsed"].setValue(
+        false
+      );
+    }
     this.coursesService.getAllCourses().subscribe((allCourses: Course[]) => {
       this.courses = allCourses.map(course => course.courseCode);
     });
@@ -78,21 +108,41 @@ export class NewReviewComponent implements OnInit {
   }
 
   onSubmit() {
-    this.reviewService.addReview({
-      course: this.searchBarControl.value,
-      reviewer: localStorage.getItem('username'),
-      profName: this.addressForm.controls['professor'].value,
-      overallRating: this.addressForm.controls['overallRating'].value,
-      difficulty: this.addressForm.controls['difficulty'].value,
-      workload: this.addressForm.controls['workload'].value,
-      hoursPerWeek: this.addressForm.controls['hours'].value,
-      gradeReceived: this.addressForm.controls['grade'].value,
-      textbookUsed:  this.addressForm.controls['textbookUsed'].value,
-      writtenReview: this.addressForm.controls['description'].value,
-      score: 5
-    }).subscribe(savedReview => {
-      console.log(savedReview);
-    });
+    if (this.isNew) {
+      this.reviewService
+        .addReview({
+          course: this.searchBarControl.value,
+          reviewer: localStorage.getItem("username"),
+          profName: this.addressForm.controls["professor"].value,
+          overallRating: this.addressForm.controls["overallRating"].value,
+          difficulty: this.addressForm.controls["difficulty"].value,
+          workload: this.addressForm.controls["workload"].value,
+          hoursPerWeek: this.addressForm.controls["hours"].value,
+          gradeReceived: this.addressForm.controls["grade"].value,
+          textbookUsed: this.addressForm.controls["textbookUsed"].value,
+          writtenReview: this.addressForm.controls["description"].value,
+          score: 5
+        })
+        .subscribe(savedReview => {
+          console.log(savedReview);
+          this.dialogRef.close(true);
+        });
+    } else {
+      this.data.professor = this.addressForm.controls["professor"].value;
+      this.data.overallRating = this.addressForm.controls[
+        "overallRating"
+      ].value;
+      this.data.difficulty = this.addressForm.controls["difficulty"].value;
+      this.data.workload = this.addressForm.controls["workload"].value;
+      this.data.hoursPerWeek = this.addressForm.controls["hours"].value;
+      this.data.gradeReceived = this.addressForm.controls["grade"].value;
+      this.data.textbookUsed = this.addressForm.controls["textbookUsed"].value;
+      this.data.writtenReview = this.addressForm.controls["description"].value;
+      this.reviewService.saveReview(this.data).subscribe(savedReview => {
+        console.log(savedReview);
+        this.dialogRef.close(true);
+      });
+    }
   }
 }
 

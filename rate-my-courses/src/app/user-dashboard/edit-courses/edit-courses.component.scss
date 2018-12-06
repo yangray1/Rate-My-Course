@@ -4,11 +4,11 @@
 
 .example-container {
   width: 200px;
-//   max-width: 100%;
+  //   max-width: 100%;
   margin: 0 25px 25px 0;
-//   display: inline-block;
+  //   display: inline-block;
   float: left;
-//   vertical-align: top;
+  //   vertical-align: top;
 }
 
 .example-list {
@@ -21,8 +21,8 @@
 }
 
 .example-box {
-    padding: 20px 10px;
-    border-bottom: solid 1px rgb(0, 0, 0);
+  padding: 20px 10px;
+  border-bottom: solid 1px rgb(0, 0, 0);
   color: black;
   display: flex;
   flex-direction: row;
@@ -37,9 +37,7 @@
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;
-  box-shadow: 0 5px 5px -3px lightpink
-              0 8px 10px 1px lightpink
-              0 3px 14px 2px lightpink
+  box-shadow: 0 5px 5px -3px lightpink 0 8px 10px 1px lightpink 0 3px 14px 2px lightpink;
 }
 
 .cdk-drag-placeholder {

@@ -55,6 +55,7 @@
                     Difficulty: {{review.content.review.difficulty}} <br>
                     Workload: {{review.content.review.workload}} <br>
                     Hours Per Week: {{review.content.review.hoursPerWeek}} <br>
+
                     Textbook Used: {{review.content.review.textbookUsed}} <br>
                     Grade Received: {{review.content.review.gradeReceived}} <br>
                     Reputation: {{review.content.review.score}} <br>
@@ -78,9 +79,8 @@
                 </mat-card-content>
               </mat-card>
               <mat-action-row *ngIf="card.title === 'Reports'">
-                <button mat-button color="primary" (click)="ban(review.content.review.reviewer)">Ban User</button>
-                <button mat-button color="primary" (click)="removeReview(review.content.review, review)">Remove Review</button>
                 <button mat-button color="primary" (click)="resolve(review)">Resolve</button>
+                <button mat-button color="primary" (click)="removeReview(review)">Remove Review & Ban User</button>
               </mat-action-row>
               <mat-action-row *ngIf="card.title === 'Requests'">
                 <button mat-button color="primary" (click)="resolve(review)">Resolve</button>

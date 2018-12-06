@@ -55,7 +55,7 @@ export class AdminDashboardComponent implements OnInit {
         console.log(reports);
         this.allReports = reports;
         this.requestReportService.getAllRequests().subscribe(requests => {
-          this.allRequests = requests;
+          this.allRequests = requests.filter(request => !request.resolved);
           this.userService.getAllUsers().subscribe(users => {
             users.forEach(user => {
               this.allUsers.push({
@@ -117,14 +117,20 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ban(username: string) {
-    this.userService.banUser(username);
+    this.userService.getUserByUsername(username).subscribe(foundUser => {
+      foundUser.banned = true;
+      this.userService.saveUser(foundUser).subscribe((savedUser: any) => {
+        console.log(savedUser);
+        alert(savedUser.username + ' has been banned');
+      });
+    });
   }
 
-  removeReview(review: any, report: any) {
+  removeReview(review: any) {
     console.log(review);
-    this.reviewService.deleteReview(review).subscribe(deletedReview => {
+    this.reviewService.deleteReview(review.content.review).subscribe(deletedReview => {
       console.log(deletedReview);
-      this.ngOnInit();
+      this.resolve(review);
     });
   }
 
@@ -135,6 +141,7 @@ export class AdminDashboardComponent implements OnInit {
       .saveRequestReport(request)
       .subscribe(savedRequestReport => {
         console.log(savedRequestReport);
+        this.ngOnInit();
       });
   }
 

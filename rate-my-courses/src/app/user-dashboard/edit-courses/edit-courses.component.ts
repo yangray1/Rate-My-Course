@@ -22,11 +22,11 @@ import { NewCourseComponent } from "src/app/new-course/new-course.component";
 export class EditCoursesComponent implements OnInit {
   user: User;
 
-  currentlyTaking: string[];
-  taken: string[];
+  currentlyTaking: string[] = [];
+  taken: string[] = [];
 
   searchCourse: string;
-  courses: string[];
+  courses: string[] = [];
 
   searchBarControl: FormControl = new FormControl();
   filteredCourses: Observable<string[]>;
@@ -38,9 +38,9 @@ export class EditCoursesComponent implements OnInit {
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data
   ) {
-    this.user = data;
-    this.currentlyTaking = this.user.courses;
-    this.taken = this.user.takenCourses;
+    this.user = this.data;
+    this.user.courses.forEach(course => this.currentlyTaking.push(course));
+    this.user.takenCourses.forEach(course => this.taken.push(course));
   }
 
   private _filter(value: string): string[] {

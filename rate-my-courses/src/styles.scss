@@ -2,39 +2,47 @@
 // @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./theme.scss";
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
 
-body, html {
-    height: 100%;
-    margin: 0 auto;
+body,
+html {
+  height: 100%;
+  margin: 0 auto;
 }
 
 body {
-    font-family: 'Montserrat';
-    font-size: 18px;
-    background: lightpink;
+  font-family: "Montserrat";
+  font-size: 18px;
+  background: url("./assets/img/background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 1.3em;
-    display: grid;
-    grid-template-columns: 20% 50% 30%;
-    a {
-        color: white;
-    }
+  width: 90%;
+  margin: 0 auto;
+  padding: 1.3em;
+  display: grid;
+  grid-template-columns: 20% 50% 30%;
+  a {
+    color: white;
+  }
 }
 
 section {
-    // width: 80%;
-    width: 100%;
-    margin: 0 auto;
-    // padding: 2em;
+  // width: 80%;
+  width: 100%;
+  margin: 0 auto;
+  // padding: 2em;
 }
 
-body { margin: 0; font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif;
+}
