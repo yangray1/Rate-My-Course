@@ -17,7 +17,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
-import { RegisterComponent } from './login/register/register.component';
+import { RegisterComponent, UsernameTakenComponent } from './login/register/register.component';
 import { EditUserComponent } from './admin-dashboard/edit-user/edit-user.component';
 import { UsersService } from './_services/users.service';
 import { HomeComponent } from './home/home.component';
@@ -58,6 +58,7 @@ import { AboutComponent } from './about/about.component';
     ReportDialogComponent,
     SuggestionDialogComponent,
     InvalidUsernamePasswordDialogComponent,
+    UsernameTakenComponent,
     NewReviewComponent,
     AboutComponent,
   ],
@@ -89,6 +90,7 @@ import { AboutComponent } from './about/about.component';
     ReportDialogComponent,
     SuggestionDialogComponent,
     InvalidUsernamePasswordDialogComponent,
+    UsernameTakenComponent,
     NewReviewComponent,
   ],
   providers: [

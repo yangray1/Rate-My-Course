@@ -11,5 +11,7 @@ router.patch(reviewRoute + '/edit-review', review.editReview);
 router.post(reviewRoute + '/add-review', review.addReview);
 router.get(reviewRoute + '/getReviewByCourse/:coursecode', review.getReviewsByCourse);
 router.get(reviewRoute + '/getReviewByUser/:user', review.getReviewsByUser);
+router.patch(reviewRoute + '/upvote', review.upvoteReview);
+router.patch(reviewRoute + '/downvote', review.downvoteReview);
 
 module.exports = router;

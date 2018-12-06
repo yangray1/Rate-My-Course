@@ -1,4 +1,5 @@
 const Review = require('../models/review.modals');
+const log = console.log
 
 // Delete review
 // Edit review
@@ -79,7 +80,7 @@ getReviewsByCourse = (req, res) => {
 
     const courseCode = req.params.coursecode
 
-    Review.find({"course": courseCode}).then((reviews) => {
+    Review.find({"course": courseCode}).sort({score: -1}).then((reviews) => { // .sort({score: -1}) ADDED
         res.send(reviews)
     }).catch((err) => {
         res.status(400).send({message: "Error looking for reviews"})
@@ -90,7 +91,7 @@ getReviewsByUser = (req, res) => {
     
     const user = req.params.user
 
-    Review.find({"reviewer": user}).then((reviews) => {
+    Review.find({"reviewer": user}).sort({score: -1}).then((reviews) => { // .sort({score: -1}) ADDED
         res.send(reviews)
     }).catch((err) => {
         res.status(400).send({message: "Error looking for reviews"})
@@ -98,10 +99,46 @@ getReviewsByUser = (req, res) => {
 
 }
 
+upvoteReview = (req, res) => {
+
+    const review_id = req.body._id
+
+    Review.findOne({"_id": review_id}).then((review) => {
+        review.score++
+        review.save().then((result) => {
+            res.send(result)
+        }).catch((err) => {
+            res.status(400).send({message: "Error upvoting review"})
+        })
+    }).catch((err) => {
+        res.status(400).send({message: "Error upvoting review"})
+    })
+    
+}
+
+downvoteReview = (req, res) => {
+
+    const review_id = req.body._id
+    
+    Review.findOne({"_id": review_id}).then((review) => {
+        review.score--
+        review.save().then((result) => {
+            res.send(result);
+        }).catch((err) => {
+            res.status(400).send({message: "Error downvoting review"})
+        })
+    }).catch((err) => {
+        res.status(400).send({message: "Error downvoting review"})
+    })
+    
+}
+
 module.exports = {
     deleteReview,
     editReview,
     addReview,
     getReviewsByCourse,
-    getReviewsByUser
+    getReviewsByUser,
+    upvoteReview,
+    downvoteReview
 };

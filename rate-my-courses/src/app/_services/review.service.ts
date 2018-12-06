@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 
 export class ReviewService {
 
-  private API = 'https://rate-my-courses.herokuapp.com';
-  // private API = 'http://localhost:3000'
+  // private API = 'https://rate-my-courses.herokuapp.com';
+  private API = 'http://localhost:3000'
   private REVIEW_API = this.API + '/api/review';
 
   constructor(private http: HttpClient) {
@@ -34,6 +34,14 @@ export class ReviewService {
 
   saveReview(review: any): Observable<Review> {
     return this.http.patch<Review>(this.REVIEW_API + "/edit-review", review, this.getHttpHeaders())
+  }
+
+  upvoteReview(review: any): Observable<Review> {
+    return this.http.patch<Review>(this.REVIEW_API + "/upvote", review, this.getHttpHeaders())
+  }
+
+  downvoteReview(review: any): Observable<Review> {
+    return this.http.patch<Review>(this.REVIEW_API + "/downvote", review, this.getHttpHeaders())
   }
 
   private getHttpHeaders() {
