@@ -1,12 +1,19 @@
 import { ReviewService } from "./../_services/review.service";
 import { CoursesService, Course } from "./../_services/courses.service";
-import { Component, OnInit, Inject } from "@angular/core";
-import { FormBuilder, Validators, FormControl } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { EditUserComponent } from "../admin-dashboard/edit-user/edit-user.component";
+import { Component, OnInit, Output, Inject, EventEmitter } from "@angular/core";
+import {
+  FormBuilder,
+  Validators,
+  FormControl,
+  FormGroup
+} from "@angular/forms";
 import { Observable } from "rxjs";
 import { startWith, map } from "rxjs/operators";
 import { User } from "../_services/users.service";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { EditUserComponent } from "../admin-dashboard/edit-user/edit-user.component";
+import { Router } from "@angular/router";
+import { MatDialog } from "@angular/material";
 
 @Component({
   selector: "app-new-review",
@@ -14,6 +21,13 @@ import { EditUserComponent } from "../admin-dashboard/edit-user/edit-user.compon
   styleUrls: ["./new-review.component.scss"]
 })
 export class NewReviewComponent implements OnInit {
+  constructor(
+    private fb: FormBuilder,
+    private coursesService: CoursesService,
+    private reviewService: ReviewService,
+    public dialogRef: MatDialogRef<EditUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {}
   grades: Grade[] = [
     { grade: "A+", gradeValue: "A+" },
     { grade: "A", gradeValue: "A" },
@@ -53,21 +67,14 @@ export class NewReviewComponent implements OnInit {
 
   searchBarControl: FormControl = new FormControl();
   filteredCourses: Observable<string[]>;
-  constructor(
-    private fb: FormBuilder,
-    private coursesService: CoursesService,
-    private reviewService: ReviewService,
-    public dialogRef: MatDialogRef<EditUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data
-  ) {}
+
+  @Output() closeModalEvent = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.isNew = this.data.isNew;
     if (!this.isNew) {
       this.searchBarControl.setValue(this.data.course);
-      this.addressForm.controls["professor"].setValue(
-        this.data.profName
-      );
+      this.addressForm.controls["professor"].setValue(this.data.profName);
       this.addressForm.controls["overallRating"].setValue(
         this.data.overallRating
       );
@@ -82,9 +89,7 @@ export class NewReviewComponent implements OnInit {
         this.data.writtenReview
       );
     } else {
-      this.addressForm.controls["textbookUsed"].setValue(
-        false
-      );
+      this.addressForm.controls["textbookUsed"].setValue(false);
     }
     this.coursesService.getAllCourses().subscribe((allCourses: Course[]) => {
       this.courses = allCourses.map(course => course.courseCode);

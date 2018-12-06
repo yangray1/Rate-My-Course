@@ -53,9 +53,10 @@ export class AdminDashboardComponent implements OnInit {
       });
       this.requestReportService.getAllReports().subscribe(reports => {
         console.log(reports);
-        this.allReports = reports;
+        this.allReports = reports.filter(report => !report.resolved);
         this.requestReportService.getAllRequests().subscribe(requests => {
           this.allRequests = requests.filter(request => !request.resolved);
+          console.log(this.allRequests);
           this.userService.getAllUsers().subscribe(users => {
             users.forEach(user => {
               this.allUsers.push({

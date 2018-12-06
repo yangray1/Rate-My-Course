@@ -84,7 +84,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
+    window.location.reload();
     localStorage.clear();
   }
 
@@ -132,6 +133,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
       width: "500px",
       data: { user: localStorage.user }
     });
+  }
+
+  about(){
+    this.router.navigate(['/about'])
   }
 
   ngOnDestroy(): void {
