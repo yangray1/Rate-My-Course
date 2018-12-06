@@ -11,7 +11,7 @@ import { FormBuilder } from "@angular/forms";
 @Component({
   selector: "app-edit-user",
   templateUrl: "./edit-user.component.html",
-  styleUrls: ["./edit-user.component.scss"]
+  styleUrls: ["./edit-userProperty.component.scss"]
 })
 export class EditUserComponent {
   visible = true;

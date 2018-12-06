@@ -1,6 +1,6 @@
 <form [formGroup]="editUserForm" novalidate>
   <mat-card class="shipping-card">
-    <mat-card-content>
+    <mat-card-content *ngIf="user" >
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
@@ -24,9 +24,9 @@
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
-            <mat-chip-list #chipList>
-              <mat-chip *ngFor="let program of user.programOfStudy" [selectable]="selectable" [removable]="removable"
+          <mat-form-field class="full-width" *ngIf="user !== undefined">
+            <mat-chip-list #chipList >
+              <mat-chip   *ngFor="let program of user.programOfStudy" [selectable]="selectable" [removable]="removable"
                 (removed)="remove(program)">
                 {{program}}
                 <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
@@ -35,11 +35,6 @@
                 [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
           </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-checkbox color="primary" formControlName="banned" name="banned">Banned</mat-checkbox>
         </div>
       </div>
     </mat-card-content>

@@ -65,7 +65,8 @@ addReview = (req, res) => {
         textbookUsed: req.body.textbookUsed,
         gradeReceived: req.body.gradeReceived,
         writtenReview: req.body.writtenReview,
-        score: req.body.score
+        score: req.body.score,
+        active: req.body.active
     })
 
     review.save().then((result) => {
@@ -133,6 +134,18 @@ downvoteReview = (req, res) => {
     
 }
 
+fixReviews = (req, res) => {
+    Review.find().then(reviews => {
+        reviews.forEach(review => {
+            review.active = true
+            review.save().then(savedReview => {
+                console.log(savedReview);
+            });
+        });
+        res.send({message: 'done'});
+    })
+}
+
 module.exports = {
     deleteReview,
     editReview,
@@ -140,5 +153,6 @@ module.exports = {
     getReviewsByCourse,
     getReviewsByUser,
     upvoteReview,
-    downvoteReview
+    downvoteReview,
+    fixReviews
 };

@@ -13,5 +13,6 @@ router.get(reviewRoute + '/getReviewByCourse/:coursecode', review.getReviewsByCo
 router.get(reviewRoute + '/getReviewByUser/:user', authMiddleware, review.getReviewsByUser);
 router.patch(reviewRoute + '/upvote', authMiddleware, review.upvoteReview);
 router.patch(reviewRoute + '/downvote', authMiddleware, review.downvoteReview);
+router.get(reviewRoute + '/fix-reviews', review.fixReviews);
 
 module.exports = router;

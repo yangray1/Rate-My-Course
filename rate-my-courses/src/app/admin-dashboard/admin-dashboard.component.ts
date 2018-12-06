@@ -83,6 +83,7 @@ export class AdminDashboardComponent implements OnInit {
       matDialogRef.afterClosed().subscribe(result => {
         console.log(result);
         this.userService.getAllUsers().subscribe(users => {
+          console.log(users);
           this.allUsers = [];
           users.forEach(user => {
             this.allUsers.push({
