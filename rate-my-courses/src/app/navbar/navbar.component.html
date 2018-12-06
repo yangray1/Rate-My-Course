@@ -27,7 +27,7 @@
       <button *ngIf="isLoggedIn()" mat-menu-item (click)="suggestion()">Suggestion?</button>
       <button *ngIf="isLoggedIn()" mat-menu-item (click)="logout()">Logout</button>
       <button *ngIf="!isLoggedIn()" mat-menu-item (click)="login()">Login/Register</button>
-      <button mat-menu-item>About</button>
+      <button mat-menu-item (click)="about()">About</button>
     </mat-menu>
 
   </mat-toolbar-row>

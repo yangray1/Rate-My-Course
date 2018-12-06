@@ -17,14 +17,13 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
-import { RegisterComponent } from './login/register/register.component';
+import { RegisterComponent, UsernameTakenComponent } from './login/register/register.component';
 import { EditUserComponent } from './admin-dashboard/edit-user/edit-user.component';
 import { UsersService } from './_services/users.service';
 import { HomeComponent } from './home/home.component';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { WriteReviewComponent } from './write-review/write-review.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule,
   MatTabsModule, MatInputModule, MatSelectModule, MatRadioModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -37,6 +36,7 @@ import { ReportDialogComponent } from './reviews/report-dialog/report-dialog.com
 import { SuggestionDialogComponent } from './navbar/suggestion-dialog/suggestion-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewReviewComponent } from './new-review/new-review.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,6 @@ import { NewReviewComponent } from './new-review/new-review.component';
     RegisterComponent,
     EditUserComponent,
     HomeComponent,
-    WriteReviewComponent,
     ReviewsComponent,
     EditProfileComponent,
     EditCoursesComponent,
@@ -59,7 +58,9 @@ import { NewReviewComponent } from './new-review/new-review.component';
     ReportDialogComponent,
     SuggestionDialogComponent,
     InvalidUsernamePasswordDialogComponent,
+    UsernameTakenComponent,
     NewReviewComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,13 +84,13 @@ import { NewReviewComponent } from './new-review/new-review.component';
     RegisterComponent,
     EditUserComponent,
     LoginComponent,
-    WriteReviewComponent,
     EditProfileComponent,
     EditCoursesComponent,
     NewCourseDialogComponent,
     ReportDialogComponent,
     SuggestionDialogComponent,
     InvalidUsernamePasswordDialogComponent,
+    UsernameTakenComponent,
     NewReviewComponent,
   ],
   providers: [

@@ -1,9 +1,9 @@
 const Course = require("../models/course.modals");
 
 getAllCourseCodes = (req, res) => {
-    Course.find({}, {courseCode: 1}).then(
+    Course.find().sort({courseCode: 1}).then(
         (courses) => {
-            res.send({ courses })
+            res.send(courses)
         }
     ).catch((error) => {
 		res.status(400).send(error)
@@ -13,12 +13,13 @@ getAllCourseCodes = (req, res) => {
 getCourseByCourseCode = (req, res) => {
     const course_code = req.params.course_code;
 
-    Course.find({courseCode: course_code}).then(
+    Course.findOne({courseCode: course_code}).then(
         (course) => {
             if (course.length != 0){
-                res.send({ course })
+                res.send(course)
+            } else {
+                res.status(404).send()
             }
-            res.status(404).send()
         }
     ).catch((error) => {
 		res.status(400).send(error)
@@ -34,7 +35,7 @@ addCourse = (req, res) => {
 
     new_course.save().then(
         (course) => {
-            res.send({ course });
+            res.send(course);
         }
     ).catch(err => {
         res.status(500).send({
@@ -45,12 +46,10 @@ addCourse = (req, res) => {
 
 /* {courseCode: ______, courseName: ____, courseDesc: _____} */
 modifyCourse = (req, res) => {
-    const course_id = req.params.course_id; // the mongo generated _id
-
-    Course.findById(course_id).then(
+    console.log(req.params);
+    Course.findOne({courseCode: req.params.course_code}).then(
         (course) => {
             if (!course){
-                console.log("cannot find this id")
                 res.status(404).send()
             }
             else{
@@ -65,6 +64,7 @@ modifyCourse = (req, res) => {
             res.send(course)
         }
     ).catch((error) => {
+        console.log(error)
 		res.status(400).send(error)
 	})
 }

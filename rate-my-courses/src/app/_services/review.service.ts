@@ -1,48 +1,61 @@
 import { Injectable } from '@angular/core';
-import { REVIEWS } from './hardcoded-reviews';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-let count = 3;
 @Injectable({
   providedIn: 'root'
 })
 
 export class ReviewService {
 
-  private allReviews: Review[] = [];
+  private API = 'https://rate-my-courses.herokuapp.com';
+  // private API = 'http://localhost:3000'
+  private REVIEW_API = this.API + '/api/review';
 
-  constructor() {
-    this.allReviews = REVIEWS;
+  constructor(private http: HttpClient) {
   }
 
-  getReviews(course: string): Review[] {
-    return this.allReviews.filter(review => review.course === course);
+  getReviews(course: string): Observable<Review[]> {
+    return this.http.get<Review[]>(this.REVIEW_API + "/getReviewByCourse/" + course, this.getHttpHeaders())
   }
 
-  getReviewsByUser(username: string): Review[] {
-    return this.allReviews.filter(review => review.reviewer === username);
+  getReviewsByUser(username: string): Observable<Review[]> {
+    return this.http.get<Review[]>(this.REVIEW_API + "/getReviewByUser/" + username, this.getHttpHeaders())
   }
 
-  deleteReview(review: Review) {
-    this.allReviews = this.allReviews.filter(e => e.id !== review.id);
+  deleteReview(review: any): Observable<Review> {
+    return this.http.delete<Review>(this.REVIEW_API + "/delete-review", this.getHttpHeaders())
   }
 
-  addReview(review: Review) {
-    this.allReviews.push(review);
+  addReview(review: any): Observable<Review> {
+    console.log(review);
+    return this.http.post<Review>(this.REVIEW_API + "/add-review", review, this.getHttpHeaders())
   }
 
-  saveReview(review: Review, origReview: Review) {
-    this.deleteReview(origReview);
-    this.addReview(review);
+  saveReview(review: any): Observable<Review> {
+    console.log(review)
+    return this.http.patch<Review>(this.REVIEW_API + "/edit-review", review, this.getHttpHeaders())
   }
 
-  next() {
-    count += 1;
-    return count;
+  upvoteReview(review: any): Observable<Review> {
+    return this.http.patch<Review>(this.REVIEW_API + "/upvote", review, this.getHttpHeaders())
+  }
+
+  downvoteReview(review: any): Observable<Review> {
+    return this.http.patch<Review>(this.REVIEW_API + "/downvote", review, this.getHttpHeaders())
+  }
+
+  private getHttpHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem('jwtToken') || ''
+      })
+    };
   }
 }
 
 export interface Review {
-  id: number;
   course: string;
   reviewer: string;
   profName: string;
@@ -54,4 +67,5 @@ export interface Review {
   gradeReceived: string;
   writtenReview: string;
   score: number;
+  active: boolean;
 }

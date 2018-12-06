@@ -27,7 +27,7 @@
 .justification {
   float: left;
   margin-top: 20px;
-  width: 100%;
+  width: 95%;
 }
 
 .dashboard-card-content {
@@ -36,7 +36,7 @@
 
 .table-container {
   position: relative;
-  max-height: 80%;
+  max-height: 100%;
   overflow: auto;
 }
 
@@ -44,7 +44,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: rgb(110, 110, 110);
+    background-color: lightgrey;
   }
 }
 
@@ -100,6 +100,6 @@ p {
 
 .table-container {
   position: relative;
-  max-height: 80%;
+  max-height: 90%;
   overflow: auto;
 }

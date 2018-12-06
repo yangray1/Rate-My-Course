@@ -31,12 +31,18 @@ export class SuggestionDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.reportService.saveReport({
-      username: this.user.username,
+    this.reportService.newRequestReport({
+      username: localStorage.getItem('username'),//this.user.username,
       description: this.suggestionForm.controls['description'].value,
+      resolved: false,
+      type: 'request',
       content: {
-        type: 'request',
         request: this.suggestionForm.controls['request'].value,
+      }
+    }).subscribe(savedRequestReport => {
+      if (savedRequestReport){
+        console.log(savedRequestReport);
+        this.dialogRef.close();
       }
     });
   }

@@ -1,99 +1,62 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class RequestReportService {
-  requests: RequestReport[] = [
-    {
-      username: 'yangray1',
-      description: 'This app looks bad.',
-      content: {
-        request:
-          'First of all, you were late. Second of all, you were late. Third of all, you were late.',
-        type: 'request'
-      }
-    },
-    {
-      username: 'admin1',
-      description: 'Test Request',
-      content: {
-        request: 'This is a test.',
-        type: 'request'
-      }
-    },
-    {
-      username: 'yangray1', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-    {
-      username: 'yangray1', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-    {
-      username: 'yangray1', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    },
-    {
-      username: 'yangray1', // If username is empty, this is an anon request
-      description: 'This is an anonymous request.',
-      content: { request: 'This is more anonymous content.', type: 'request' }
-    }
-  ];
 
-  reports: RequestReport[] = [
-    {
-      username: 'yangray1',
-      description: 'Inaccurate Review',
-      content: {
-        type: 'report',
-        report: 'He doesn\'t even go to this school.',
-        review: {
-          id: 2,
-          course: 'CSC207',
-          reviewer: 'yangray1',
-          profName: 'Ray Mond',
-          overallRating: 2,
-          difficulty: 4,
-          workload: 4,
-          hoursPerWeek: 20,
-          textbookUsed: true,
-          gradeReceived: 'B',
-          writtenReview: 'this course is so hard :( this review is hardcoded',
-          score: 0
-        }
-      }
-    }
-  ];
+  // private API = "http://localhost:3000";
 
-  constructor() {}
+  private API = 'https://rate-my-courses.herokuapp.com';
+  private reportRequestAPI = this.API + "/api/requestsReports";
 
-  getAllRequests(): RequestReport[] {
-    return this.requests;
+  constructor(private http: HttpClient) {}
+
+  getAllRequests(): Observable<RequestReport[]> {
+    return this.http.get<RequestReport[]>(
+      this.reportRequestAPI + "/allRequestsReports/request",
+      this.getHttpHeaders()
+    );
+    // return this.requests;
   }
 
-  getAllReports(): RequestReport[] {
-    return this.reports;
+  getAllReports(): Observable<RequestReport[]> {
+    return this.http.get<RequestReport[]>(
+      this.reportRequestAPI + "/allRequestsReports/report",
+      this.getHttpHeaders()
+    );
   }
 
-  saveReport(report: RequestReport) {
-    this.reports.push(report);
+  saveRequestReport(report: RequestReport) {
+    return this.http.patch<RequestReport>(
+      this.reportRequestAPI + "/modifyRequestReport", report,
+      this.getHttpHeaders()
+    );
   }
 
-  saveRequest(request: RequestReport) {
-    this.requests.push(request);
+  newRequestReport(report: RequestReport) {
+    return this.http.post<RequestReport>(
+      this.reportRequestAPI + "/newRequestReport", report,
+      this.getHttpHeaders()
+    );
   }
 
-  removeReport(report: RequestReport) {
-    this.reports = this.reports.filter(e => e !== report);
+  private getHttpHeaders() {
+    return {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("jwtToken") || ""
+      })
+    };
   }
 }
 
 export interface RequestReport {
   username: string;
   description: string;
+  resolved: boolean;
+  type: string;
   content: any;
 }

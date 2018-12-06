@@ -1,77 +1,157 @@
 <div class="grid-container">
   <mat-grid-list cols="4" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+    <mat-grid-tile
+      *ngFor="let card of (cards | async)"
+      [colspan]="card.cols"
+      [rowspan]="card.rows"
+    >
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title}}
-            <button *ngIf="card.title !== 'All Reviews'" mat-icon-button class="more-button" (click)="edit(card.title)">
+            {{ card.title }}
+            <button
+              *ngIf="card.title !== 'All Reviews'"
+              mat-icon-button
+              class="more-button"
+              (click)="edit(card.title)"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content *ngIf="card.title === 'User Info'" class="dashboard-card-content">
-          <h1>{{card.cardData.user.firstName + ' ' + card.cardData.user.lastName}}</h1>
-          <h3> {{card.cardData.user.programOfStudy.join(', ')}} </h3>
+        <mat-card-content
+          *ngIf="card.title === 'User Info'"
+          class="dashboard-card-content"
+        >
+          <h1>
+            {{
+              card.cardData.user.firstName + " " + card.cardData.user.lastName
+            }}
+          </h1>
+          <h3>{{ card.cardData.user.programOfStudy.join(", ") }}</h3>
           <mat-table [dataSource]="card.cardData.tableData">
             <ng-container matColumnDef="title">
               <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
               <mat-cell *matCellDef="let element">
-                <h4>{{element.title}}</h4>
+                <h4>{{ element.title }}</h4>
               </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="data">
               <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.data}} </mat-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.data }}
+              </mat-cell>
             </ng-container>
             <mat-row mat-button *matRowDef="let row; columns: title"></mat-row>
           </mat-table>
         </mat-card-content>
-        <mat-card-content *ngIf="card.title === 'All Reviews'" class="dashboard-card-content">
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let review of card.cardData.allReviews" (closed)="reset()" (opened)="reset()">
+        <mat-card-content
+          *ngIf="card.title === 'All Reviews'"
+          class="dashboard-card-content"
+        >
+          <mat-list>
+            <mat-list-item
+              *ngFor="let review of card.cardData.allReviews"
+              (click)="editReview(review)"
+              class="course"
+            >
+              <mat-divider></mat-divider>
+              {{ review.course }}
+              <div class="spacer"></div>
+              Overall Rating: {{ review.overallRating }}
+              <div class="spacer"></div>
+            </mat-list-item>
+          </mat-list>
+          <!-- <mat-accordion>
+            <mat-expansion-panel
+              *ngFor="let review of card.cardData.allReviews"
+              (closed)="reset()"
+              (opened)="reset()"
+            >
               <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{review.course}}
-                </mat-panel-title>
+                <mat-panel-title> {{ review.course }} </mat-panel-title>
                 <mat-panel-description>
-                  Overall Rating: {{review.overallRating}}
+                  Overall Rating: {{ review.overallRating }}
                 </mat-panel-description>
                 <mat-panel-description>
-                  Difficulty: {{review.difficulty}}
+                  Difficulty: {{ review.difficulty }}
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p *ngIf="!editing"> {{review.writtenReview}} </p>
+              <p *ngIf="!editing">{{ review.writtenReview }}</p>
               <mat-form-field *ngIf="editing" class="editReview">
-                <textarea matInput cdkTextareaAutosize [(ngModel)]="review.writtenReview" name="writtenReview"></textarea>
+                <textarea
+                  matInput
+                  cdkTextareaAutosize
+                  [(ngModel)]="review.writtenReview"
+                  name="writtenReview"
+                ></textarea>
               </mat-form-field>
               <mat-action-row>
-                <button mat-button *ngIf="!editing" color="primary" (click)="editReview(review)">Edit</button>
-                <button mat-button *ngIf="editing" color="primary" (click)="saveReview(review)">Save</button>
-                <button mat-button *ngIf="editing" color="primary" (click)="reset()">Cancel</button>
-                <button mat-button *ngIf="!editing" color="primary" (click)="removeReview(review)">Remove</button>
+                <button
+                  mat-button
+                  *ngIf="!editing"
+                  color="primary"
+                  (click)="editReview(review)"
+                >
+                  Edit
+                </button>
+                <button
+                  mat-button
+                  *ngIf="editing"
+                  color="primary"
+                  (click)="saveReview(review)"
+                >
+                  Save
+                </button>
+                <button
+                  mat-button
+                  *ngIf="editing"
+                  color="primary"
+                  (click)="reset()"
+                >
+                  Cancel
+                </button>
+                <button
+                  mat-button
+                  *ngIf="!editing"
+                  color="primary"
+                  (click)="removeReview(review)"
+                >
+                  Remove
+                </button>
               </mat-action-row>
             </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> -->
         </mat-card-content>
-        <mat-card-content *ngIf="card.title === 'Courses'" class="dashboard-card-content">
+        <mat-card-content
+          *ngIf="card.title === 'Courses'"
+          class="dashboard-card-content"
+        >
           <mat-list>
             <h2>Currently Taking</h2>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let course of card.cardData.currentlyTaking" (click)="viewCourse(course)" class="course">
+            <mat-list-item
+              *ngFor="let course of card.cardData.currentlyTaking"
+              (click)="viewCourse(course)"
+              class="course"
+            >
               <mat-divider></mat-divider>
-              {{course}}
+              {{ course }}
               <div class="spacer"></div>
-              {{courseService.getCourseDesc(course)}}
+              {{ courseDescMap[course] }}
             </mat-list-item>
             <h2>Taken</h2>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let course of card.cardData.taken" (click)="viewCourse(course)" class="course">
+            <mat-list-item
+              *ngFor="let course of card.cardData.taken"
+              (click)="viewCourse(course)"
+              class="course"
+            >
               <mat-divider></mat-divider>
-              {{course}}
+              {{ course }}
               <div class="spacer"></div>
-              {{courseService.getCourseDesc(course)}}
+              {{ courseDescMap[course] }}
             </mat-list-item>
           </mat-list>
         </mat-card-content>

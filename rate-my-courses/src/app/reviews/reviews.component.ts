@@ -16,9 +16,12 @@ export class ReviewsComponent implements OnInit {
 
   course: string;
   courseDesc: string;
+  courseName: string;
   allReviews: Review[];
 
   courseFound = true;
+
+  isLogged = true;
 
   constructor(
     private reviewService: ReviewService,
@@ -29,19 +32,36 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = localStorage.getItem('username') !== null;
     this.route.params.subscribe(params => {
       this.course = params.course; // Pass in later during the course searchbar
-      this.courseFound = this.coursesService.getAllCourses().includes(params.course);
-      if (this.courseFound) {
-        this.courseDesc = this.coursesService.getCourseDesc(this.course);
-        this.allReviews = this.reviewService.getReviews(this.course);
-      }
+      this.coursesService.getAllCourses().subscribe(
+        (allCourses) => {
+
+          this.courseFound = allCourses.map(course => course.courseCode).includes(params.course);
+          if (this.courseFound) {
+            this.coursesService.getCourse(this.course).subscribe(
+              (course) => {
+                this.courseName = course.courseName;
+                this.courseDesc = course.courseDesc;
+              }
+            )
+            this.reviewService.getReviews(this.course).subscribe(reviews => {
+              this.allReviews = reviews.filter(review => review.active);
+              console.log(this.allReviews);
+            });
+          }
+        }
+      )
       console.log(params.course);
     });
   }
 
   courseAdded() {
-    this.courseFound = true;
+    this.coursesService.getCourse(this.course).subscribe(courseObject => {
+      this.courseDesc = courseObject.courseDesc;
+      this.courseFound = true;
+    })
     console.log(this.courseFound);
   }
 
@@ -54,5 +74,25 @@ export class ReviewsComponent implements OnInit {
         width: '400px',
       }
     );
+  }
+
+  upvoteReview(review: Review) {
+    this.reviewService.upvoteReview(review).subscribe((result) => {
+      console.log(result);
+      this.reviewService.getReviews(this.course).subscribe(reviews => {
+        this.allReviews = reviews;
+        console.log(this.allReviews);
+      });
+    })
+  }
+
+  downvoteReview(review: Review) {
+    this.reviewService.downvoteReview(review).subscribe((result) => {
+      console.log(result);
+      this.reviewService.getReviews(this.course).subscribe(reviews => {
+        this.allReviews = reviews;
+        console.log(this.allReviews);
+      });
+    })
   }
 }

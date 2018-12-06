@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AboutComponent } from './about/about.component';
 
 import { ReviewsComponent } from './reviews/reviews.component';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'user-dashboard/:username', component: UserDashboardComponent},
   { path: 'view-reviews/:course', component: ReviewsComponent},
+  { path: 'about', component: AboutComponent},
   { path: '**', redirectTo: '' },
 ];
 

@@ -2,11 +2,19 @@
   <div class="example-container">
     <h3>Currently Taking</h3>
 
-    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="currentlyTaking" [cdkDropListConnectedTo]="[doneList]"
-      class="example-list" (cdkDropListDropped)="drop($event)">
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="currentlyTaking"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
       <div class="example-box" *ngFor="let item of currentlyTaking" cdkDrag>
-        {{item}}
-        <button (click)="deleteTaking(item)" mat-raised-button color="alert">Delete</button>
+        {{ item }}
+        <button (click)="deleteTaking(item)" mat-raised-button color="alert">
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -14,24 +22,41 @@
   <div class="example-container">
     <h3>Taken</h3>
 
-    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="taken" [cdkDropListConnectedTo]="[todoList]" class="example-list"
-      (cdkDropListDropped)="drop($event)">
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="taken"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
       <div class="example-box" *ngFor="let item of taken" cdkDrag>
-        {{item}}
-        <button (click)="deleteTaken(item)" mat-raised-button color="alert">Delete</button>
+        {{ item }}
+        <button (click)="deleteTaken(item)" mat-raised-button color="alert">
+          Delete
+        </button>
       </div>
     </div>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button (click)="save()" mat-raised-button color="primary">Save</button>
-  <button (click)="add()" mat-raised-button color="primary">Add</button>
   <mat-form-field class="padding-left">
-    <input matInput [formControl]="searchBarControl" placeholder="Search for a Course" [matAutocomplete]="auto">
+    <input
+      matInput
+      [formControl]="searchBarControl"
+      placeholder="Search for a Course"
+      [matAutocomplete]="auto"
+      #form="ngForm"
+    />
   </mat-form-field>
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let course of filteredCourses | async" [value]="course">
-      {{course}}
+    <mat-option
+      *ngFor="let course of (filteredCourses | async)"
+      [value]="course"
+      (click)="add(course)"
+    >
+      {{ course }}
     </mat-option>
   </mat-autocomplete>
 </mat-dialog-actions>

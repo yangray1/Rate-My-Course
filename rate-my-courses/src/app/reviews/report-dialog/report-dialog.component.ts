@@ -31,14 +31,18 @@ export class ReportDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.reportService.saveReport({
-      username: 'yangray1',
+    this.reportService.newRequestReport({
+      username: localStorage.getItem('username'),
       description: this.reportForm.controls['description'].value,
+      resolved: false,
+      type: 'report',
       content: {
-        type: 'report',
         report: this.reportForm.controls['report'].value,
         review: this.currentReview
       }
+    }).subscribe(newReport => {
+      console.log(newReport);
+      this.dialogRef.close();
     });
   }
 

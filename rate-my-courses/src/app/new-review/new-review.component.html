@@ -1,13 +1,11 @@
 <form [formGroup]="addressForm" novalidate>
   <mat-card class="shipping-card">
-    <mat-card-header>
-      <mat-card-title>Rate a Course</mat-card-title>
-    </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
-          <mat-form-field class="full-width">
-            <input matInput placeholder="Search for a Course" [matAutocomplete]="auto" formControlName="courseCode">
+          <mat-form-field class="full-width" *ngIf="isNew" >
+            <input matInput placeholder="Course Code" [formControl]="searchBarControl" [matAutocomplete]="auto"
+              formControlName="courseCode">
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let course of filteredCourses | async" [value]="course">
                 {{course}}
@@ -25,32 +23,33 @@
       </div>
       <div class="row">
         <div class="col">
-          <h4 style="float: left;">Overall Rating: {{addressForm.controls['overallRating'].value}}</h4>
-          <mat-slider style="float: right; margin-left: 10px;" tickInterval="1" min="0" max="5" formControlName="overallRating"></mat-slider>
+          <h4>Overall Rating: {{addressForm.controls['overallRating'].value}}</h4>
+          <mat-slider tickInterval="1" min="0" max="5" formControlName="overallRating"></mat-slider>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <h4 style="float: left;">Difficulty: {{addressForm.controls['difficulty'].value}}</h4>
-          <mat-slider style="float: right; margin-left: 10px;" tickInterval="1" min="0" max="5" formControlName="difficulty"></mat-slider>
+          <h4>Difficulty: {{addressForm.controls['difficulty'].value}}</h4>
+          <mat-slider tickInterval="1" min="0" max="5" formControlName="difficulty"></mat-slider>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <h4 style="float: left;">Workload: {{addressForm.controls['workload'].value}}</h4>
-          <mat-slider style="float: right; margin-left: 10px;" tickInterval="1" min="0" max="5" formControlName="workload"></mat-slider>
+          <h4>Workload: {{addressForm.controls['workload'].value}}</h4>
+          <mat-slider tickInterval="1" min="0" max="5" formControlName="workload"></mat-slider>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <h4 style="float: left;">Hours: {{addressForm.controls['hours'].value}}</h4>
-          <mat-slider style="float: right; margin-left: 10px;" tickInterval="1" min="0" max="5" formControlName="hours"></mat-slider>
+          <h4>Hours: {{addressForm.controls['hours'].value}}</h4>
+          <mat-slider tickInterval="1" min="0" max="5" formControlName="hours"></mat-slider>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field>
-            <mat-select placeholder="Grade" formControlName="grade">
+          <h4>Grade:</h4>
+          <mat-form-field class="grade-form">
+            <mat-select formControlName="grade" >
               <mat-option *ngFor="let grade of grades" [value]="grade.grade">
                 {{grade.gradeValue}}
               </mat-option>
@@ -58,9 +57,21 @@
           </mat-form-field>
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="form-field-width">
+            <textarea matInput placeholder="Add a description!" formControlName="description"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-slide-toggle formControlName="textbookUsed" class="textbook">Textbook Used</mat-slide-toggle>
+        </div>
+      </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Save</button>
     </mat-card-actions>
   </mat-card>
 </form>
