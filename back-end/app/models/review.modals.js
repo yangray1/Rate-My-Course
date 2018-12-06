@@ -44,6 +44,10 @@ const ReviewSchema = mongoose.Schema({
     score: {
         type: Number,
         required: true
+    },
+    active: {
+        type: Boolean,
+        required: true
     }
 })
 

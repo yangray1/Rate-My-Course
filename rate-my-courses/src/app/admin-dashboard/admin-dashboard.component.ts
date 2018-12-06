@@ -129,7 +129,8 @@ export class AdminDashboardComponent implements OnInit {
 
   removeReview(review: any) {
     console.log(review);
-    this.reviewService.deleteReview(review.content.review).subscribe(deletedReview => {
+    review.active = false;
+    this.reviewService.saveReview(review.content.review).subscribe(deletedReview => {
       console.log(deletedReview);
       this.resolve(review);
     });

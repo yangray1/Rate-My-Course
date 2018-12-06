@@ -30,7 +30,8 @@ export class EditUserComponent {
     yearOfStudy: null,
     programOfStudy: null,
     courses: null,
-    takenCourses: null
+    takenCourses: null,
+    banned: null
   });
 
   constructor(
@@ -84,6 +85,7 @@ export class EditUserComponent {
     this.user.programOfStudy = this.editUserForm.controls["programOfStudy"].value;
     this.user.courses = this.editUserForm.controls["courses"].value;
     this.user.takenCourses = this.editUserForm.controls["takenCourses"].value;
+    this.user.banned = this.editUserForm.controls["banned"].value;
     this.userService.saveUser(this.user).subscribe(savedUser => {
       console.log(savedUser);
       this.dialogRef.close(true);

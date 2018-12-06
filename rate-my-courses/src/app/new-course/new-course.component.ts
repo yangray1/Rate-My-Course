@@ -31,7 +31,7 @@ export class NewCourseComponent implements OnInit {
 
   onSubmit() {
     this.courseService.addCourse({
-      courseCode: this.addressForm.controls['courseCode'].value,
+      courseCode: this.addressForm.controls['courseCode'].value.toUpperCase(),
       courseName: this.addressForm.controls['courseName'].value,
       courseDesc: this.addressForm.controls['courseDesc'].value
     }).subscribe((course) => {

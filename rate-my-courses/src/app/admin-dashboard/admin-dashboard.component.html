@@ -1,45 +1,67 @@
 <div class="grid-container">
   <!-- <h1 class="mat-h1">Dashboard</h1> -->
   <mat-grid-list cols="4" rowHeight="300px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-
+    <mat-grid-tile
+      *ngFor="let card of (cards | async)"
+      [colspan]="card.cols"
+      [rowspan]="card.rows"
+    >
       <mat-card class="dashboard-card">
-
         <mat-card-header>
           <mat-card-title>
-            {{card.title}}
-            <!-- <button mat-mini-fab color="primary" class="more-button">
-              <mat-icon>add</mat-icon>
-            </button> -->
+            {{ card.title }}
+            <!--
+              <button mat-mini-fab color="primary" class="more-button">
+                <mat-icon>add</mat-icon>
+              </button>
+            -->
           </mat-card-title>
         </mat-card-header>
 
         <mat-card-content class="table-container mat-elevation-z18">
-
-          <mat-table [dataSource]="card.tableData" *ngIf="card.title === 'Courses' || card.title === 'Users'">
+          <mat-table
+            [dataSource]="card.tableData"
+            *ngIf="card.title === 'Courses' || card.title === 'Users'"
+          >
             <ng-container matColumnDef="username">
               <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.username }}
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="description">
               <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+              <mat-cell *matCellDef="let element">
+                {{ element.description }}
+              </mat-cell>
             </ng-container>
 
-            <!-- <mat-header-row *matHeaderRowDef="card.tableData.displayedColumns; sticky: true"></mat-header-row> -->
-            <mat-row mat-button *matRowDef="let row; columns: displayedColumns" (click)="select(row)" class="tableRow"></mat-row>
+            <!--
+              <mat-header-row *matHeaderRowDef="card.tableData.displayedColumns; sticky: true"></mat-header-row>
+            -->
+            <mat-row
+              mat-button
+              *matRowDef="let row; columns: displayedColumns"
+              (click)="select(row)"
+              class="tableRow"
+            ></mat-row>
           </mat-table>
 
-          <mat-accordion *ngIf="card.title === 'Requests' || card.title === 'Reports'">
+          <mat-accordion
+            *ngIf="card.title === 'Requests' || card.title === 'Reports'"
+          >
             <mat-expansion-panel *ngFor="let review of card.tableData">
               <mat-expansion-panel-header>
-                <mat-panel-title>
-                  {{review.description}}
+                <mat-panel-title *ngIf="card.title === 'Reports'">
+                  {{ review.content.review.course }}
+                </mat-panel-title>
+                <mat-panel-title *ngIf="card.title === 'Requests'">
+                  {{ review.username }}
                 </mat-panel-title>
                 <mat-panel-description>
                   <div class="spacer"></div>
-                  {{review.username}}
+                  {{ review.description }}
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="float" *ngIf="review.type === 'report'">
@@ -47,22 +69,26 @@
                   <mat-card-header>
                     <div mat-card-avatar class="header-image"></div>
                     <mat-card-title>
-                      {{review.content.review.reviewer}}
+                      {{ review.content.review.reviewer }}
                     </mat-card-title>
                   </mat-card-header>
                   <mat-card-content>
-                    Overall Rating: {{review.content.review.overallRating}} <br>
-                    Difficulty: {{review.content.review.difficulty}} <br>
-                    Workload: {{review.content.review.workload}} <br>
-                    Hours Per Week: {{review.content.review.hoursPerWeek}} <br>
+                    Overall Rating: {{ review.content.review.overallRating }}
+                    <br />
+                    Difficulty: {{ review.content.review.difficulty }} <br />
+                    Workload: {{ review.content.review.workload }} <br />
+                    Hours Per Week: {{ review.content.review.hoursPerWeek }}
+                    <br />
 
-                    Textbook Used: {{review.content.review.textbookUsed}} <br>
-                    Grade Received: {{review.content.review.gradeReceived}} <br>
-                    Reputation: {{review.content.review.score}} <br>
+                    Textbook Used: {{ review.content.review.textbookUsed }}
+                    <br />
+                    Grade Received: {{ review.content.review.gradeReceived }}
+                    <br />
+                    Reputation: {{ review.content.review.score }} <br />
                   </mat-card-content>
                 </mat-card>
                 <div class="written-review">
-                  {{review.content.review.writtenReview}}
+                  {{ review.content.review.writtenReview }}
                 </div>
               </div>
               <mat-card class="justification mat-elevation-z18">
@@ -70,7 +96,11 @@
                   <!-- <p *ngIf="review.content.type === 'report'"> -->
                   <h3>Justifications/Explanations</h3>
                   <div>
-                    {{review.type === 'report' ? review.content.report: review.content.request}}
+                    {{
+                      review.type === "report"
+                        ? review.content.report
+                        : review.content.request
+                    }}
                   </div>
                   <!-- </p> -->
                   <!-- <p *ngIf="review.content.type === 'request'"> -->
@@ -79,19 +109,26 @@
                 </mat-card-content>
               </mat-card>
               <mat-action-row *ngIf="card.title === 'Reports'">
-                <button mat-button color="primary" (click)="resolve(review)">Resolve</button>
-                <button mat-button color="primary" (click)="removeReview(review)">Remove Review & Ban User</button>
+                <button mat-button color="primary" (click)="resolve(review)">
+                  Resolve
+                </button>
+                <button
+                  mat-button
+                  color="primary"
+                  (click)="removeReview(review)"
+                >
+                  Remove Review & Ban User
+                </button>
               </mat-action-row>
               <mat-action-row *ngIf="card.title === 'Requests'">
-                <button mat-button color="primary" (click)="resolve(review)">Resolve</button>
+                <button mat-button color="primary" (click)="resolve(review)">
+                  Resolve
+                </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
-
         </mat-card-content>
-
       </mat-card>
-
     </mat-grid-tile>
   </mat-grid-list>
 </div>

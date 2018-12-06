@@ -6,9 +6,9 @@ const authMiddleware = require('../../auth.middleware');
 
 const requestReportRoute = '/api/requestsReports';
 
-router.post(requestReportRoute + '/newRequestReport', requestReport.newRequestReport);
-router.patch(requestReportRoute + '/modifyRequestReport', requestReport.modifyRequestReport);
-router.get(requestReportRoute + '/allRequestsReports/:type', requestReport.allRequestsReports);
-router.get(requestReportRoute + '/requestsReportsByUsername/:username', requestReport.getRequestsReportsByUsername);
+router.post(requestReportRoute + '/newRequestReport', authMiddleware, requestReport.newRequestReport);
+router.patch(requestReportRoute + '/modifyRequestReport', authMiddleware, requestReport.modifyRequestReport);
+router.get(requestReportRoute + '/allRequestsReports/:type', authMiddleware, requestReport.allRequestsReports);
+router.get(requestReportRoute + '/requestsReportsByUsername/:username', authMiddleware, requestReport.getRequestsReportsByUsername);
 
 module.exports = router;

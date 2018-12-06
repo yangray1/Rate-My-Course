@@ -32,6 +32,7 @@
                 class="more-button"
                 [matMenuTriggerFor]="menu"
                 aria-label="Toggle menu"
+                *ngIf="isLogged"
               >
                 <mat-icon>more_vert</mat-icon>
               </button>

@@ -21,6 +21,8 @@ export class ReviewsComponent implements OnInit {
 
   courseFound = true;
 
+  isLogged = true;
+
   constructor(
     private reviewService: ReviewService,
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLogged = localStorage.getItem('username') !== null;
     this.route.params.subscribe(params => {
       this.course = params.course; // Pass in later during the course searchbar
       this.coursesService.getAllCourses().subscribe(
@@ -44,7 +47,7 @@ export class ReviewsComponent implements OnInit {
               }
             )
             this.reviewService.getReviews(this.course).subscribe(reviews => {
-              this.allReviews = reviews;
+              this.allReviews = reviews.filter(review => review.active);
               console.log(this.allReviews);
             });
           }

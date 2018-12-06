@@ -66,4 +66,5 @@ export interface Review {
   gradeReceived: string;
   writtenReview: string;
   score: number;
+  active: boolean;
 }
