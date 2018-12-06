@@ -33,6 +33,7 @@ export class ReviewService {
   }
 
   saveReview(review: any): Observable<Review> {
+    console.log(review)
     return this.http.patch<Review>(this.REVIEW_API + "/edit-review", review, this.getHttpHeaders())
   }
 

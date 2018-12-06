@@ -123,18 +123,22 @@ export class AdminDashboardComponent implements OnInit {
       foundUser.banned = true;
       this.userService.saveUser(foundUser).subscribe((savedUser: any) => {
         console.log(savedUser);
-        alert(savedUser.username + ' has been banned');
+        alert(savedUser.username + " has been banned");
       });
     });
   }
 
   removeReview(review: any) {
     console.log(review);
-    review.active = false;
-    this.reviewService.saveReview(review.content.review).subscribe(deletedReview => {
-      console.log(deletedReview);
-      this.resolve(review);
-    });
+    review.content.review.active = false;
+
+    console.log(review);
+    this.reviewService
+      .saveReview(review.content.review)
+      .subscribe(deletedReview => {
+        console.log(deletedReview);
+        this.resolve(review);
+      });
   }
 
   resolve(request: RequestReport) {

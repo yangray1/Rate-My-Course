@@ -39,6 +39,7 @@ editReview = (req, res) => {
         review.gradeReceived = req.body.gradeReceived;
         review.writtenReview = req.body.writtenReview;
         review.score = req.body.score;
+        review.active = req.body.active;
 
         review.save().then((result) => {
             res.send(result)
@@ -46,7 +47,7 @@ editReview = (req, res) => {
             res.status(400).send({message: "Error editing review"})
         })
         
-    }).catch((err) => {
+    }).catch((err) => {removed
         res.status(400).send({message: "Error editing review"})
     })
 
