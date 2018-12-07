@@ -1,0 +1,141 @@
+
+
+========================== Welcome to Phase 2 ========================== 
+
+	To rid the endless “Is CSCXXX cancer?” reddit posts, 4 brilliant U of T students put their minds together and came up with the ultimate solution: *Rate My Course* . From being able to post reviews and like/dislike posts, to reporting reviews, our web app has it all! Our web app gives users the opportunity to rate any course that they have taken at the University of Toronto. To start our app, you must first visit https://rate-my-courses.herokuapp.com, where our web app is hosted.
+
+
+======= FEATURES =======
+
+####### ENTERING THE APP #######
+When you arrive at the webpage, you will be greeted with the home page. To log in, click the top right icon(the person icon), and there should be a drop list of 2 items. One of them should be a login/register button. When you click on that button, a window will popup, asking you to login. 
+
+
+####### LOGIN #######
+(user) To login with user credentials, login with the username “yangray1” and password “test1234”, and click ‘login’. This will take you to the user dashboard, where it displays your user info including account information, your reviews, and courses you’re currently taking.
+
+(admin) To login with admin credentials, login with the username “yangray2” and password “123”, where you will be redirected to the admin dashboard upon clicking the ‘login’ button. The admin dashboard lists information about all users (and their details upon clicking on the user), all courses, review reports, and suggestion requests.
+
+
+####### REGISTER #######
+The other choice is to click ‘register’ and enter your own information to create a new user. When you are done registering, click ‘Register’, and it will prompt the login window again, where you should be able to login with your newly created username and password. To login, refer to the ‘LOGIN’ category in this text file.
+
+
+####### Homepage(User and admin)#######
+Users and admin both share a homepage, where you can search a course in the navigation bar. To get the homepage, click the `Rate My Course` in the top left corner. The hover-text in the middle of the homepage will display your username if you're logged in and link to your dashboard if you’re logged in. It will do nothing if you are not logged in.
+
+
+####### Dashboard(User and admin)#######
+To go to the dashboard, simply click the top right person icon in the navigation bar and a drop down list should appear. Click ‘Dashboard’ to be redirected to the dashboard.
+
+
+####### Searching for a course (User and admin)#######
+To search for a course, enter the course code in the search bar located in the navigation bar. If the course you are looking for is not in our database, please feel free to add it yourself with our add a course feature. This is done when you search for a course that isn't in the database; there will be a window that allows you to fill out the information for that course. Once you are done filling out the information, click ‘save’ and t
+
+
+####### Leaving Suggestions to the App #######
+When logged in, users are able to leave suggestions for this app for the admins to see on the admin dashboards. To make a suggestion, click the user icon on the right of the navigation bar, and press “Suggestion?”. A window will popup asking you to enter the description( which is the general description of the suggestion) and request( which is the actual suggestion).
+
+
+####### Writing a new Review(Users and admin) #######
+To write a new review, you must be logged in to either a user or admin account. Once you’re logged in, click the add review icon located on the top right of the navigation bar. Once you click on the button a form will open where; you can specify what course your review is for (the course you are writing the review about must already exist), the professor who was teaching the course when you took the course, an overall rating for the course (out of 5), a rating for the workload in the course, the number of lecture hours this course required each week, the grade you received in this course, whether or not a textbook was required, and finally anything else you would like to say about the course. Press Save to publish your review.
+
+
+####### Reporting Reviews #######
+To report a review you must first be logged in. Then, click on the dotted icon in the top right corner of any review, when clicked on, a drop down menu should appear where you can select the option to report. When the report option is clicked, a form will open. Fill in the “description” section with a general description of what the report is about. Fill in the “report” section with a explanation of why you are reporting. Click on the save button to submit your report. 
+
+
+####### Like/Disliking #######
+All reviews have a “vote” which is a representation of how the users on the website feel about the review. To like/dislike a review, you must first be logged in. Then, you can upvote or downvote a review by clicking on the dotted icon on the top right of a review and selecting the upvote/downvote option from the menu to change the vote count on the review. All reviews are sorted by vote score in descending order.
+
+
+####### Editing your profile (User) #######
+To edit your profile, first head to the dashboard. (Refer to the ‘Dashboard’ section in this phase2.txt) Next, you should see a User info section in the top left of the page. Click the pencil icon located at the top right of that User info box. From there, you can edit your profile details, and when you're done, hit save.
+
+
+####### Editing your currently taking courses (User) #######
+To edit the courses that you are currently taking, first head to the dashboard.(Refer to the ‘Dashboard’ section in this phase2.txt). Next, you should see a Courses section right below the User Info section. To edit the courses, click the pencil icon located at the top right of the Courses section. To add a new course, type in the course name in the “Search for a course” text box. If the course does not exist, it will prompt you to add information about the new course as it is not yet in our database. Otherwise, the course will be added to the list of courses, and when you’re done, hit ‘save’.
+
+
+####### Editing your reviews (User) #######
+To edit your reviews, first head to the dashboard.(Refer to the ‘Dashboard’ section in this phase2.txt). Next, you should see a All Reviews section on the right side of the screen. 
+This section displays all the reviews you have made for courses. To edit the review, click on the review that you want to edit and a window should pop up that lists the statistics of your review. Now, you are able to edit the review. Click ‘save’ when you are done editing.
+
+
+####### Resolving Reports (Admin) #######
+To resolve reviews, you must be logged in as admin.(Refer to the “Login” portion in this phase2.txt). First, go to the dashboard. (Refer to the ‘Dashboard’ section in this phase2.txt). Next, scroll down until you see the “Reports” section on the right side of the page. Then, click on the report you want to resolve, and details about the review should show along with a “resolve” button and a “remove review and resolve” button. The resolve button simply dismisses the report while the “remove review and resolve” removes the review from the course reviews and dismisses the review.
+
+
+####### Resolving Suggestion requests (Admin) #######
+To resolve suggestions, you must be logged in as admin.(Refer to the “Login” portion in this phase2.txt). First, go to the dashboard. (Refer to the ‘Dashboard’ section in this phase2.txt). Next, scroll down until you see the “Requests” section on the left side of the page. Click on the suggestion request you want to resolve, and  details about the suggestion should show along with a “resolve” button. Click “resolve” to resolve and dismiss the suggestion.
+
+
+####### About page (Users and Admin) #######
+To visit the about page, click the user icon in the top right in the navigation bar. To view the credits, click the `credits` tab. Likewise, click on `instructions` to view the basic functionalities of this web app.
+
+
+
+
+======= Routes/Endpoints ==========
+Note: in front of every endpoint is the link to the website.
+
+
+####### Course endpoints #######
+
+/api/courses/save
+	Saves the new course into the database. 
+
+/api/courses/getAllCourseCodes
+	Gets all the course codes.
+
+/api/courses/getCourseByCourseCode/:course_code
+	Gets the course given a course code, course_code.
+
+/api/courses/modifyCourse/:course_id
+	Modify the course’s details (ie course description) with course id course_id and save it into the database.
+
+
+####### Login routes #######
+/api/login
+	Login with the given username and password from body.
+
+
+####### request-reports endpoints #######
+
+/api/requestsReports/newRequestReport
+	Creates a new report.
+
+/api/requestsReports/modifyRequestReport
+	Modifies the report’s details and save it into the database.
+
+/api/requestsReports/allRequestsReports/:type
+	Gets all the reports with type `type`.
+
+/api/requestsReports/requestsReportsByUsername/:username'
+	Gets all the reports by username `username`.
+
+
+####### Review Routes #######
+
+/api/review/delete-review/:id
+	Delete the review with id `id`.
+
+/api/review/edit-review/:id
+	Modifies the review with id `id`.
+/api/review/add-review
+	Creates a new review. The body of this is from the add review form located at the top right in the navigation bar. (For more details about the add review, checkout the ‘writing a new review’ section in this phase2.txt).
+
+
+####### User routes #######
+
+/api/users/save
+	Creates a new user and save it into our database.
+
+/api/users/profile/:username
+	Find the profile of the username `username`.
+
+/api/users/allUsers
+	Gets all the users in the database.
+
+/api/users/updateUser
+	Modifies the user’s details and save it into the database.
