@@ -12,13 +12,14 @@ When you arrive at the webpage, you will be greeted with the home page. To log i
 
 
 ####### LOGIN #######
-(user) To login with user credentials, login with the username “yangray1” and password “test1234”, and click ‘login’. This will take you to the user dashboard, where it displays your user info including account information, your reviews, and courses you’re currently taking.
+(user) To login with user credentials, login with the username “yangray1” and password “test1234”, and click ‘login’. This will take you to the user dashboard, where it displays your user info including account information, your reviews, and courses you’re currently taking. To cancel logging in, click anywhere outside of the box.
+
 
 (admin) To login with admin credentials, login with the username “yangray2” and password “123”, where you will be redirected to the admin dashboard upon clicking the ‘login’ button. The admin dashboard lists information about all users (and their details upon clicking on the user), all courses, review reports, and suggestion requests.
 
 
 ####### REGISTER #######
-The other choice is to click ‘register’ and enter your own information to create a new user. When you are done registering, click ‘Register’, and it will prompt the login window again, where you should be able to login with your newly created username and password. To login, refer to the ‘LOGIN’ category in this text file.
+The other choice is to click ‘register’ and enter your own information to create a new user. When you are done registering, click ‘Register’, and it will prompt the login window again, where you should be able to login with your newly created username and password. To login, refer to the ‘LOGIN’ category in this text file. To cancel, click anywhere outside of the box.
 
 
 ####### Homepage(User and admin)#######
@@ -30,15 +31,15 @@ To go to the dashboard, simply click the top right person icon in the navigation
 
 
 ####### Searching for a course (User and admin)#######
-To search for a course, enter the course code in the search bar located in the navigation bar. If the course you are looking for is not in our database, please feel free to add it yourself with our add a course feature. This is done when you search for a course that isn't in the database; there will be a window that allows you to fill out the information for that course. Once you are done filling out the information, click ‘save’ and t
+To search for a course, enter the course code in the search bar located in the navigation bar. If the course you are looking for is not in our database, please feel free to add it yourself with our add a course feature. This is done when you search for a course that isn't in the database; there will be a window that allows you to fill out the information for that course. Once you are done filling out the information, click ‘save’ and the new course will be added to the database.
 
 
-####### Leaving Suggestions to the App #######
-When logged in, users are able to leave suggestions for this app for the admins to see on the admin dashboards. To make a suggestion, click the user icon on the right of the navigation bar, and press “Suggestion?”. A window will popup asking you to enter the description( which is the general description of the suggestion) and request( which is the actual suggestion).
+####### Leaving Suggestions to the App (Users and admins) #######
+When logged in, users are able to leave suggestions for this app for the admins to see on the admin dashboards. To make a suggestion, click the user icon on the right of the navigation bar, and press “Suggestion?”. A window will popup asking you to enter the description( which is the general topic of the suggestion) and request( which is the actual suggestion).To cancel, click anywhere outside of the box.
 
 
 ####### Writing a new Review(Users and admin) #######
-To write a new review, you must be logged in to either a user or admin account. Once you’re logged in, click the add review icon located on the top right of the navigation bar. Once you click on the button a form will open where; you can specify what course your review is for (the course you are writing the review about must already exist), the professor who was teaching the course when you took the course, an overall rating for the course (out of 5), a rating for the workload in the course, the number of lecture hours this course required each week, the grade you received in this course, whether or not a textbook was required, and finally anything else you would like to say about the course. Press Save to publish your review.
+To write a new review, you must be logged in to either a user or admin account. Once you’re logged in, click the add review icon located on the top right of the navigation bar. Once you click on the button a form will open where; you can specify what course your review is for (the course you are writing the review about must already exist), the professor who was teaching the course when you took the course, an overall rating for the course (out of 5), a rating for the workload in the course, the number of lecture hours this course required each week, the grade you received in this course, whether or not a textbook was required, and finally anything else you would like to say about the course. Press Save to publish your review. To cancel writing a review, click anywhere outside of the box. Note that when you publish your review, you can search up the course and the review will be under that course. (Go to the 'searching for a course' topic to learn more about searching for a course).
 
 
 ####### Reporting Reviews #######
@@ -68,6 +69,14 @@ To resolve reviews, you must be logged in as admin.(Refer to the “Login” por
 
 ####### Resolving Suggestion requests (Admin) #######
 To resolve suggestions, you must be logged in as admin.(Refer to the “Login” portion in this phase2.txt). First, go to the dashboard. (Refer to the ‘Dashboard’ section in this phase2.txt). Next, scroll down until you see the “Requests” section on the left side of the page. Click on the suggestion request you want to resolve, and  details about the suggestion should show along with a “resolve” button. Click “resolve” to resolve and dismiss the suggestion.
+
+
+####### Changing Users information (Admin) #######
+To change users information, you must be logged as an admin (Refer to the “Login” portion in this phase2.txt). First, go to the dashboard (Refer to the ‘Dashboard’ section in this phase2.txt). Next, you should see a `Users` section in the top left of the page. Select which user’s information you want to change and click on that user. A window should popup, allowing you to change the user’s information, such as first name, last name, year of study and program of study. Once you are done, click `save`. To cancel editing, click anywhere outside of the box.
+
+
+####### Changing course information (Admin) #######
+To change course information, you must be logged as an admin (Refer to the “Login” portion in this phase2.txt). First, go to the dashboard (Refer to the ‘Dashboard’ section in this phase2.txt). Next, you should see a `Courses` section in the top right of the page. Select which course’s information you want to change and click on that course. A window should popup, allowing you to change the course’s information, such as the course name and description. Once you are done, click `save`. To cancel editing, click anywhere outside of the box.
 
 
 ####### About page (Users and Admin) #######
